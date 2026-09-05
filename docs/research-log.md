@@ -1,5 +1,23 @@
 # Research Log
 
+## 2026-09-05: Cost-Accounted Compression Diagnostic Preregistered
+
+Locked DNS05-CA before development evaluation. The diagnostic measures the
+already studied compact candidates rather than adding a new model family:
+linear, fixed ReLU 256, PCA ReLU 192, compiled 192, RFF 64/128/192,
+uniform/farthest/class-balanced Nystrom 64/128/192, spectral 64/128/192 and
+full RBF. It preserves the same split seeds, oracle gamma selection grid and
+closed-form readout grid used in previous validation-only diagnostics.
+
+The runner records separate preprocessing, oracle selection, train feature
+construction, validation feature transform, readout-grid solve and repeated
+selected-readout inference timings. It also records approximate numerical
+model-state bytes, retained train samples, dense intermediate-array estimates
+and `tracemalloc` peaks. These are cost diagnostics, not energy measurements.
+Tests cover RBF readout state accounting, excluded-input isolation, synthetic
+grid completeness and RBF-referenced efficiency summaries. No test scores were
+computed.
+
 ## 2026-09-05: Error Geometry Diagnostic Result
 
 Protocol/code commit: `c3c8a01593e0d20bc561e10555247d0acc2447a0`.

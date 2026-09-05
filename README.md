@@ -179,6 +179,17 @@ does not compute test scores.
 The complete validation-only record is stored at
 `docs/results/dns05_error_geometry_digits.json`.
 
+The cost-accounted compression diagnostic is locked in
+[DNS05 Cost Protocol](docs/dns05-cost-protocol.md). Run it with:
+
+```bash
+python -m experiments.run_dns05_cost --config configs/dns05_cost_digits.json --output results/dns05_cost_digits.json
+```
+
+It records validation-only accuracy together with construction time, readout
+selection time, retained samples, approximate model-state bytes and repeated
+validation prediction timing. It does not compute test scores or energy use.
+
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
   train-only median heuristic when `gamma` is not specified.

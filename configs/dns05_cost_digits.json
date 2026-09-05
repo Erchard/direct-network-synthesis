@@ -1,0 +1,98 @@
+{
+  "alphas": [
+    0.001,
+    0.01,
+    0.1,
+    1.0
+  ],
+  "compiled_feature_count": 192,
+  "dataset": {
+    "name": "sklearn_digits"
+  },
+  "fixed_relu_hidden_units": 192,
+  "fixed_relu_seed": 1705,
+  "intercepts": [
+    false,
+    true
+  ],
+  "landmark_counts": [
+    64,
+    128,
+    192
+  ],
+  "landmark_seed": 2309,
+  "models": [
+    "linear",
+    "fixed_relu_256",
+    "pca_relu_192",
+    "compiled_192",
+    "rff_64",
+    "rff_128",
+    "rff_192",
+    "nystrom_uniform_64",
+    "nystrom_uniform_128",
+    "nystrom_uniform_192",
+    "nystrom_farthest_64",
+    "nystrom_farthest_128",
+    "nystrom_farthest_192",
+    "nystrom_class_farthest_64",
+    "nystrom_class_farthest_128",
+    "nystrom_class_farthest_192",
+    "spectral_64",
+    "spectral_128",
+    "spectral_192",
+    "rbf"
+  ],
+  "oracle_selection": {
+    "alpha_values": [
+      0.001,
+      0.01,
+      0.1
+    ],
+    "gamma_multipliers": [
+      0.5,
+      1.0,
+      2.0
+    ]
+  },
+  "paired_models": [
+    [
+      "nystrom_uniform_192",
+      "rbf"
+    ],
+    [
+      "nystrom_uniform_192",
+      "spectral_192"
+    ],
+    [
+      "nystrom_uniform_192",
+      "fixed_relu_256"
+    ],
+    [
+      "nystrom_uniform_192",
+      "compiled_192"
+    ],
+    [
+      "spectral_192",
+      "rbf"
+    ],
+    [
+      "compiled_192",
+      "fixed_relu_256"
+    ]
+  ],
+  "prediction_repeats": 9,
+  "prediction_warmups": 2,
+  "rff_seed": 2310,
+  "splits": {
+    "split_seeds": [
+      101,
+      202,
+      303,
+      404,
+      505
+    ],
+    "train_fraction": 0.6,
+    "validation_fraction": 0.2
+  }
+}
