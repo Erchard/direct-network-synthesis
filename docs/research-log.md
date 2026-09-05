@@ -1,5 +1,16 @@
 # Research Log
 
+## 2026-09-05: Accessibility Motivation Recorded
+
+Added the long-term motivation to `docs/hypothesis.md`: direct synthesis could
+lower the cost of creating strong models and broaden access beyond organizations
+able to fund large training infrastructure. Recorded single-pass synthesis as an
+unverified ambition and separated it from low total computation and energy cost.
+Potential reductions in corporate concentration are conditional implications,
+not findings; neither unnecessary data centers nor impossible monopoly follows
+from the current evidence. No experiment, protocol change or novelty claim was
+introduced by this documentation update.
+
 ## 2026-09-05: Full-Basis Diagnostic Result
 
 Code/config/protocol commit: `f48c4edb7a0d32867801546440f84105e9e8454a`.
