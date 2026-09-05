@@ -137,6 +137,17 @@ python -m experiments.run_dns05_depth_width --config configs/dns05_full_basis_di
 It adds full-basis residual blocks and a rank-192 spectral oracle reference.
 Curated complete result records are stored under `docs/results/`.
 
+The matched-readout validation diagnostic is preregistered in
+[DNS05 Readout Protocol](docs/dns05-readout-protocol.md) and tracked in
+[Experiment Register](docs/experiment-register.md). Run it with:
+
+```bash
+python -m experiments.run_dns05_readout --config configs/dns05_readout_digits.json --output results/dns05_readout_digits.json
+```
+
+It reuses the digits development splits only, compares six representations under
+the same closed-form readout grid, and records null test fields by design.
+
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
   train-only median heuristic when `gamma` is not specified.

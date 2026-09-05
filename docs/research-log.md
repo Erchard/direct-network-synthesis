@@ -1,5 +1,14 @@
 # Research Log
 
+## 2026-09-05: Matched-Readout Diagnostic Preregistered
+
+Added the experiment register and validation-only DNS05-RO protocol. The new runner
+accepts only development arrays in its evaluator and records null test fields.
+Six representations receive the identical eight-setting readout grid; paired and
+validation-selected analyses are separate. Tests check primal/dual intercept
+equivalence, excluded-input isolation and synthetic grid completeness. Digits
+remains development data; no confirmation claim or new independent holdout.
+
 ## 2026-09-05: AI Contributor Onboarding Added
 
 Added root `AGENTS.md` and `docs/ai-contributor-guide.md`, linked from README.
