@@ -94,6 +94,50 @@ def class_pca_prototypes(X, y, count, quantiles):
     return np.asarray(centers[:count], dtype=float)
 
 
+def class_dipole_prototypes(X, y, count, quantiles, shift_fraction, gamma):
+    """Class-local synthetic centers shifted toward and away from nearest rival classes."""
+    X = np.asarray(X, dtype=float)
+    labels = np.asarray(y)
+    if count <= 0:
+        raise ValueError("count must be positive.")
+    if not 0.0 <= shift_fraction <= 1.0:
+        raise ValueError("shift_fraction must be between 0 and 1.")
+    classes = np.unique(labels)
+    quotas = _balanced_quotas(count, len(classes))
+    rivals = _nearest_rival_labels(X, labels, classes, gamma)
+    centers = []
+    for class_index, label in enumerate(classes):
+        local = X[labels == label]
+        quota = min(quotas[class_index], count - len(centers))
+        if quota <= 0:
+            continue
+        class_mean = local.mean(axis=0)
+        centers.append(class_mean)
+        if quota == 1:
+            continue
+        rival_mean = X[labels == rivals[label]].mean(axis=0)
+        boundary_vector = rival_mean - class_mean
+        if float(np.linalg.norm(boundary_vector)) <= 1e-12:
+            boundary_vector = _oriented_pca_components(local)[0]
+        boundary_shift = shift_fraction * boundary_vector
+        components = _oriented_pca_components(local)
+        projections = (local - class_mean) @ components.T
+        for offset_index in range(quota - 1):
+            pair_index = offset_index // 2
+            component_index = pair_index % components.shape[0]
+            quantile = quantiles[(pair_index // components.shape[0]) % len(quantiles)]
+            offset = float(np.quantile(projections[:, component_index], quantile))
+            polarity = 1.0 if offset_index % 2 == 0 else -1.0
+            centers.append(
+                class_mean
+                + offset * components[component_index]
+                + polarity * boundary_shift
+            )
+    if len(centers) < count:
+        centers.extend(global_pca_prototypes(X, count - len(centers), quantiles))
+    return np.asarray(centers[:count], dtype=float)
+
+
 def evaluate_development(X_train, y_train, X_validation, y_validation, config, seed):
     """Only development arrays enter this function; no test argument exists."""
     start = time.perf_counter()
@@ -285,10 +329,26 @@ def _prototype_representations(train, y_train, validation, kernel, gamma, config
     representations = []
     quantiles = np.asarray(config["prototype_quantiles"], dtype=float)
     for count in config["landmark_counts"]:
-        for name, centers, uses_labels in [
+        families = [
             ("prototype_global_pca", global_pca_prototypes(train, count, quantiles), False),
             ("prototype_class_pca", class_pca_prototypes(train, y_train, count, quantiles), True),
-        ]:
+        ]
+        if config.get("include_dipole_prototypes", False):
+            families.append(
+                (
+                    "prototype_class_dipole",
+                    class_dipole_prototypes(
+                        train,
+                        y_train,
+                        count,
+                        quantiles,
+                        float(config["dipole_shift_fraction"]),
+                        gamma,
+                    ),
+                    True,
+                )
+            )
+        for name, centers, uses_labels in families:
             start = time.perf_counter()
             features, rank = nystrom_features(train, centers, gamma)
             validation_features, _ = nystrom_features(validation, centers, gamma)
@@ -344,6 +404,24 @@ def _balanced_quotas(total, group_count):
     base = total // group_count
     remainder = total % group_count
     return [base + int(index < remainder) for index in range(group_count)]
+
+
+def _nearest_rival_labels(X, labels, classes, gamma):
+    class_arrays = {label: X[labels == label] for label in classes}
+    rivals = {}
+    for label in classes:
+        best_label = None
+        best_affinity = -np.inf
+        local = class_arrays[label]
+        for other in classes:
+            if other == label:
+                continue
+            affinity = float(rbf_kernel(local, class_arrays[other], gamma=gamma).mean())
+            if affinity > best_affinity:
+                best_affinity = affinity
+                best_label = other
+        rivals[label] = best_label
+    return rivals
 
 
 def _exact_train_match_count(train, centers):

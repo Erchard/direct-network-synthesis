@@ -1,5 +1,23 @@
 # Research Log
 
+## 2026-09-05: Dipole Prototype Diagnostic Preregistered
+
+Locked DNS05-DIP before development evaluation. The diagnostic keeps the same
+validation-only digits development boundary as DNS05-PT and adds one bounded
+synthetic-center variant: `prototype_class_dipole` at 64/128/192 centers. The
+variant starts from class-local PCA/quantile prototypes but shifts centers
+toward and away from the nearest rival class under the train-only RBF geometry.
+The shift fraction is fixed at 0.25 before evaluation and is not a validation
+grid.
+
+The predicted mechanism is boundary coverage: previous error geometry suggested
+that many compact-model misses still have useful local class support. If this
+support is organized around class boundaries, a small set of synthetic dipole
+centers may outperform unshifted class-PCA prototypes without retaining train
+rows. The falsifying outcome is equal or lower validation accuracy than
+class-PCA prototypes at the same feature budget, especially if kernel
+reconstruction also worsens. No test scores are computed.
+
 ## 2026-09-05: Prototype Distillation Diagnostic Result
 
 Evaluation commit: `59fa76deb5a20e1ea06a1e7707c7e08293e1d087`.
