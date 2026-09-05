@@ -1,5 +1,22 @@
 # Research Log
 
+## 2026-09-05: Prototype Distillation Diagnostic Preregistered
+
+Locked DNS05-PT before development evaluation. The diagnostic tests whether
+synthetic RBF centers computed from train statistics can retain the useful local
+geometry seen in Nystrom landmarks without storing real train examples as
+inference landmarks. It adds global-PCA and class-PCA prototype families at
+64/128/192 centers, while retaining the previous linear, fixed-ReLU, PCA-ReLU,
+compiled, RFF, Nystrom, spectral and full-RBF references under the same
+validation-only readout grid.
+
+The related-work note was updated with RBF networks, locally tuned units and
+resource-allocating networks. These sources make the novelty boundary explicit:
+synthetic RBF centers with an analytical readout are not a new idea by
+themselves. Tests cover deterministic prototype construction, absence of raw
+train-sample retention, excluded-input isolation and synthetic grid completeness.
+No test scores were computed.
+
 ## 2026-09-05: Cost-Accounted Compression Diagnostic Result
 
 Protocol/code commit: `dc6a917007ec8048d51af768f1bc6e6f9b114558`.

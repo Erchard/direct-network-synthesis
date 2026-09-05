@@ -14,6 +14,9 @@ baselines unless a later source review identifies a narrower difference.
 | Nystrom kernel machines | Williams and Seeger, "Using the Nystrom Method to Speed Up Kernel Machines", NIPS 2000/2001, https://papers.nips.cc/paper/1866-using-the-nystrom-method-to-speed-up-kernel-machines | Directly covers low-rank kernel approximation through a smaller landmark/eigendecomposition system. |
 | Random Fourier features | Rahimi and Recht, "Random Features for Large-Scale Kernel Machines", NIPS 2007, https://papers.nips.cc/paper/3182-random-features-for-large-scale-kernel-machines | Covers randomized explicit features whose inner products approximate shift-invariant kernels such as RBF. |
 | Extreme learning machines | Huang, Zhu and Siew, "Extreme Learning Machine: Theory and Applications", Neurocomputing 2006, DOI: https://doi.org/10.1016/j.neucom.2005.12.126 | Random hidden nodes plus analytically solved output weights are established prior art for non-gradient readouts. |
+| Radial basis function networks | Broomhead and Lowe, "Multivariable Functional Interpolation and Adaptive Networks", Complex Systems 1988 / RSRE memorandum, https://dblp.org/rec/journals/compsys/BroomheadL88 | RBF hidden units with analytically solved output coefficients are established prior art; fixed or synthetic centers are not novel by themselves. |
+| Locally tuned processing units | Moody and Darken, "Fast Learning in Networks of Locally-Tuned Processing Units", Neural Computation 1989, https://doi.org/10.1162/neco.1989.1.2.281 | Local units with fast hybrid learning are an established reference for center-based representations and closed-form output layers. |
+| Resource-allocating networks | Platt, "A Resource-Allocating Network for Function Interpolation", Neural Computation 1991, https://doi.org/10.1162/neco.1991.3.2.213 | Adaptive allocation of compact local units from examples is prior art for local prototype-like models, though it uses an incremental rule. |
 | Landmark selection | Oglic and Gaertner, "Nystrom Method with Kernel K-means++ Samples as Landmarks", ICML 2017, https://proceedings.mlr.press/v70/oglic17a.html | Data-dependent landmark selection for Nystrom approximation is established; class-balanced or farthest-first variants here are controls, not novelty claims. |
 | Implementation reference | scikit-learn `Nystroem` documentation, https://scikit-learn.org/stable/modules/generated/sklearn.kernel_approximation.Nystroem.html | Confirms the standard feature-map form: kernels to basis points multiplied by a normalization from the basis kernel matrix. |
 
@@ -36,3 +39,9 @@ Any success in this diagnostic belongs first to the established Nystrom/kernel
 approximation family. DNS can only claim a later contribution if it defines a
 specific reproducible synthesis change beyond those methods and compares against
 them directly.
+
+The same caution applies to synthetic prototype centers. A train-sample-free
+center generator may be useful engineering, but RBF networks and locally tuned
+units are old ideas. The relevant DNS question is whether a fixed, auditable
+center-synthesis rule gives a better quality/resource tradeoff than the Nystrom
+and random-feature baselines under the same data boundary.
