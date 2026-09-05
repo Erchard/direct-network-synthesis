@@ -1,5 +1,43 @@
 # Research Log
 
+## 2026-09-05: Matched-Readout Diagnostic Result
+
+Protocol/code commit: `83066851081b773584c067b7c23414b1a5555dc4`.
+Worktree was clean at evaluation. Command:
+
+```text
+D:\Projects\direct-network-synthesis\.venv\Scripts\python.exe -m experiments.run_dns05_readout --config configs/dns05_readout_digits.json --output results/dns05_readout_digits.json
+```
+
+Complete auditable record: `docs/results/dns05_readout_digits.json`.
+The run produced 240 validation-only rows: five fixed digits development splits,
+six representations, four ridge values and intercept on/off. Test fields are
+null by design; this is not independent confirmation evidence.
+
+| Model | Validation accuracy, mean +/- SD | Kernel error, mean +/- SD | Rank / budget | Mean solve s | Mean inference s |
+|---|---:|---:|---:|---:|---:|
+| Linear | 0.9354 +/- 0.0072 | n/a | 60.2 / 64 | 0.0005 | <0.0001 |
+| Fixed ReLU | 0.9749 +/- 0.0079 | n/a | 252.2 / 256 | 0.0065 | 0.0002 |
+| PCA ReLU 192 | 0.9616 +/- 0.0041 | n/a | 184.4 / 192 | 0.0030 | 0.0001 |
+| Compiled 192 | 0.9638 +/- 0.0044 | 0.0321 +/- 0.0008 | 184.4 / 192 | 0.0036 | 0.0001 |
+| Spectral 192 | 0.9900 +/- 0.0042 | 0.000355 +/- 0.000006 | 192 / 192 | 0.0032 | 0.0001 |
+| RBF oracle | 0.9916 +/- 0.0028 | 0 | 1078 / 1078 | 0.0389 | 0.0004 |
+
+Validation-selected paired differences: compiled minus PCA ReLU was
++0.0022 +/- 0.0036 accuracy, compiled minus fixed ReLU was -0.0111 +/- 0.0086,
+compiled minus spectral was -0.0262 +/- 0.0061, and spectral minus full RBF was
+-0.0017 +/- 0.0042. The matched readout removes a previous comparison
+confound and shows that a compact spectral representation can nearly preserve
+the RBF oracle on this development setup. The current compiled representation
+does not yet compile that geometry well enough: its kernel reconstruction error
+remains about 0.032, far above the spectral reference, and its validation
+accuracy remains below fixed random ReLU despite using fewer features.
+
+Resulting decision: pause residual-depth variants for now. The next justified
+step is related-work verification plus a narrower representation hypothesis
+focused on why the compiler fails to approximate the spectral oracle, not a
+claim that direct synthesis already replaces training.
+
 ## 2026-09-05: Matched-Readout Diagnostic Preregistered
 
 Added the experiment register and validation-only DNS05-RO protocol. The new runner

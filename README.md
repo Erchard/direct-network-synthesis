@@ -147,6 +147,8 @@ python -m experiments.run_dns05_readout --config configs/dns05_readout_digits.js
 
 It reuses the digits development splits only, compares six representations under
 the same closed-form readout grid, and records null test fields by design.
+The complete validation-only record is stored at
+`docs/results/dns05_readout_digits.json`.
 
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
