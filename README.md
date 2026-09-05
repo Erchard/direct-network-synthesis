@@ -46,6 +46,11 @@ is understood.
 
 ## Experiment Protocol
 
+The [research plan](docs/research-plan.md) sets out the next DNS diagnostics,
+evidence gates, resource measurements and eventual independent reproduction of
+an affordable model. It connects the experiments to the long-term accessibility
+objective without treating that objective as an established result.
+
 The strict protocol lives in [docs/methodology.md](docs/methodology.md). The short version:
 
 - Keep train, validation, and test data separate for every run.

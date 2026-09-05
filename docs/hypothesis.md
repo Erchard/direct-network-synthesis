@@ -96,6 +96,10 @@ passes, storage and inference costs, with energy measured before making energy
 savings claims. Current digits results establish none of the broader economic
 implications. The binding experimental protocol remains `docs/methodology.md`.
 
+The [research plan](research-plan.md) translates this motivation into staged
+experiments, measurable resource criteria and independent reproduction. Later
+stages depend on evidence from the earlier ones.
+
 ## Non-Claims
 
 - No claim of novelty is made by this repository.

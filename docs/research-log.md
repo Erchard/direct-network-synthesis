@@ -1,5 +1,16 @@
 # Research Log
 
+## 2026-09-05: Staged Research Plan Recorded
+
+Added `docs/research-plan.md` and linked it from README and the hypothesis document.
+The plan starts with validation-only matched-readout controls, then covers related
+work, complete resource accounting, untouched-data confirmation, scaling and the
+single-pass hypothesis, and independent reproduction under a predefined budget.
+Each stage has deliverables and decision criteria, including stopping unsuccessful
+branches. No new experiments were run and no future capability is claimed as a
+result. The methodology remains binding; individual protocols must still be locked
+before execution.
+
 ## 2026-09-05: Independent Model Creation Objective Clarified
 
 Integrated a concrete independence objective into the existing accessibility
