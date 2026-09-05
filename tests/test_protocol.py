@@ -2,7 +2,7 @@ from pathlib import Path
 
 import numpy as np
 
-from dns.features import train_validation_test_split
+from dns.features import stratified_train_validation_test_split, train_validation_test_split
 from experiments.run_baselines import load_config, run
 
 
@@ -13,6 +13,18 @@ def test_train_validation_test_split_is_disjoint():
     assert set(train).isdisjoint(test)
     assert set(validation).isdisjoint(test)
     assert len(train) + len(validation) + len(test) == 50
+
+
+def test_stratified_split_preserves_classes_across_partitions():
+    labels = np.repeat(np.arange(4), 12)
+    train, validation, test = stratified_train_validation_test_split(labels, seed=77)
+
+    assert set(labels[train]) == {0, 1, 2, 3}
+    assert set(labels[validation]) == {0, 1, 2, 3}
+    assert set(labels[test]) == {0, 1, 2, 3}
+    assert set(train).isdisjoint(validation)
+    assert set(train).isdisjoint(test)
+    assert set(validation).isdisjoint(test)
 
 
 def test_starter_experiment_reports_all_required_models():

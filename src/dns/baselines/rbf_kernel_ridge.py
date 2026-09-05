@@ -22,7 +22,7 @@ class RBFKernelRidgeRegressor:
     alpha: float = 1.0
     gamma: float | None = None
 
-    def fit(self, X: np.ndarray, y: np.ndarray) -> "RBFKernelRidgeRegressor":
+    def fit(self, X: np.ndarray, y: np.ndarray) -> RBFKernelRidgeRegressor:
         X = as_2d_float(X)
         self.gamma_ = self.gamma if self.gamma is not None else median_heuristic_gamma(X)
         self.model_ = KernelRidgeRegressor(

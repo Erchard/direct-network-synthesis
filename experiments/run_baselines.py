@@ -14,15 +14,20 @@ SRC_PATH = Path(__file__).resolve().parents[1] / "src"
 if str(SRC_PATH) not in sys.path:
     sys.path.insert(0, str(SRC_PATH))
 
-from dns.baselines import (  # noqa: E402
+from dns.baselines import (
     DeterministicReLUBaseline,
     KernelRidgeRegressor,
     LinearRidgeRegressor,
     RBFKernelRidgeRegressor,
 )
-from dns.features import train_validation_test_split  # noqa: E402
-from dns.metrics import r2_score, root_mean_squared_error, summarize_metric_rows  # noqa: E402
-from dns.synthesis import DNS04Config, DNS04Synthesizer, DNS05KernelCompiler, KernelSpec  # noqa: E402
+from dns.features import train_validation_test_split
+from dns.metrics import r2_score, root_mean_squared_error, summarize_metric_rows
+from dns.synthesis import (
+    DNS04Config,
+    DNS04Synthesizer,
+    DNS05KernelCompiler,
+    KernelSpec,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG_PATH = PROJECT_ROOT / "configs" / "default_experiment.json"

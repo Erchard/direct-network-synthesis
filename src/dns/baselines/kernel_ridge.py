@@ -19,7 +19,7 @@ class KernelRidgeRegressor:
     kernel: KernelFn
     alpha: float = 1.0
 
-    def fit(self, X: np.ndarray, y: np.ndarray) -> "KernelRidgeRegressor":
+    def fit(self, X: np.ndarray, y: np.ndarray) -> KernelRidgeRegressor:
         X = as_2d_float(X)
         y_matrix, was_1d = as_target_matrix(y)
         if X.shape[0] != y_matrix.shape[0]:

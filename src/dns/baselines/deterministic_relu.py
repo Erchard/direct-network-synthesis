@@ -20,7 +20,7 @@ class DeterministicReLUBaseline:
     seed: int = 0
     include_original: bool = True
 
-    def fit(self, X: np.ndarray, y: np.ndarray) -> "DeterministicReLUBaseline":
+    def fit(self, X: np.ndarray, y: np.ndarray) -> DeterministicReLUBaseline:
         X = as_2d_float(X)
         y_matrix, was_1d = as_target_matrix(y)
         if X.shape[0] != y_matrix.shape[0]:

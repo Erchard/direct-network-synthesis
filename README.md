@@ -103,6 +103,23 @@ python -m experiments.run_baselines --write-results
 Generated result files are intentionally ignored by Git. Commit only curated summaries,
 protocol changes, or result notes that are needed for reproducibility.
 
+## Run the DNS 0.5 Depth-vs-Width Experiment
+
+```bash
+python -m experiments.run_dns05_depth_width
+```
+
+To write the raw JSON summary under `results/`:
+
+```bash
+python -m experiments.run_dns05_depth_width --write-results
+```
+
+This `sklearn digits` classification experiment selects the RBF oracle bandwidth and ridge
+regularization on validation data for each fixed split, then compares the locked oracle,
+closed-form baselines, a one-shot compiled feature model, and residual multi-block compiled
+models at the same total feature budget.
+
 ## Initial Models
 
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
@@ -111,6 +128,8 @@ protocol changes, or result notes that are needed for reproducibility.
 - `DeterministicReLUBaseline`: fixed seeded ReLU features with a closed-form ridge readout.
 - `DNS04Synthesizer`: initial SVD-based direct feature synthesis prototype.
 - `DNS05KernelCompiler`: initial weighted kernel compiler for closed-form kernel solvers.
+- `DNS05CompiledFeatureClassifier`: residual spectral RBF-geometry compiler for the DNS 0.5
+  depth-vs-width classification experiment.
 
 ## Research Log
 

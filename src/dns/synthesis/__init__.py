@@ -3,6 +3,9 @@
 __all__ = [
     "DNS04Config",
     "DNS04Synthesizer",
+    "DNS05BlockDiagnostics",
+    "DNS05CompiledFeatureClassifier",
+    "DNS05FeatureCompilerConfig",
     "DNS05KernelCompiler",
     "KernelSpec",
 ]
@@ -13,8 +16,26 @@ def __getattr__(name: str):
         from dns.synthesis.dns04 import DNS04Config, DNS04Synthesizer
 
         return {"DNS04Config": DNS04Config, "DNS04Synthesizer": DNS04Synthesizer}[name]
-    if name in {"DNS05KernelCompiler", "KernelSpec"}:
-        from dns.synthesis.dns05_kernel_compiler import DNS05KernelCompiler, KernelSpec
+    if name in {
+        "DNS05BlockDiagnostics",
+        "DNS05CompiledFeatureClassifier",
+        "DNS05FeatureCompilerConfig",
+        "DNS05KernelCompiler",
+        "KernelSpec",
+    }:
+        from dns.synthesis.dns05_kernel_compiler import (
+            DNS05BlockDiagnostics,
+            DNS05CompiledFeatureClassifier,
+            DNS05FeatureCompilerConfig,
+            DNS05KernelCompiler,
+            KernelSpec,
+        )
 
-        return {"DNS05KernelCompiler": DNS05KernelCompiler, "KernelSpec": KernelSpec}[name]
+        return {
+            "DNS05BlockDiagnostics": DNS05BlockDiagnostics,
+            "DNS05CompiledFeatureClassifier": DNS05CompiledFeatureClassifier,
+            "DNS05FeatureCompilerConfig": DNS05FeatureCompilerConfig,
+            "DNS05KernelCompiler": DNS05KernelCompiler,
+            "KernelSpec": KernelSpec,
+        }[name]
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

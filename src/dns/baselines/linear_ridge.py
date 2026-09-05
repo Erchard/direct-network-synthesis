@@ -16,7 +16,7 @@ class LinearRidgeRegressor:
     alpha: float = 1.0
     fit_intercept: bool = True
 
-    def fit(self, X: np.ndarray, y: np.ndarray) -> "LinearRidgeRegressor":
+    def fit(self, X: np.ndarray, y: np.ndarray) -> LinearRidgeRegressor:
         X = as_2d_float(X)
         y_matrix, was_1d = as_target_matrix(y)
         if X.shape[0] != y_matrix.shape[0]:

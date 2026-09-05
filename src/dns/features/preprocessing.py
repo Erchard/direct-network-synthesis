@@ -15,7 +15,7 @@ class Standardizer:
 
     eps: float = 1e-12
 
-    def fit(self, X: np.ndarray) -> "Standardizer":
+    def fit(self, X: np.ndarray) -> Standardizer:
         X = as_2d_float(X)
         self.mean_ = X.mean(axis=0)
         scale = X.std(axis=0)
@@ -58,8 +58,8 @@ def train_validation_test_split(
 
     rng = np.random.default_rng(seed)
     indices = rng.permutation(n_samples)
-    train_end = int(round(n_samples * train_fraction))
-    validation_end = train_end + int(round(n_samples * validation_fraction))
+    train_end = round(n_samples * train_fraction)
+    validation_end = train_end + round(n_samples * validation_fraction)
 
     train = indices[:train_end]
     validation = indices[train_end:validation_end]
@@ -67,3 +67,56 @@ def train_validation_test_split(
     if len(train) == 0 or len(validation) == 0 or len(test) == 0:
         raise ValueError("Split fractions produced an empty partition.")
     return train, validation, test
+
+
+def stratified_train_validation_test_split(
+    labels: np.ndarray,
+    *,
+    seed: int,
+    train_fraction: float = 0.6,
+    validation_fraction: float = 0.2,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Return deterministic stratified train, validation, and test indices."""
+
+    labels = np.asarray(labels)
+    if labels.ndim != 1:
+        raise ValueError("labels must be a 1D array.")
+    if labels.size <= 2:
+        raise ValueError("At least three samples are required.")
+    if not 0.0 < train_fraction < 1.0:
+        raise ValueError("train_fraction must be between 0 and 1.")
+    if not 0.0 < validation_fraction < 1.0:
+        raise ValueError("validation_fraction must be between 0 and 1.")
+    if train_fraction + validation_fraction >= 1.0:
+        raise ValueError("Train and validation fractions must leave a test split.")
+
+    rng = np.random.default_rng(seed)
+    train_parts: list[np.ndarray] = []
+    validation_parts: list[np.ndarray] = []
+    test_parts: list[np.ndarray] = []
+
+    for label in np.unique(labels):
+        class_indices = np.flatnonzero(labels == label)
+        if class_indices.size < 3:
+            raise ValueError("Each class must contain at least three samples.")
+
+        shuffled = class_indices[rng.permutation(class_indices.size)]
+        train_count = round(class_indices.size * train_fraction)
+        validation_count = round(class_indices.size * validation_fraction)
+        train_count = min(max(train_count, 1), class_indices.size - 2)
+        validation_count = min(max(validation_count, 1), class_indices.size - train_count - 1)
+
+        train_end = train_count
+        validation_end = train_end + validation_count
+        train_parts.append(shuffled[:train_end])
+        validation_parts.append(shuffled[train_end:validation_end])
+        test_parts.append(shuffled[validation_end:])
+
+    train = np.concatenate(train_parts)
+    validation = np.concatenate(validation_parts)
+    test = np.concatenate(test_parts)
+    return (
+        train[rng.permutation(train.size)],
+        validation[rng.permutation(validation.size)],
+        test[rng.permutation(test.size)],
+    )

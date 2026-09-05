@@ -31,7 +31,7 @@ class DNS04Synthesizer:
     def __init__(self, config: DNS04Config | None = None):
         self.config = config or DNS04Config()
 
-    def fit(self, X: np.ndarray, y: np.ndarray) -> "DNS04Synthesizer":
+    def fit(self, X: np.ndarray, y: np.ndarray) -> DNS04Synthesizer:
         X = as_2d_float(X)
         y_matrix, was_1d = as_target_matrix(y)
         if X.shape[0] != y_matrix.shape[0]:
