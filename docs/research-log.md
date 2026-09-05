@@ -1,5 +1,66 @@
 # Research Log
 
+## 2026-09-05: Dipole Prototype Diagnostic Result
+
+Evaluation commit: `dc69292d2a8e029794af38d4baede248230aae8f`.
+Worktree was clean at evaluation. Command:
+
+```text
+D:\Projects\direct-network-synthesis\.venv\Scripts\python.exe -m experiments.run_dns05_prototype --config configs/dns05_dipole_prototype_digits.json --output results/dns05_dipole_prototype_digits.json
+```
+
+Complete auditable record: `docs/results/dns05_dipole_prototype_digits.json`.
+The run produced 1160 validation-only rows and 145 selected model/split rows.
+Test fields are null by design; this is not independent confirmation evidence.
+
+Selected validation summary:
+
+| Model | Validation accuracy, mean +/- SD | Kernel error | Rank | Retained train samples | Exact train-row prototype matches |
+|---|---:|---:|---:|---:|---:|
+| Fixed ReLU 256 | 0.9749 +/- 0.0079 | n/a | 252.2 | 0 | n/a |
+| Compiled 192 | 0.9638 +/- 0.0044 | 0.032062 | 184.4 | 0 | n/a |
+| Class PCA prototypes 192 | 0.9794 +/- 0.0080 | 0.005312 | 192.0 | 0 | 0 |
+| Dipole prototypes 64 | 0.9588 +/- 0.0077 | 0.008797 | 64.0 | 0 | 0 |
+| Dipole prototypes 128 | 0.9744 +/- 0.0087 | 0.005662 | 128.0 | 0 | 0 |
+| Dipole prototypes 192 | 0.9811 +/- 0.0060 | 0.004937 | 192.0 | 0 | 0 |
+| Uniform Nystrom 192 | 0.9833 +/- 0.0048 | 0.004250 | 192.0 | 192 | n/a |
+| Spectral 192 | 0.9900 +/- 0.0042 | 0.000355 | 192.0 | 1078 | n/a |
+| RBF oracle | 0.9916 +/- 0.0028 | 0.000000 | 1078.0 | 1078 | n/a |
+
+Selected paired differences:
+
+| Comparison | Validation accuracy delta, mean +/- SD | Kernel error delta | Retained train samples delta |
+|---|---:|---:|---:|
+| Dipole prototypes 192 - Class PCA prototypes 192 | +0.00167 +/- 0.00671 | -0.000375 | 0 |
+| Dipole prototypes 192 - Uniform Nystrom 192 | -0.00223 +/- 0.00694 | +0.000687 | -192 |
+| Dipole prototypes 192 - Fixed ReLU 256 | +0.00613 +/- 0.00305 | n/a | 0 |
+| Dipole prototypes 192 - Compiled 192 | +0.01727 +/- 0.00635 | -0.027124 | 0 |
+| Dipole prototypes 192 - Spectral 192 | -0.00891 +/- 0.00413 | +0.004582 | -1078 |
+| Class PCA prototypes 192 - Uniform Nystrom 192 | -0.00390 +/- 0.00641 | +0.001062 | -192 |
+| Uniform Nystrom 192 - Spectral 192 | -0.00669 +/- 0.00641 | +0.003895 | -886 |
+
+Interpretation: the unexpected boundary-aware shift helped slightly. Dipole
+prototypes 192 improved over unshifted class-PCA prototypes by 0.00167 validation
+accuracy and reduced train-kernel reconstruction error by 0.000375, while still
+retaining no real train rows and having no exact train-row center matches. The
+gain is small relative to split variation, so it should be treated as a
+development clue rather than a confirmed improvement.
+
+Negative result: explicit boundary shifting does not close the gap to stronger
+RBF-derived references. Dipole prototypes 192 remain below uniform Nystrom 192
+by 0.00223 +/- 0.00694 and below spectral 192 by 0.00891 +/- 0.00413. This
+suggests that rival-class boundary information is useful but incomplete; the
+remaining gap may require better coverage of within-class manifolds or a
+train-only way to synthesize more diverse local centers.
+
+Decision: keep `prototype_class_dipole_192` as the strongest observed
+train-sample-free synthetic prototype candidate, but do not proceed directly to
+test confirmation from this small validation gain. The next bounded development
+step should audit which validation examples are fixed or broken by dipole
+prototypes relative to class-PCA prototypes and uniform Nystrom. If the fixed
+examples concentrate near rival-class boundaries, a final frozen candidate may
+combine class-local coverage with a small boundary-center allocation.
+
 ## 2026-09-05: Dipole Prototype Diagnostic Preregistered
 
 Locked DNS05-DIP before development evaluation. The diagnostic keeps the same

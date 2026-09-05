@@ -216,6 +216,8 @@ python -m experiments.run_dns05_prototype --config configs/dns05_dipole_prototyp
 It tests a boundary-aware synthetic-center variant that shifts class-local
 prototypes toward and away from their nearest rival class under the train-only
 RBF geometry.
+The complete validation-only record is stored at
+`docs/results/dns05_dipole_prototype_digits.json`.
 
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
