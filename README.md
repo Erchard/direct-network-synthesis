@@ -162,6 +162,8 @@ python -m experiments.run_dns05_landmark --config configs/dns05_landmark_digits.
 It tests whether uniform, farthest-first, class-balanced farthest-first Nystrom
 landmarks or random Fourier features explain the gap between the compiler and the
 compact spectral RBF reference. It is validation-only and records null test fields.
+The complete validation-only record is stored at
+`docs/results/dns05_landmark_digits.json`.
 
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and

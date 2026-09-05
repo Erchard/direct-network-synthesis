@@ -1,5 +1,67 @@
 # Research Log
 
+## 2026-09-05: Landmark Geometry Diagnostic Result
+
+Protocol/code commit: `0d9213e73c9d2185d507b9830b351c83dc813783`.
+Worktree was clean at evaluation. Command:
+
+```text
+D:\Projects\direct-network-synthesis\.venv\Scripts\python.exe -m experiments.run_dns05_landmark --config configs/dns05_landmark_digits.json --output results/dns05_landmark_digits.json
+```
+
+Complete auditable record: `docs/results/dns05_landmark_digits.json`.
+The run produced 800 validation-only rows: five fixed digits development splits,
+20 representations, four ridge values and intercept on/off. Test fields are null
+by design; this is not independent confirmation evidence.
+
+Selected validation summary:
+
+| Model | Validation accuracy, mean +/- SD | Kernel error, mean | Rank / budget | Retained train samples |
+|---|---:|---:|---:|---:|
+| Linear | 0.9354 +/- 0.0072 | n/a | 60.2 / 64 | 0 |
+| Fixed ReLU 256 | 0.9749 +/- 0.0079 | n/a | 252.2 / 256 | 0 |
+| PCA ReLU 192 | 0.9616 +/- 0.0041 | n/a | 184.4 / 192 | 0 |
+| Compiled 192 | 0.9638 +/- 0.0044 | 0.032062 | 184.4 / 192 | 0 |
+| RFF 192 | 0.9671 +/- 0.0077 | 0.063285 | 192 / 192 | 0 |
+| Uniform Nystrom 192 | 0.9833 +/- 0.0048 | 0.004250 | 192 / 192 | 192 |
+| Farthest Nystrom 192 | 0.9822 +/- 0.0051 | 0.001291 | 192 / 192 | 192 |
+| Class-balanced Nystrom 192 | 0.9827 +/- 0.0046 | 0.001338 | 192 / 192 | 192 |
+| Spectral 192 | 0.9900 +/- 0.0042 | 0.000355 | 192 / 192 | 1078 |
+| RBF oracle | 0.9916 +/- 0.0028 | 0 | 1078 / 1078 | 1078 |
+
+Width trend:
+
+| Budget | Spectral | Uniform Nystrom | Farthest Nystrom | Class-balanced Nystrom | RFF |
+|---:|---:|---:|---:|---:|---:|
+| 64 | 0.9515 | 0.9532 | 0.9476 | 0.9493 | 0.9220 |
+| 128 | 0.9721 | 0.9772 | 0.9682 | 0.9694 | 0.9604 |
+| 192 | 0.9900 | 0.9833 | 0.9822 | 0.9827 | 0.9671 |
+
+Validation-selected paired differences: uniform Nystrom 192 minus spectral 192
+was -0.0067 +/- 0.0064 accuracy; farthest Nystrom 192 minus spectral 192 was
+-0.0078 +/- 0.0046; class-balanced farthest Nystrom 192 minus spectral 192 was
+-0.0072 +/- 0.0064; RFF 192 minus spectral 192 was -0.0228 +/- 0.0036.
+Farthest Nystrom 192 beat compiled 192 by +0.0184 +/- 0.0080 accuracy and
+reduced train kernel error by about 0.0308. Class-balanced farthest Nystrom 192
+beat fixed ReLU 256 by +0.0078 +/- 0.0091, but this is a development-selected
+comparison and the interval is not decisive.
+
+Interpretation: simple Nystrom-style landmark features explain much of the
+compiler gap. Farthest-first landmarks reconstruct the train kernel better than
+uniform landmarks, but uniform landmarks slightly led validation accuracy at
+192 features, so Frobenius kernel error is not a complete proxy for class
+performance. Class-balanced landmarks did not provide a clear improvement over
+unsupervised landmarks. RFF at 192 features was better than compiled but far
+behind Nystrom and spectral references. The promising compact path is therefore
+explicit kernel-map compression with retained landmarks, not the current DNS05
+PCA/quantile compiler.
+
+Decision: stop expanding the current residual compiler. The next technical step
+should be a cost-accounted Nystrom/spectral compression protocol: separate
+feature construction time, retained model bytes, validation transform cost and
+readout cost, then decide whether a landmark-based compact model deserves an
+untouched-dataset confirmation run.
+
 ## 2026-09-05: Landmark Geometry Diagnostic Preregistered
 
 Added a related-work note for kernel PCA/spectral references, Nystrom kernel
