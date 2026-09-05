@@ -9,7 +9,7 @@ The methodology is binding. Status describes execution, not success.
 | DNS05-RO | Readout settings versus representation loss? | Only original train/validation for seeds 101,202,303,404,505 | dns05-readout-protocol.md, docs/results readout record | Completed, mixed/negative for compiler |
 | DNS05-LM | Do simple landmark kernel maps explain the compiler gap? | Only original train/validation for seeds 101,202,303,404,505 | dns05-landmark-protocol.md, docs/results landmark record | Completed, landmarks beat compiler but not spectral/RBF |
 | DNS05-EG | Which examples expose the compiler gap? | Only original train/validation for seeds 101,202,303,404,505 | dns05-error-geometry-protocol.md, docs/results error-geometry record | Completed, compiler loses recoverable local structure |
-| DNS05-CA | Which compact candidate has the best quality/resource tradeoff? | Only original train/validation for seeds 101,202,303,404,505 | dns05-cost-protocol.md, configs/dns05_cost_digits.json | Preregistered |
+| DNS05-CA | Which compact candidate has the best quality/resource tradeoff? | Only original train/validation for seeds 101,202,303,404,505 | dns05-cost-protocol.md, docs/results cost record | Completed, uniform Nystrom 192 is best compact development candidate |
 
 Digits is development data. A sample excluded in one split can belong to another
 split's development portion; this is not a globally untouched holdout. The readout

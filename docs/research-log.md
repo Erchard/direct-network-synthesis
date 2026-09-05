@@ -1,5 +1,71 @@
 # Research Log
 
+## 2026-09-05: Cost-Accounted Compression Diagnostic Result
+
+Protocol/code commit: `dc6a917007ec8048d51af768f1bc6e6f9b114558`.
+Worktree was clean at evaluation. Command:
+
+```text
+D:\Projects\direct-network-synthesis\.venv\Scripts\python.exe -m experiments.run_dns05_cost --config configs/dns05_cost_digits.json --output results/dns05_cost_digits.json
+```
+
+Complete auditable record: `docs/results/dns05_cost_digits.json`.
+The run produced 800 validation-only readout rows and 100 selected model/split
+rows. Test fields are null by design; this is not independent confirmation
+evidence. Cost fields are approximate numerical-array accounting plus descriptive
+single-machine timings, not exact OS RSS and not energy measurements.
+
+Selected validation summary for key candidates:
+
+| Model | Validation accuracy, mean +/- SD | Model bytes | Validation prediction s | Fit s without oracle | Fit s with oracle |
+|---|---:|---:|---:|---:|---:|
+| Fixed ReLU 256 | 0.9749 +/- 0.0079 | 121376 | 0.000879 | 0.0583 | 0.0596 |
+| Compiled 192 | 0.9638 +/- 0.0044 | 411168 | 0.001485 | 0.5803 | 1.1462 |
+| RFF 192 | 0.9671 +/- 0.0077 | 116256 | 0.001823 | 0.0488 | 0.6147 |
+| Uniform Nystrom 192 | 0.9833 +/- 0.0048 | 409600 | 0.002569 | 0.0529 | 0.6188 |
+| Farthest Nystrom 192 | 0.9822 +/- 0.0051 | 409600 | 0.002447 | 0.1143 | 0.6802 |
+| Class-balanced Nystrom 192 | 0.9827 +/- 0.0046 | 409600 | 0.002542 | 0.0832 | 0.6490 |
+| Spectral 192 | 0.9900 +/- 0.0042 | 2224128 | 0.014278 | 0.3447 | 0.9105 |
+| RBF oracle | 0.9916 +/- 0.0028 | 639288 | 0.012849 | 0.4206 | 0.9865 |
+
+Mean shared RBF oracle/gamma selection time was 0.5645 s per split. This
+dominates the development accounting for RBF-derived compact models. Without
+that shared selection, uniform Nystrom 192 used about 0.0529 s for train
+features plus the readout grid, compared with 0.4206 s for full RBF and
+0.3447 s for spectral 192.
+
+Efficiency relative to full RBF: uniform Nystrom 192 had an accuracy gap of
+0.00836 +/- 0.00394, used 0.641x the RBF model-state bytes and 0.201x the RBF
+validation prediction time. Spectral 192 had a smaller accuracy gap of
+0.00167 +/- 0.00422, but used 3.48x the RBF model-state bytes and 1.13x the RBF
+validation prediction time in this implementation. Fixed ReLU 256 was much
+smaller and faster than RBF, but its validation accuracy gap was
+0.0167 +/- 0.0079.
+
+Width/cost trend:
+
+| Family | 64 acc / bytes / pred s | 128 acc / bytes / pred s | 192 acc / bytes / pred s |
+|---|---:|---:|---:|
+| Uniform Nystrom | 0.9532 / 71680 / 0.000711 | 0.9772 / 207872 / 0.001683 | 0.9833 / 409600 / 0.002569 |
+| RFF | 0.9220 / 39440 / 0.000624 | 0.9604 / 77856 / 0.001246 | 0.9671 / 116256 / 0.001823 |
+| Spectral | 0.9515 / 1110032 / 0.013522 | 0.9721 / 1667072 / 0.015108 | 0.9900 / 2224128 / 0.014278 |
+
+Interpretation: on reused digits development splits, uniform Nystrom 192 is the
+best observed quality/resource compromise among the compact RBF approximations:
+it is less accurate than spectral 192 and full RBF, but substantially cheaper
+than both for validation prediction and smaller than spectral state. Farthest
+landmarks remain better at kernel reconstruction, but not at validation accuracy
+or construction time. Spectral 192 is an excellent quality reference, not a
+compact deployment winner in the current implementation. The current compiled
+model is worse than uniform Nystrom in accuracy, construction time and model
+bytes, so it should not be retained as the next candidate.
+
+Decision: if the goal permits storing 192 train-derived landmarks, the next
+candidate for untouched-data confirmation is uniform Nystrom 192 with the fixed
+readout-selection rule. If the goal requires a train-sample-free neural artifact,
+this result is not sufficient; the next research step should distill landmark
+behavior into explicit parameters and compare it against Nystrom directly.
+
 ## 2026-09-05: Cost-Accounted Compression Diagnostic Preregistered
 
 Locked DNS05-CA before development evaluation. The diagnostic measures the

@@ -189,6 +189,8 @@ python -m experiments.run_dns05_cost --config configs/dns05_cost_digits.json --o
 It records validation-only accuracy together with construction time, readout
 selection time, retained samples, approximate model-state bytes and repeated
 validation prediction timing. It does not compute test scores or energy use.
+The complete validation-only record is stored at
+`docs/results/dns05_cost_digits.json`.
 
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
