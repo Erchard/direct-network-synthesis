@@ -45,6 +45,21 @@ accessible to smaller teams and individuals. This could weaken a source of
 corporate concentration: the capital required for large training infrastructure.
 Broadening access to model creation is a long-term motivation for DNS.
 
+The practical technological objective is to enable a small independent team to
+create, modify and run a capable model on affordable hardware, without requiring
+permission from or continued access to a single provider's proprietary service.
+Success would mean that users can build and maintain an alternative when a
+provider withdraws access or imposes unacceptable terms.
+
+That independence requires more than inexpensive training. Model creation and
+everyday inference must both be affordable. Independent reproduction requires
+available code, a documented procedure and legally usable data. Rights to modify
+and redistribute the necessary artifacts must allow development to continue if
+the original team stops. Portable data and workflows must let users change
+providers without abandoning their accumulated work. These are design goals for
+the broader ecosystem; the current DNS experiments primarily investigate the
+cost and quality of model creation.
+
 The proposed chain of implications must be tested one step at a time:
 
 1. Direct weight computation can produce useful representations.
@@ -63,6 +78,17 @@ data processing, storage or the need for data centers. Nor would it make corpora
 monopoly impossible: access to data, distribution and users can remain advantages.
 Claims about infrastructure becoming unnecessary or corporate concentration
 disappearing are therefore not conclusions of this project.
+
+The intended contribution is therefore a practical capacity for independent
+competition, rather than a technological guarantee against monopoly. Technical
+accessibility alone does not settle control over data, hardware, distribution or
+legal rights.
+
+To make the DNS contribution testable, a future accessibility benchmark should
+specify the model's task, minimum acceptable quality, available hardware and a
+total resource budget before evaluation. An independent team should then be able
+to reproduce the model within those limits using the published procedure. These
+thresholds remain to be defined; the current digits study is not such a benchmark.
 
 Evidence for the technical ambition would require matched-quality comparisons
 with strong alternatives, measuring total computation time, peak memory, data

@@ -1,5 +1,17 @@
 # Research Log
 
+## 2026-09-05: Independent Model Creation Objective Clarified
+
+Integrated a concrete independence objective into the existing accessibility
+motivation in `docs/hypothesis.md`: small teams should be able to create, modify,
+run and maintain useful models without dependence on one proprietary service.
+Connected affordable synthesis to inference cost, reproducible procedures and
+legally usable data, modification and redistribution rights, and portability.
+Proposed a future benchmark with task, quality, hardware and budget fixed before
+evaluation, followed by independent reproduction. These are research and ecosystem
+goals, not demonstrated capabilities or a guarantee against monopoly. No changes
+to the experimental protocol or reported results.
+
 ## 2026-09-05: Accessibility Motivation Recorded
 
 Added the long-term motivation to `docs/hypothesis.md`: direct synthesis could
