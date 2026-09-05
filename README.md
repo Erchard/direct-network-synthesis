@@ -10,13 +10,18 @@ negative results explicit enough to audit.
 
 ## Conceptual Foundations
 
-The full reasoning history behind the project — from market price discovery, evolution, and
-engineering design to the DNS 0.1–0.5 research program — is documented in Ukrainian in
-[docs/conceptual-foundations-uk.md](docs/conceptual-foundations-uk.md).
+The project's long-form reasoning history — from market price discovery, evolution, and
+engineering design to the DNS 0.1–0.5 research program — is available in two versions:
 
-That document preserves the evolution of the hypotheses, exploratory chat results, negative
-results, epistemic status of claims, and the immediate DNS 0.5 Kernel Compiler experiment.
-It is the project's long-form conceptual memory; `docs/hypothesis.md` and
+- [English: Conceptual Foundations of Direct Network Synthesis](docs/conceptual-foundations-en.md)
+- [Українською: Концептуальні засади Direct Network Synthesis](docs/conceptual-foundations-uk.md)
+
+The English document is written as a self-contained introduction for a broad technical
+audience. Both versions preserve the evolution of the hypotheses, exploratory chat results,
+negative results, epistemic status of claims, and the immediate DNS 0.5 Kernel Compiler
+experiment.
+
+These documents are the project's long-form conceptual memory; `docs/hypothesis.md` and
 `docs/methodology.md` remain the concise normative documents.
 
 ## Research Question
