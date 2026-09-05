@@ -8,6 +8,17 @@ The working phrase "Direct Network Synthesis" is a project label. This repositor
 claim novelty. Its purpose is to make the hypotheses, baselines, experiment protocol, and
 negative results explicit enough to audit.
 
+## Conceptual Foundations
+
+The full reasoning history behind the project — from market price discovery, evolution, and
+engineering design to the DNS 0.1–0.5 research program — is documented in Ukrainian in
+[docs/conceptual-foundations-uk.md](docs/conceptual-foundations-uk.md).
+
+That document preserves the evolution of the hypotheses, exploratory chat results, negative
+results, epistemic status of claims, and the immediate DNS 0.5 Kernel Compiler experiment.
+It is the project's long-form conceptual memory; `docs/hypothesis.md` and
+`docs/methodology.md` remain the concise normative documents.
+
 ## Research Question
 
 Can a neural model obtain competitive predictive performance when its hidden features,
