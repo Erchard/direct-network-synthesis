@@ -200,6 +200,22 @@ def evaluate_split(
         compiled_rows.append(row)
         block_diagnostics.extend(diagnostics)
 
+    if model_config.get("full_basis_diagnostic", False):
+        for block_count in compiled_block_counts[1:]:
+            row, diagnostics = evaluate_compiled_classifier(
+                X_train, y_train, X_validation, y_validation, X_test, y_test,
+                gamma=selection.gamma, block_count=block_count, config=config,
+                split_seed=split_seed, full_basis=True,
+            )
+            compiled_rows.append(row)
+            block_diagnostics.extend(diagnostics)
+        rows.append(evaluate_spectral_reference(
+            X_train_std, y_train_one_hot, X_validation_std, y_validation,
+            X_test_std, y_test, classes, gamma=selection.gamma,
+            rank=int(model_config["compiled_total_feature_count"]),
+            alpha=float(model_config["compiled_readout_alpha"]), split_seed=split_seed,
+        ))
+
     return rows + compiled_rows, selection, block_diagnostics
 
 
@@ -390,6 +406,7 @@ def evaluate_compiled_classifier(
     block_count: int,
     config: dict[str, Any],
     split_seed: int,
+    full_basis: bool = False,
 ) -> tuple[dict[str, float | str | bool | int], list[dict[str, float | str | int]]]:
     model_config = config["models"]
     total_feature_count = int(model_config["compiled_total_feature_count"])
@@ -401,8 +418,11 @@ def evaluate_compiled_classifier(
         quantile_min=float(model_config["compiled_quantile_min"]),
         quantile_max=float(model_config["compiled_quantile_max"]),
         quantile_count=int(model_config["compiled_quantile_count"]),
+        full_basis=full_basis,
     )
     name = compiled_model_name(total_feature_count, block_count)
+    if full_basis:
+        name += "_full_basis"
     model = DNS05CompiledFeatureClassifier(gamma=gamma, config=compiler_config)
     start = time.perf_counter()
     model.fit(X_train, y_train)
@@ -439,7 +459,46 @@ def evaluate_compiled_classifier(
         }
         for diagnostic in model.block_diagnostics_
     ]
+    row["basis_feature_count"] = total_feature_count
+    row["block_basis_evaluations"] = total_feature_count * (block_count if full_basis else 1)
+    row["embedding_dimension"] = model.train_embedding_.shape[1]
+    row["projection_parameter_count"] = sum(b.projection_weights.size for b in model.blocks_)
     return row, diagnostics
+
+
+def evaluate_spectral_reference(
+    X_train, targets, X_validation, y_validation, X_test, y_test, classes,
+    *, gamma, rank, alpha, split_seed,
+):
+    """Train-only truncated kernel embedding with out-of-sample extension.
+
+    This is an optimal train Gram approximation, not an accuracy upper bound.
+    Inference retains all training examples and is not a compact neural model.
+    """
+    start = time.perf_counter()
+    kernel = rbf_kernel(X_train, gamma=gamma)
+    values, vectors = np.linalg.eigh(kernel)
+    indices = np.argsort(values)[::-1][:rank]
+    indices = indices[values[indices] > 1e-10 * max(1.0, values.max())]
+    embedding = vectors[:, indices] * np.sqrt(values[indices])
+    extension = vectors[:, indices] / np.sqrt(values[indices])
+    weights = solve_primal_ridge(embedding, targets, alpha=alpha, fit_intercept=True)
+    solve_time = time.perf_counter() - start
+    val = predict_primal(rbf_kernel(X_validation, X_train, gamma=gamma) @ extension,
+                         weights, classes)
+    start = time.perf_counter()
+    test = predict_primal(rbf_kernel(X_test, X_train, gamma=gamma) @ extension,
+                          weights, classes)
+    inference_time = time.perf_counter() - start
+    return classification_row(
+        model=f"spectral_oracle_{rank}", split_seed=split_seed,
+        y_validation=y_validation, validation_pred=val, y_test=y_test, test_pred=test,
+        solve_time_seconds=solve_time, inference_time_seconds=inference_time,
+        feature_budget=rank, compiled_rank=len(indices),
+        kernel_reconstruction_error=float(
+            np.linalg.norm(kernel - embedding @ embedding.T) / np.linalg.norm(kernel)
+        ),
+    )
 
 
 def relu_features(
@@ -489,6 +548,16 @@ def classification_row(
         "block_count": int(block_count),
         "uses_iterative_parameter_optimization": False,
     }
+    classes = np.unique(np.concatenate([y_validation, y_test, validation_pred, test_pred]))
+    for partition, truth, prediction in (
+        ("validation", y_validation, validation_pred), ("test", y_test, test_pred)
+    ):
+        observed = one_hot(truth, classes)
+        predicted = one_hot(prediction, classes)
+        residual_sum = float(np.sum((observed - predicted) ** 2))
+        total_sum = float(np.sum((observed - observed.mean(axis=0)) ** 2))
+        row[f"{partition}_rmse"] = float(np.sqrt(np.mean((observed - predicted) ** 2)))
+        row[f"{partition}_r2"] = 1.0 - residual_sum / total_sum if total_sum else 0.0
     if kernel_reconstruction_error is not None:
         row["kernel_reconstruction_error"] = float(kernel_reconstruction_error)
     if mean_block_spectral_energy is not None:
@@ -506,6 +575,15 @@ def paired_differences(rows: list[dict[str, float | str | bool | int]]) -> dict[
     comparisons.extend((model, one_shot_models[0]) for model in residual_models if one_shot_models)
     comparisons.extend(
         (model, "rbf_kernel_ridge_oracle") for model in one_shot_models + residual_models
+    )
+    comparisons.extend(
+        (model, reference) for reference in sorted(models)
+        if reference.startswith("spectral_oracle_")
+        for model in one_shot_models + residual_models
+    )
+    comparisons.extend(
+        (model, model.removesuffix("_full_basis")) for model in residual_models
+        if model.endswith("_full_basis")
     )
 
     by_model: dict[str, dict[int, dict[str, float | str | bool | int]]] = {}

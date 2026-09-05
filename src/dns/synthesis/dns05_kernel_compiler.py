@@ -102,6 +102,7 @@ class DNS05FeatureCompilerConfig:
     quantile_max: float = 0.9
     quantile_count: int = 5
     eigensolver_eps: float = 1e-10
+    full_basis: bool = False
 
     def __post_init__(self) -> None:
         if self.total_feature_count <= 0:
@@ -201,9 +202,12 @@ class DNS05CompiledFeatureClassifier:
         diagnostics: list[DNS05BlockDiagnostics] = []
 
         for block_index, feature_indices in enumerate(block_partitions):
+            target_rank = feature_indices.size
+            if self.config.full_basis:
+                feature_indices = np.arange(self.config.total_feature_count)
             target, eigenvalues, positive_rank, spectral_energy = _positive_spectral_embedding(
                 residual,
-                rank=feature_indices.size,
+                rank=target_rank,
                 eps=self.config.eigensolver_eps,
             )
             phi_train = self.feature_map_.transform_columns(X, feature_indices)
@@ -252,7 +256,7 @@ class DNS05CompiledFeatureClassifier:
         self.kernel_reconstruction_error_ = diagnostics[-1].reconstruction_error
         self.compiled_rank_ = int(np.linalg.matrix_rank(train_embedding))
         self.feature_budget_ = self.config.total_feature_count
-        self.block_feature_counts_ = tuple(int(indices.size) for indices in block_partitions)
+        self.block_feature_counts_ = tuple(int(block.feature_indices.size) for block in blocks)
         self.n_features_in_ = X.shape[1]
         return self
 

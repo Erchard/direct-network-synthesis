@@ -1,5 +1,14 @@
 # Research Log
 
+## 2026-09-05: Full-Basis Diagnostic Preregistered
+
+Next comparison is fixed in `docs/dns05-full-basis-protocol.md` and
+`configs/dns05_full_basis_digits.json`. Add full-basis residual projection and a
+train-only rank-192 spectral reference. Retain all previous baselines and report
+all paired outcomes. Code inspection establishes that the current residual blocks
+share a fixed nonlinear basis and do not implement compositional neural depth.
+This limits the interpretation of the earlier depth result. No novelty claim.
+
 ## 2026-09-05: Repository Scaffold
 
 Created the initial reproducible research scaffold for Direct Network Synthesis.

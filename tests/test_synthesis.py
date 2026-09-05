@@ -60,3 +60,20 @@ def test_dns05_compiled_feature_classifier_records_residual_diagnostics():
     assert model.compiled_rank_ <= 12
     assert np.isfinite(model.kernel_reconstruction_error_)
     assert model.uses_iterative_parameter_optimization is False
+
+
+def test_full_basis_residuals_keep_output_budget_and_collapse_to_fixed_basis():
+    rng = np.random.default_rng(1705)
+    X = rng.normal(size=(40, 6))
+    y = (X[:, 0] > 0).astype(int)
+    model = DNS05CompiledFeatureClassifier(config=DNS05FeatureCompilerConfig(
+        total_feature_count=12, block_count=3, full_basis=True,
+    )).fit(X, y)
+    assert model.train_embedding_.shape[1] <= 12
+    assert all(block.feature_indices.size == 12 for block in model.blocks_)
+    assert all(block.projection_weights.shape[1] <= 4 for block in model.blocks_)
+    new_X = rng.normal(size=(7, 6))
+    basis = model.feature_map_.transform_columns(new_X, np.arange(12))
+    combined = np.column_stack([block.projection_weights for block in model.blocks_])
+    np.testing.assert_allclose(model.transform(new_X), basis @ combined, atol=1e-12)
+    np.testing.assert_allclose(model.transform(X), model.train_embedding_, atol=1e-12)

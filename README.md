@@ -122,6 +122,16 @@ models at the same total feature budget.
 
 ## Initial Models
 
+The next preregistered diagnostic is described in
+[Full-Basis Protocol](docs/dns05-full-basis-protocol.md). Run it with:
+
+```bash
+python -m experiments.run_dns05_depth_width --config configs/dns05_full_basis_digits.json --write-results --output results/dns05_full_basis_digits_summary.json
+```
+
+It adds full-basis residual blocks and a rank-192 spectral oracle reference.
+Curated complete result records are stored under `docs/results/`.
+
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
   train-only median heuristic when `gamma` is not specified.

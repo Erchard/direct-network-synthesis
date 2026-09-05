@@ -1,0 +1,26 @@
+{
+  "dataset": {"name": "sklearn_digits"},
+  "splits": {
+    "train_fraction": 0.6,
+    "validation_fraction": 0.2,
+    "split_seeds": [101, 202, 303, 404, 505]
+  },
+  "oracle_selection": {
+    "gamma_multipliers": [0.5, 1.0, 2.0],
+    "alpha_values": [0.001, 0.01, 0.1]
+  },
+  "models": {
+    "linear_alpha": 1.0,
+    "relu_hidden_units": 192,
+    "relu_seed": 1705,
+    "relu_include_original": true,
+    "compiled_total_feature_count": 192,
+    "compiled_block_counts": [2, 3],
+    "compiled_projection_alpha": 0.000001,
+    "compiled_readout_alpha": 1.0,
+    "compiled_quantile_min": 0.1,
+    "compiled_quantile_max": 0.9,
+    "compiled_quantile_count": 5,
+    "full_basis_diagnostic": true
+  }
+}
