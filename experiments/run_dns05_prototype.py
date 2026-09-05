@@ -23,14 +23,30 @@ from experiments.run_dns05_depth_width import (
     load_digits_dataset,
     one_hot,
     select_rbf_oracle,
+    summarize_values,
 )
 from experiments.run_dns05_landmark import (
     _anchor_representations,
     _landmark_representations,
     _score_representations,
-    aggregate,
     nystrom_features,
 )
+
+METRICS = [
+    "validation_accuracy",
+    "validation_rmse",
+    "validation_r2",
+    "rank",
+    "feature_budget",
+    "readout_parameter_count",
+    "retained_train_samples",
+    "solve_time_seconds",
+    "inference_time_seconds",
+    "representation_time_seconds",
+    "kernel_reconstruction_error",
+    "prototype_count",
+    "prototype_train_exact_match_count",
+]
 
 
 def global_pca_prototypes(X, count, quantiles):
@@ -201,6 +217,67 @@ def run(config):
         "test_status": "not_evaluated",
         "dataset_sha256": hashlib.sha256(X.tobytes() + y.tobytes()).hexdigest(),
         **aggregate(rows, config["paired_models"]),
+    }
+
+
+def summary(rows):
+    return {
+        metric: summarize_values([r[metric] for r in rows])
+        for metric in METRICS
+        if all(r.get(metric) is not None for r in rows)
+    }
+
+
+def aggregate(rows, pair_specs):
+    models = sorted({r["model"] for r in rows})
+    settings = sorted({(r["alpha"], r["intercept"]) for r in rows})
+    seeds = sorted({r["split_seed"] for r in rows})
+    selected = []
+    matched = {}
+    pairs = {}
+    for model in models:
+        for seed in seeds:
+            candidates = [r for r in rows if r["model"] == model and r["split_seed"] == seed]
+            selected.append(
+                min(
+                    candidates,
+                    key=lambda r: (-r["validation_accuracy"], r["alpha"], r["intercept"]),
+                )
+            )
+        for alpha, intercept in settings:
+            group = [
+                r
+                for r in rows
+                if r["model"] == model and r["alpha"] == alpha and r["intercept"] == intercept
+            ]
+            matched[f"{model}/alpha={alpha}/intercept={intercept}"] = summary(group)
+    for left, right in pair_specs:
+        for setting in [None, *settings]:
+            source = (
+                selected
+                if setting is None
+                else [r for r in rows if (r["alpha"], r["intercept"]) == setting]
+            )
+            left_rows = {r["split_seed"]: r for r in source if r["model"] == left}
+            right_rows = {r["split_seed"]: r for r in source if r["model"] == right}
+            if set(left_rows) != set(seeds) or set(right_rows) != set(seeds):
+                continue
+            pairs[f"{left}_minus_{right}/{setting}"] = {
+                metric: summarize_values(
+                    [left_rows[split][metric] - right_rows[split][metric] for split in seeds]
+                )
+                for metric in METRICS
+                if all(
+                    left_rows[split].get(metric) is not None
+                    and right_rows[split].get(metric) is not None
+                    for split in seeds
+                )
+            }
+    return {
+        "matched_summary": matched,
+        "selected_rows": selected,
+        "selected_summary": {m: summary([r for r in selected if r["model"] == m]) for m in models},
+        "paired_differences": pairs,
     }
 
 
