@@ -165,6 +165,18 @@ compact spectral RBF reference. It is validation-only and records null test fiel
 The complete validation-only record is stored at
 `docs/results/dns05_landmark_digits.json`.
 
+The error geometry diagnostic is locked in
+[DNS05 Error Geometry Protocol](docs/dns05-error-geometry-protocol.md). Run it
+with:
+
+```bash
+python -m experiments.run_dns05_error_geometry --config configs/dns05_error_geometry_digits.json --output results/dns05_error_geometry_digits.json
+```
+
+It records per-validation-sample predictions, neighbor geometry and landmark
+coverage for already selected development models. It is validation-only and
+does not compute test scores.
+
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
   train-only median heuristic when `gamma` is not specified.

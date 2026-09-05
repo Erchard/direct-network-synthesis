@@ -1,5 +1,18 @@
 # Research Log
 
+## 2026-09-05: Error Geometry Diagnostic Preregistered
+
+Locked DNS05-EG before development evaluation. The diagnostic reconstructs the
+already studied selected development models and records per-validation-sample
+predictions, correctness, score margins, local RBF neighbor geometry and
+192-landmark coverage. It reports tag counts, confusion counts and model-pair
+error overlap for compiler-vs-spectral, compiler-vs-Nystrom, compiler-vs-fixed
+ReLU, Nystrom-vs-spectral and spectral-vs-RBF comparisons.
+
+The runner has no test argument in its evaluator and records null test fields.
+Tests cover diagnostic tag direction, local-neighbor geometry, excluded-input
+isolation and synthetic grid/sample completeness. No test scores were computed.
+
 ## 2026-09-05: Landmark Geometry Diagnostic Result
 
 Protocol/code commit: `0d9213e73c9d2185d507b9830b351c83dc813783`.
