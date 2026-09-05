@@ -176,6 +176,8 @@ python -m experiments.run_dns05_error_geometry --config configs/dns05_error_geom
 It records per-validation-sample predictions, neighbor geometry and landmark
 coverage for already selected development models. It is validation-only and
 does not compute test scores.
+The complete validation-only record is stored at
+`docs/results/dns05_error_geometry_digits.json`.
 
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and

@@ -1,5 +1,68 @@
 # Research Log
 
+## 2026-09-05: Error Geometry Diagnostic Result
+
+Protocol/code commit: `c3c8a01593e0d20bc561e10555247d0acc2447a0`.
+Worktree was clean at evaluation. Command:
+
+```text
+D:\Projects\direct-network-synthesis\.venv\Scripts\python.exe -m experiments.run_dns05_error_geometry --config configs/dns05_error_geometry_digits.json --output results/dns05_error_geometry_digits.json
+```
+
+Complete auditable record: `docs/results/dns05_error_geometry_digits.json`.
+The run produced 400 validation-only readout rows, 50 selected model/split rows
+and 1795 per-validation-sample records. Test fields are null by design; this is
+not independent confirmation evidence.
+
+Selected validation accuracy matched the previous landmark diagnostic:
+compiled 192 was 0.9638 +/- 0.0044, uniform Nystrom 192 was
+0.9833 +/- 0.0048, spectral 192 was 0.9900 +/- 0.0042 and full RBF was
+0.9916 +/- 0.0028.
+
+Per-split diagnostic tags:
+
+| Tag | Mean count +/- SD |
+|---|---:|
+| All selected models correct | 326.0 +/- 4.5 |
+| All selected models wrong | 0.8 +/- 0.8 |
+| Compiled miss / spectral hit | 10.2 +/- 1.6 |
+| Compiled miss / uniform Nystrom hit | 9.6 +/- 2.1 |
+| Compiled miss / farthest Nystrom hit | 9.4 +/- 2.3 |
+| Compiled miss / fixed ReLU hit | 9.0 +/- 2.0 |
+| Compiled hit / spectral miss | 0.8 +/- 0.8 |
+| Uniform Nystrom miss / spectral hit | 3.6 +/- 2.2 |
+| Spectral miss / RBF hit | 1.0 +/- 1.2 |
+
+Compiler and spectral errors overlapped weakly: compiled averaged 13.0 errors
+per split, spectral 3.6, shared errors 2.8 and Jaccard overlap 0.20. Compiler
+and uniform Nystrom errors also overlapped weakly: compiled 13.0, uniform
+Nystrom 6.0, shared 3.4 and Jaccard 0.22. This supports the claim that the
+compiler loses recoverable structure rather than merely failing on the same
+ambiguous examples as the stronger compact methods.
+
+For the 51 compiled-miss/spectral-hit examples, the mean same-minus-other RBF
+neighbor margin was +0.0202 and the mean top-5 true-class-neighbor fraction was
+0.686. For the four all-models-wrong examples, the same values were -0.1443 and
+0.150. This separates two regimes: many compiler-only failures still have
+useful local class support, while the few universal failures look genuinely
+ambiguous under the RBF neighborhood.
+
+Common compiler mistakes among compiled-miss/spectral-hit examples included
+9->0, 3->8, 9->7, 4->7, 7->9 and several 8-confusions. These are not used for
+test-set tuning; they are development clues for the next representation design.
+
+Interpretation: the current compiler is not primarily limited by impossible
+validation samples. It often misses examples that spectral and Nystrom features
+recover and that still have same-class local support in the RBF geometry. The
+next representation attempt should therefore preserve local neighbor/landmark
+structure more directly, or introduce a supervised class-separation geometry,
+instead of further residualizing the existing PCA/quantile feature map.
+
+Decision: proceed to a cost-accounted local landmark/spectral compression
+protocol before any untouched test evaluation. A useful next candidate should
+state whether it stores landmarks, distills landmarks into parameters, or uses
+train labels to separate local class neighborhoods.
+
 ## 2026-09-05: Error Geometry Diagnostic Preregistered
 
 Locked DNS05-EG before development evaluation. The diagnostic reconstructs the
