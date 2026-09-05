@@ -71,6 +71,7 @@ def test_synthetic_landmark_grid_and_test_fields():
             "alphas": [0.01],
             "compiled_feature_count": 6,
             "fixed_relu_hidden_units": 6,
+            "fixed_relu_seed": 1705,
             "intercepts": [False],
             "landmark_counts": [6],
             "landmark_seed": 2309,
@@ -95,3 +96,5 @@ def test_synthetic_landmark_grid_and_test_fields():
     assert all(r["test_accuracy"] is None and r["test_status"] == "not_evaluated" for r in rows)
     class_rows = [r for r in rows if r["model"] == "nystrom_class_farthest_6"]
     assert class_rows[0]["uses_train_labels_for_representation"]
+    compiled_rows = [r for r in rows if r["model"] == "compiled_6"]
+    assert not compiled_rows[0]["uses_train_labels_for_representation"]

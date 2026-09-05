@@ -10,6 +10,7 @@
     "name": "sklearn_digits"
   },
   "fixed_relu_hidden_units": 192,
+  "fixed_relu_seed": 1705,
   "intercepts": [
     false,
     true

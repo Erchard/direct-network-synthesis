@@ -302,7 +302,7 @@ def _anchor_representations(
     weights, bias = deterministic_relu_projection(
         n_features=train.shape[1],
         hidden_units=config["fixed_relu_hidden_units"],
-        seed=config["landmark_seed"],
+        seed=config["fixed_relu_seed"],
     )
     fixed = relu_features(train, weights, bias, True)
     fixed_validation = relu_features(validation, weights, bias, True)
@@ -351,7 +351,7 @@ def _anchor_representations(
             "kernel_reconstruction_error": compiler.kernel_reconstruction_error_,
             "representation_time_seconds": compilation_time,
             "retained_train_samples": 0,
-            "uses_train_labels_for_representation": True,
+            "uses_train_labels_for_representation": False,
             "landmark_count": None,
             "landmark_rank": None,
             "feature_family": "dns05_compiled",

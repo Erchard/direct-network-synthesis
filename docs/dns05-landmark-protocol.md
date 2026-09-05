@@ -14,7 +14,7 @@ new test evidence.
    grid: gamma multipliers [0.5, 1.0, 2.0] and alpha [0.001, 0.01, 0.1]. Reuse
    the selected gamma for all RBF-derived representations in that split.
 3. Evaluate anchor representations: standardized linear input, fixed seeded ReLU
-   with 192 hidden units plus input, compiler direct basis at 192 features,
+   with 192 hidden units plus input using seed 1705, compiler direct basis at 192 features,
    one-shot compiled features at 192, full RBF, and spectral RBF features at
    ranks 64, 128 and 192.
 4. Evaluate new explicit kernel-map controls at landmark counts 64, 128 and 192:
