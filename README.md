@@ -202,6 +202,8 @@ python -m experiments.run_dns05_prototype --config configs/dns05_prototype_digit
 It asks whether synthetic global-PCA or class-PCA RBF centers can approximate
 the useful local geometry of Nystrom landmarks without retaining real train
 examples as inference landmarks.
+The complete validation-only record is stored at
+`docs/results/dns05_prototype_digits.json`.
 
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and

@@ -1,5 +1,70 @@
 # Research Log
 
+## 2026-09-05: Prototype Distillation Diagnostic Result
+
+Evaluation commit: `59fa76deb5a20e1ea06a1e7707c7e08293e1d087`.
+The DNS05-PT protocol had already been locked; this commit adds prototype audit
+fields to the summaries before the recorded run. Worktree was clean at
+evaluation. Command:
+
+```text
+D:\Projects\direct-network-synthesis\.venv\Scripts\python.exe -m experiments.run_dns05_prototype --config configs/dns05_prototype_digits.json --output results/dns05_prototype_digits.json
+```
+
+Complete auditable record: `docs/results/dns05_prototype_digits.json`.
+The run produced 1040 validation-only rows and 130 selected model/split rows.
+Test fields are null by design; this is not independent confirmation evidence.
+
+Selected validation summary:
+
+| Model | Validation accuracy, mean +/- SD | Kernel error | Rank | Retained train samples | Exact train-row prototype matches |
+|---|---:|---:|---:|---:|---:|
+| Fixed ReLU 256 | 0.9749 +/- 0.0079 | n/a | 252.2 | 0 | n/a |
+| Compiled 192 | 0.9638 +/- 0.0044 | 0.032062 | 184.4 | 0 | n/a |
+| RFF 192 | 0.9671 +/- 0.0077 | 0.063285 | 192.0 | 0 | n/a |
+| Uniform Nystrom 192 | 0.9833 +/- 0.0048 | 0.004250 | 192.0 | 192 | n/a |
+| Global PCA prototypes 64 | 0.9387 +/- 0.0074 | 0.008324 | 61.2 | 0 | 0 |
+| Global PCA prototypes 128 | 0.9599 +/- 0.0042 | 0.006491 | 128.0 | 0 | 0 |
+| Global PCA prototypes 192 | 0.9599 +/- 0.0051 | 0.006487 | 119.8 | 0 | 0 |
+| Class PCA prototypes 64 | 0.9543 +/- 0.0075 | 0.006700 | 64.0 | 0 | 0 |
+| Class PCA prototypes 128 | 0.9733 +/- 0.0051 | 0.005477 | 128.0 | 0 | 0 |
+| Class PCA prototypes 192 | 0.9794 +/- 0.0080 | 0.005312 | 192.0 | 0 | 0 |
+| Spectral 192 | 0.9900 +/- 0.0042 | 0.000355 | 192.0 | 1078 | n/a |
+| RBF oracle | 0.9916 +/- 0.0028 | 0.000000 | 1078.0 | 1078 | n/a |
+
+Selected paired differences:
+
+| Comparison | Validation accuracy delta, mean +/- SD | Kernel error delta | Retained train samples delta |
+|---|---:|---:|---:|
+| Global PCA prototypes 192 - Uniform Nystrom 192 | -0.02340 +/- 0.00578 | +0.002236 | -192 |
+| Class PCA prototypes 192 - Uniform Nystrom 192 | -0.00390 +/- 0.00641 | +0.001062 | -192 |
+| Class PCA prototypes 192 - Fixed ReLU 256 | +0.00446 +/- 0.00578 | n/a | 0 |
+| Class PCA prototypes 192 - Compiled 192 | +0.01560 +/- 0.01090 | -0.026749 | 0 |
+| Class PCA prototypes 192 - Spectral 192 | -0.01058 +/- 0.00773 | +0.004957 | -1078 |
+| Uniform Nystrom 192 - Spectral 192 | -0.00669 +/- 0.00641 | +0.003895 | -886 |
+
+Interpretation: synthetic class-PCA RBF prototypes are the strongest
+train-sample-free candidate observed so far. At 192 centers they nearly match
+uniform Nystrom 192 on reused validation splits while retaining no real train
+rows and having no exact train-row prototype matches. They also beat the current
+compiled 192 representation and the fixed ReLU 256 baseline in this diagnostic.
+This is encouraging for direct synthesis because it suggests that useful RBF
+geometry can be represented by explicit synthetic centers rather than by stored
+training examples.
+
+Negative result: global PCA prototypes do not preserve enough class-local
+structure. Their validation accuracy saturates around 0.9599 at 128/192 centers
+and trails uniform Nystrom 192 by 0.0234 +/- 0.0058. This supports the previous
+error-geometry result: the missing information is local and class-structured,
+not merely a global low-dimensional outline of the data.
+
+Decision: keep class-PCA prototypes as the next compact neural candidate, but
+do not treat this as final evidence. The next justified step is a locked
+confirmation protocol that compares only a small set of already selected
+candidates on a fresh boundary: class-PCA prototypes 192, uniform Nystrom 192,
+fixed ReLU 256, spectral 192 and full RBF. If a fresh dataset is chosen, the
+candidate set and readout rules must be frozen before test evaluation.
+
 ## 2026-09-05: Prototype Distillation Diagnostic Preregistered
 
 Locked DNS05-PT before development evaluation. The diagnostic tests whether
