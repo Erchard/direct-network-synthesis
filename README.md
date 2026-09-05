@@ -146,6 +146,12 @@ Curated complete result records are stored under `docs/results/`.
 - `DNS05CompiledFeatureClassifier`: residual spectral RBF-geometry compiler for the DNS 0.5
   depth-vs-width classification experiment.
 
+## AI Contributors
+
+AI agents joining the project should start with [AGENTS.md](AGENTS.md) and the
+[AI contributor guide](docs/ai-contributor-guide.md). These documents explain the
+reading order, evidence boundaries, contribution workflow and handoff requirements.
+
 ## Research Log
 
 The running log is in [docs/research-log.md](docs/research-log.md). Add short entries for

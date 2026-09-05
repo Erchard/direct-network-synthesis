@@ -1,5 +1,14 @@
 # Research Log
 
+## 2026-09-05: AI Contributor Onboarding Added
+
+Added root `AGENTS.md` and `docs/ai-contributor-guide.md`, linked from README.
+The guide covers required reading, implementation boundaries, the current evidence
+snapshot, test-data protection, experiment preregistration, reporting, Git workflow
+and handoff requirements. It explicitly warns that the historical runner evaluates
+test data and that joining the project does not authorize executing the entire
+roadmap. Documentation only; no new experiments or protocol changes.
+
 ## 2026-09-05: Staged Research Plan Recorded
 
 Added `docs/research-plan.md` and linked it from README and the hypothesis document.
