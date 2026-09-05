@@ -1,5 +1,20 @@
 # Research Log
 
+## 2026-09-05: Landmark Geometry Diagnostic Preregistered
+
+Added a related-work note for kernel PCA/spectral references, Nystrom kernel
+machines, random Fourier features, extreme learning machines and landmark
+selection. This confirms that the next diagnostic is a comparison against
+established kernel-approximation methods, not a novelty claim.
+
+Locked DNS05-LM before development evaluation. The new validation-only runner
+compares spectral ranks 64/128/192, uniform Nystrom landmarks, deterministic
+farthest-first Nystrom landmarks, train-label-balanced farthest-first landmarks,
+random Fourier features, and the current linear/fixed-ReLU/PCA-ReLU/compiled/RBF
+anchors under the same closed-form readout grid. Tests cover Nystrom landmark
+kernel reconstruction, deterministic farthest-first selection, excluded-input
+isolation and synthetic grid completeness. No test scores were computed.
+
 ## 2026-09-05: Matched-Readout Diagnostic Result
 
 Protocol/code commit: `83066851081b773584c067b7c23414b1a5555dc4`.

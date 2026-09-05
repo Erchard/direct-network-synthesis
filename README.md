@@ -150,6 +150,19 @@ the same closed-form readout grid, and records null test fields by design.
 The complete validation-only record is stored at
 `docs/results/dns05_readout_digits.json`.
 
+The next landmark geometry diagnostic is locked in
+[DNS05 Landmark Protocol](docs/dns05-landmark-protocol.md), with related-work
+notes in [Kernel Approximation Related Work](docs/related-work-kernel-approximations.md).
+Run it with:
+
+```bash
+python -m experiments.run_dns05_landmark --config configs/dns05_landmark_digits.json --output results/dns05_landmark_digits.json
+```
+
+It tests whether uniform, farthest-first, class-balanced farthest-first Nystrom
+landmarks or random Fourier features explain the gap between the compiler and the
+compact spectral RBF reference. It is validation-only and records null test fields.
+
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
   train-only median heuristic when `gamma` is not specified.
