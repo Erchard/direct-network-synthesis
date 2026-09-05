@@ -1,5 +1,70 @@
 # Research Log
 
+## 2026-09-05: Full-Basis Diagnostic Result
+
+Code/config/protocol commit: `f48c4edb7a0d32867801546440f84105e9e8454a`.
+Worktree was clean at evaluation. Command:
+
+```text
+D:\Projects\direct-network-synthesis\.venv\Scripts\python.exe -m experiments.run_dns05_depth_width --config configs/dns05_full_basis_digits.json --write-results --output results/dns05_full_basis_digits_summary.json
+```
+
+Complete auditable record: `docs/results/dns05_full_basis_digits_summary.json`.
+It preserves all 45 model/split rows, exact configuration, oracle selections,
+block diagnostics, sample standard deviations and paired differences for all
+reported metrics. Five splits: 101, 202, 303, 404, 505. No parameter optimization.
+This is a diagnostic reuse of digits, not an independent confirmation.
+
+| Model | Test accuracy, mean +/- SD | Train kernel error, mean +/- SD | Rank / budget | Mean fit s | Mean inference s |
+|---|---:|---:|---:|---:|---:|
+| Linear ridge | 0.9328 +/- 0.0107 | n/a | 60.2 / 64 | 0.004 | <0.001 |
+| RBF oracle | 0.9856 +/- 0.0077 | 0 | 1078 / 1078 | 0.083 | 0.013 |
+| Deterministic ReLU | 0.9728 +/- 0.0084 | n/a | 252.2 / 256 | 0.043 | 0.001 |
+| Spectral oracle 192 | 0.9489 +/- 0.0110 | 0.000355 +/- 0.000006 | 192 / 192 | 0.848 | 0.016 |
+| One-shot 192 | 0.9389 +/- 0.0102 | 0.0321 +/- 0.0008 | 184.4 / 192 | 0.741 | 0.001 |
+| Partitioned 2x96 | 0.9383 +/- 0.0117 | 0.0667 +/- 0.0029 | 184.4 / 192 | 1.054 | 0.004 |
+| Partitioned 3x64 | 0.9356 +/- 0.0087 | 0.0904 +/- 0.0035 | 184.4 / 192 | 1.805 | 0.002 |
+| Full-basis 2x96 | 0.9372 +/- 0.0099 | 0.0340 +/- 0.0009 | 184.4 / 192 | 1.445 | 0.002 |
+| Full-basis 3x64 | 0.9383 +/- 0.0105 | 0.0368 +/- 0.0010 | 184.4 / 192 | 1.407 | 0.003 |
+
+Paired differences (left minus right, mean +/- sample SD):
+
+- Full-basis 2x96 minus one-shot: accuracy -0.001667 +/- 0.002485;
+  kernel error +0.001938 +/- 0.000051.
+- Full-basis 3x64 minus one-shot: accuracy -0.000556 +/- 0.001242;
+  kernel error +0.004729 +/- 0.000125.
+- Full-basis 2x96 minus partitioned 2x96: accuracy -0.001111 +/- 0.005760;
+  kernel error -0.032676 +/- 0.002607.
+- Full-basis 3x64 minus partitioned 3x64: accuracy +0.002778 +/- 0.003402.
+- One-shot minus spectral oracle: accuracy -0.010000 +/- 0.005046.
+
+Interpretation and limitations:
+
+- Removing basis partitioning substantially reduces reconstruction error but
+  does not outperform one-shot compilation. This is another negative outcome for
+  sequential residual compilation with this fixed basis, not a rejection of DNS.
+- All compiled variants have the same mean realized rank, 184.4. Full-basis
+  projections have 36,864 coefficients, equal to one-shot, versus 18,432 / 12,288
+  for partitioned 2 / 3 blocks. Block basis evaluations rise to 384 / 576.
+- Spectral reconstruction is much better yet accuracy is only 0.9489 at fixed
+  alpha 1.0. The full oracle selected alpha 0.001 or 0.01 and uses no intercept;
+  therefore its accuracy gap cannot be attributed solely to truncation. The
+  spectral reference is not an accuracy upper bound. Kernel Frobenius error alone
+  is insufficient to assess task performance in this comparison.
+- Kernel error here is train-only. Spectral inference retains 1,078 training
+  examples. Output rank does not describe its storage/inference cost.
+- Timings are noisy single measurements, with routine checks overlapping part of
+  the run. Do not use these values for speedup claims; complete timing SDs remain
+  in the record. No test rerun was used to improve timing numbers.
+- Checks: Ruff passed; 10 tests passed, including a new unseen-input equivalence
+  check showing that full-basis blocks collapse to one projection of the basis.
+
+Next: preregister a validation-only diagnostic matching spectral/full-kernel
+readout regularization and intercept, and compare direct readout on the same
+PCA/quantile basis. These controls would separate readout effects from geometry
+projection loss. Keep the previously inspected test partitions out of selection;
+reserve independent data for any confirmatory claim. No novelty claim is made.
+
 ## 2026-09-05: Full-Basis Diagnostic Preregistered
 
 Next comparison is fixed in `docs/dns05-full-basis-protocol.md` and
