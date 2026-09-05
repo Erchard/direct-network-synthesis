@@ -43,3 +43,11 @@ Decision:
 - Keep `docs/hypothesis.md` concise and normative.
 - Keep `docs/methodology.md` as the binding experimental protocol.
 - Continue using this log as the chronological laboratory record.
+
+## 2026-09-05: English Conceptual Foundations Added
+
+Added `docs/conceptual-foundations-en.md` as a self-contained English-language version of the project's conceptual foundation for a broader technical audience.
+
+The English version is not a literal translation. It preserves the same reasoning, epistemic labels, DNS 0.1–0.5 evolution, negative results, exploratory-number warnings, current beliefs, open questions, and the DNS 0.5 Kernel Compiler experiment plan, while using terminology and structure intended to be natural for international ML/engineering readers.
+
+README navigation was updated to link both the English and Ukrainian conceptual documents.
