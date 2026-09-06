@@ -272,6 +272,8 @@ It is a train/validation-only diagnostic across digits, breast cancer and a
 fixed synthetic multiclass task. It records validation accuracy, kernel
 reconstruction, rank, basis coverage and timing across feature budgets. It does
 not compute test scores.
+The complete validation-only record is stored at
+`docs/results/dns05_failure_scaling_audit.json`.
 
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and

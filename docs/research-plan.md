@@ -1,8 +1,9 @@
 # Research Plan: Direct Synthesis and Independent Model Creation
 
 Status: planned work, recorded 2026-09-05 and updated 2026-09-06 after the
-DNS05 prototype, dipole, hybrid and fresh-confirmation diagnostics. This document
-summarizes direction; experimental results remain in [Research Log](research-log.md).
+DNS05 prototype, dipole, hybrid, fresh-confirmation and failure-scaling
+diagnostics. This document summarizes direction; experimental results remain in
+[Research Log](research-log.md).
 
 This plan implements the motivation in [Hypothesis](hypothesis.md): enable small
 independent teams to create, modify and run useful models within affordable
@@ -29,20 +30,22 @@ splits without retaining real train rows. Dipole and hybrid prototypes added
 small development gains, but the fresh-confirmation run was mixed: hybrid
 prototypes did not clearly transfer on `sklearn_breast_cancer`, while they beat
 uniform Nystrom on the fixed synthetic multiclass task and still trailed spectral
-and full RBF references. This does not justify further formula tuning on the
-inspected test outcomes.
+and full RBF references. The follow-up failure-scaling audit made the limitation
+clearer: breast-cancer hybrid centers had lower coverage, worse kernel error and
+rank collapse at larger widths; digits gains appeared only at very small width;
+and the synthetic multiclass advantage was not stable across width. This does not
+justify further formula tuning on the inspected boundaries.
 
 Digits remains development data. The next meaningful confirmation must use a
 fresh boundary chosen before candidate outcomes are inspected. Further digits
 work is allowed only as bounded development diagnostics and must not be treated
 as new independent evidence.
 
-Immediate priority: stop ad hoc center-formula expansion and diagnose the
-failure modes that now appear across datasets. Measure when synthetic centers
-lose rank, coverage or cost advantage; identify the dense kernel and inverse-root
-bottlenecks; and only then define either a bounded-memory kernel-map experiment
+Immediate priority: stop ad hoc center-formula expansion and define one new
+mechanism, not a tuned variant of `prototype_class_hybrid`. The two live options
+are a bounded-memory kernel-map compiler that avoids dense center inverse roots,
 or a true-depth experiment whose later features depend on earlier synthesized
-representations.
+representations and cannot collapse to one wide map.
 
 ## 1. Establish the Starting Point
 
@@ -156,6 +159,49 @@ Decision: only if the hybrid gives a stable, meaningful improvement over dipole
 and remains close to uniform Nystrom should it become the train-sample-free
 candidate for fresh-data confirmation.
 
+## 3B. Supporting Theory: Composition of Synthesized Blocks
+
+Status: proposed theoretical work, recorded 2026-09-06; no categorical compiler
+or new experimental result is implemented by this addition.
+
+Category theory may help formulate how separately synthesized blocks compose
+while preserving a specified behavior. Its role is to support the true-depth
+option above, not to replace the numerical diagnostics or expand the candidate
+search. The concrete question is: under what assumptions can locally computed
+blocks preserve task-relevant information and control end-to-end error without
+joint iterative parameter optimization?
+
+1. Define the spaces, block maps, composition rule and property to preserve.
+   Distinguish approximation of oracle geometry from preservation of class
+   information; low kernel error alone does not guarantee classification quality.
+2. Check whether a proposed chain collapses algebraically to a single fixed
+   feature map. Current residual projections share a nonlinear basis and do not
+   establish compositional depth merely by being constructed sequentially.
+3. Seek an explicit error-propagation bound with stated domain and stability
+   assumptions, or a counterexample showing why local approximation is
+   insufficient. Separate train-sample identities from guarantees on unseen data.
+4. Specify how each block obtains its target and parameters from train data,
+   including intermediate storage, data passes and solves. A compositional
+   description does not establish cheap synthesis or single-pass access.
+5. Proceed to an experiment only if this analysis yields a concrete construction
+   or falsifiable prediction. Lock a separate protocol with matched feature and
+   resource budgets, multiple recorded splits and validation-only development
+   before any fresh confirmation. Otherwise record the limitation and pause this
+   theoretical branch rather than adding terminology to the existing algorithm.
+
+Related-work anchor: Fong, Spivak and Tuyeras,
+[Backprop as Functor: A compositional perspective on supervised learning](https://arxiv.org/abs/1711.10455)
+(2017 preprint; abstract checked 2026-09-06), describes a category of composable
+learning update rules and a functorial account of gradient descent under stated
+conditions. It is structural precedent, not evidence for gradient-free DNS or a
+completed related-work review. Verify the relevant full-text definitions and
+assumptions before adapting them or making any novelty claim.
+
+Deliverable: a short derivation or counterexample with explicit assumptions and
+an assessment of whether categorical language adds useful constraints beyond
+ordinary linear algebra and stability analysis. No performance, energy or
+accessibility claim follows from this planned work alone.
+
 ## 4. Measure Total Cost Reliably
 
 1. Add separate timing for preprocessing, feature construction, oracle selection,
@@ -263,9 +309,8 @@ alone does not establish affordability, portability or freedom to redistribute.
 6. Keep economic implications conditional: the deliverable is a practical ability
    to create alternatives, not proof that data centers or monopolies disappear.
 
-Immediate execution order after DNS05-FC1: do not tune hybrid prototypes against
-the inspected confirmation tests. Preregister a failure-mode and scaling audit
-that uses train/validation data only, records rank/coverage/cost bottlenecks for
-synthetic centers versus retained landmarks, and decides whether the next method
-should target bounded-memory kernel maps or genuinely compositional synthesized
-depth.
+Immediate execution order after DNS05-FMSA: do not continue
+`prototype_class_hybrid` formula tweaks on the inspected boundaries. Draft one
+locked train/validation-only protocol for either a bounded-memory kernel-map
+compiler or a genuinely compositional depth mechanism. The protocol must state
+which FMSA failure mode it targets and what negative outcome would stop it.

@@ -1,5 +1,86 @@
 # Research Log
 
+## 2026-09-06: Bounded Composition-Theory Direction
+
+Added a supporting theoretical branch in
+[Research Plan, section 3B](research-plan.md#3b-supporting-theory-composition-of-synthesized-blocks)
+following the question of whether category theory could help DNS. Its purpose is
+to identify conditions for composing directly synthesized blocks, preserving
+task-relevant information and controlling accumulated approximation error.
+
+This is planned work, not an implemented method or evidence of useful depth.
+The first deliverable is a derivation or counterexample with explicit assumptions;
+an experiment requires a concrete mechanism and its own locked protocol.
+The abstract of Fong, Spivak and Tuyeras, *Backprop as Functor* (2017), was checked
+as a related-work anchor. Its account of gradient-based learning does not prove
+gradient-free synthesis; full-text verification remains necessary before reuse.
+The existing negative results and methodology remain binding.
+
+## 2026-09-06: Failure-Mode and Scaling Audit Result
+
+Evaluation commit: `c4c0a36f95f7b475506e94ad508ce297067b4993`.
+Worktree was clean at evaluation. Command:
+
+```text
+D:\Projects\direct-network-synthesis\.venv\Scripts\python.exe -m experiments.run_dns05_failure_scaling --config configs\dns05_failure_scaling_audit.json --output results\dns05_failure_scaling_audit.json
+```
+
+Complete auditable record: `docs/results/dns05_failure_scaling_audit.json`.
+SHA256: `CF02C55097383D12A36850081CD9ED749601D6F7572CE8C96CE13439D783AEFB`.
+The run produced 1920 validation grid rows and 240 validation-selected rows:
+three datasets, five splits per dataset, five feature budgets and three compact
+families, plus exact RBF once per split. Test fields are null by design.
+
+Selected validation summary at 192 requested features:
+
+| Dataset | Hybrid acc | Nystrom acc | Spectral acc | RBF acc | Hybrid - Nystrom | Hybrid - Spectral | Hybrid rank / budget | Hybrid p05 coverage | Nystrom p05 coverage |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| sklearn_digits | 0.9822 +/- 0.0047 | 0.9833 +/- 0.0048 | 0.9900 +/- 0.0042 | 0.9916 +/- 0.0028 | -0.0011 +/- 0.0064 | -0.0078 +/- 0.0031 | 192.0 / 192 | 0.8361 | 0.8794 |
+| sklearn_breast_cancer | 0.9646 +/- 0.0108 | 0.9717 +/- 0.0211 | 0.9752 +/- 0.0170 | 0.9788 +/- 0.0134 | -0.0071 +/- 0.0115 | -0.0106 +/- 0.0074 | 144.0 / 192 | 0.6141 | 0.8689 |
+| synthetic_multiclass_v1 | 0.6854 +/- 0.0199 | 0.6870 +/- 0.0181 | 0.7188 +/- 0.0112 | 0.7222 +/- 0.0208 | -0.0017 +/- 0.0271 | -0.0335 +/- 0.0122 | 192.0 / 192 | 0.6808 | 0.6699 |
+
+Scaling signals for hybrid minus uniform Nystrom validation accuracy:
+
+| Dataset | 32 | 64 | 128 | 192 | 256 |
+|---|---:|---:|---:|---:|---:|
+| sklearn_digits | +0.0100 | +0.0006 | -0.0022 | -0.0011 | -0.0072 |
+| sklearn_breast_cancer | -0.0018 | -0.0071 | -0.0088 | -0.0071 | -0.0088 |
+| synthetic_multiclass_v1 | +0.0469 | -0.0008 | +0.0059 | -0.0017 | -0.0059 |
+
+Resource and geometry notes:
+
+- On breast cancer, hybrid consistently trails uniform Nystrom while having much
+  lower train-to-basis fifth-percentile coverage. Its rank also collapses at
+  larger widths: 144 / 192 and 178 / 256. This is a clear failure mode for the
+  current synthetic-center construction.
+- On digits, hybrid only wins at width 32. At 128, 192 and 256 it is slightly
+  worse than uniform Nystrom, and its coverage gap grows as width increases.
+  This explains why the earlier 192-feature digits advantage was not robust.
+- On the fixed synthetic multiclass task, hybrid has a useful low-budget signal
+  at width 32 and slightly better kernel error than Nystrom through width 192,
+  but the accuracy advantage is not stable and spectral remains much stronger
+  from width 64 onward.
+- At matched widths, hybrid retains zero train samples but does not reduce state
+  bytes versus Nystrom in this implementation because both store centers and a
+  dense inverse-root matrix. Hybrid fit time is usually slower than Nystrom:
+  at width 192 the paired mean deltas are +0.040s on breast cancer, +0.170s on
+  digits and +0.084s on synthetic multiclass.
+- Spectral has much lower kernel reconstruction error and often better
+  validation accuracy, but it stores the train basis and a dense extension, so
+  it is not a compact deployment answer.
+
+Interpretation: DNS05-FMSA is a mixed-to-negative diagnostic for the current
+hybrid synthetic-center branch. It gives evidence that the problem is not just
+readout selection; center coverage, rank stability and dense inverse-root state
+are real bottlenecks. The audit does not support claims about useful analytical
+depth, single-pass learning, energy savings or large-scale model creation.
+
+Decision: stop formula tweaking of `prototype_class_hybrid` on these inspected
+boundaries. The next scientifically justified step is either a bounded-memory
+kernel-map compiler that avoids dense center inverse roots, or a new experiment
+that tests genuinely compositional synthesized depth with a fixed mechanism and
+fresh train/validation-only diagnostics before any confirmation boundary.
+
 ## 2026-09-06: Failure-Mode and Scaling Audit Preregistered
 
 Locked DNS05-FMSA before evaluation. This protocol follows the mixed fresh
