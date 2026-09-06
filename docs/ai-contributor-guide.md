@@ -52,22 +52,27 @@ Do not confuse `DNS05KernelCompiler`, the weighted kernel combiner, with
 
 ## 4. Know the Current Evidence
 
-Snapshot as of 2026-09-05; verify newer log entries before relying on it:
+Snapshot as of 2026-09-06; verify newer log entries before relying on it:
 
 1. The 192-feature compiler and partitioned/full-basis residual variants have been
    evaluated on five digits splits. Residual construction did not outperform the
    one-shot model. Full-basis access improved reconstruction relative to partitioning.
 2. Every current block projects the same fixed nonlinear basis. Concatenated
    projections can collapse to one projection; block count is not neural depth.
-3. The spectral reference reconstructs the training kernel much better, but its
-   accuracy is not an upper bound. Readout regularization and intercept differ
-   from the selected full RBF oracle and confound that comparison.
-4. The next planned experiment is validation-only matched-readout diagnosis,
-   including direct readout on the exact PCA/quantile basis. Its implementation
-   must be checked; the historical runner evaluates test data by default.
-5. The complete full-basis record is
-   [dns05_full_basis_digits_summary.json](results/dns05_full_basis_digits_summary.json).
-   Use this record for exact values and uncertainty rather than conversational rounding.
+3. Matched-readout, landmark, cost and error-geometry diagnostics have been
+   completed on validation-only digits development splits. Full RBF and spectral
+   remain strong references; uniform Nystrom 192 is the best observed compact
+   candidate if retaining 192 train-derived landmarks is acceptable.
+4. Train-sample-free synthetic centers are the active development branch.
+   Class-PCA prototypes nearly matched uniform Nystrom without retaining train
+   rows. Dipole prototypes improved slightly over class-PCA, but the error audit
+   showed a mixed boundary trade rather than a clean repair mechanism.
+5. The current planned next step is not another unrestricted architecture search.
+   It is either a locked DNS05-HYB hybrid synthetic-center diagnostic, or an
+   explicit decision to stop prototype development and move to fresh-data
+   confirmation with already selected candidates.
+6. Complete records live under `docs/results/`. Use those records for exact
+   values and uncertainty rather than conversational rounding.
 
 ## 5. Protect the Experimental Boundary
 

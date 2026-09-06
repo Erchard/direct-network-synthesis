@@ -1,5 +1,20 @@
 # Research Log
 
+## 2026-09-06: Research Plan Updated After Dipole Audit
+
+Updated [Research Plan](research-plan.md) and
+[AI Contributor Guide](ai-contributor-guide.md) to reflect the completed DNS05
+prototype, dipole and dipole-error-audit diagnostics. No new experiment was run
+in this milestone.
+
+The plan now treats train-sample-free synthetic centers as the active
+development branch, while keeping the original residual compiler branch paused.
+It adds a bounded DNS05-HYB direction: one frozen hybrid-center diagnostic that
+combines class-local coverage with a predetermined boundary-center allocation.
+The plan explicitly forbids tuning dipole shift fractions, quantiles or budgets
+from DNS05-DEA examples and keeps digits as development data rather than fresh
+confirmation evidence.
+
 ## 2026-09-06: Dipole Error Audit Result
 
 Evaluation commit: `9b7baf08e30d6ae715fcade08c045c32625fab0c`.

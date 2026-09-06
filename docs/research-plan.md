@@ -1,12 +1,45 @@
 # Research Plan: Direct Synthesis and Independent Model Creation
 
-Status: planned work, recorded 2026-09-05. No new experimental results.
+Status: planned work, recorded 2026-09-05 and updated 2026-09-06 after the
+DNS05 prototype, dipole and dipole-error-audit diagnostics. This document
+summarizes direction; experimental results remain in [Research Log](research-log.md).
 
 This plan implements the motivation in [Hypothesis](hypothesis.md): enable small
 independent teams to create, modify and run useful models within affordable
 resource limits. It does not promise that technology can prevent monopoly.
 [Methodology](methodology.md) remains binding and takes precedence over this plan.
 The stages below are evidence gates, not a promise that every stage will succeed.
+
+## Current Evidence Update, 2026-09-06
+
+The initial DNS 0.5 residual compiler branch has not supported useful analytical
+depth. Under the current PCA/quantile ReLU construction, residual blocks and
+full-basis variants did not beat simpler one-shot or spectral references. This
+branch should stay paused unless a later architecture makes downstream features
+depend on earlier representations in a way that cannot collapse to one wide map.
+
+Low-rank RBF geometry remains the strongest guide. Spectral 192 is a strong
+quality reference, while uniform Nystrom 192 is the best observed compact
+development candidate when retaining train-derived landmarks is allowed. Both
+remain established kernel-approximation territory, not DNS novelty claims.
+
+Train-sample-free synthetic centers are the active DNS development branch.
+Class-PCA prototypes nearly matched uniform Nystrom 192 on reused validation
+splits without retaining real train rows. Dipole prototypes added a small
+boundary-aware gain, but the follow-up error audit showed a mixed trade: they
+fix some boundary-like examples and break other boundary-like examples. This is
+not enough to justify independent confirmation.
+
+Digits remains development data. The next meaningful confirmation must use a
+fresh boundary chosen before candidate outcomes are inspected. Further digits
+work is allowed only as bounded development diagnostics and must not be treated
+as new independent evidence.
+
+Immediate priority: define one frozen hybrid-center diagnostic that combines
+class-local coverage with a small predetermined boundary-center allocation, then
+decide whether the resulting train-sample-free candidate is strong enough to
+move to fresh datasets. Do not tune dipole shift fractions, quantiles or budgets
+using DNS05-DEA examples.
 
 ## 1. Establish the Starting Point
 
@@ -76,10 +109,49 @@ An ambiguous result warrants a bounded diagnostic, not an unrestricted search.
    representations; check algebraically whether the model collapses to one layer.
 6. Preregister width, realized rank, parameter count and resource controls. A
    shared output dimension alone is insufficient for a fair depth comparison.
+7. For the active prototype branch, separate three claims: retaining train
+   samples, using synthetic centers and improving boundary coverage. A method
+   that stores landmarks may be useful, but it is not the same technological
+   claim as a train-sample-free neural artifact.
 
 Deliverable: related-work note and one bounded experiment proposal.
 Decision: reuse established methods when appropriate. Make no novelty claim until
 the specific claim is supported by the literature review and experimental evidence.
+
+## 3A. Active Development Branch: Hybrid Synthetic Centers
+
+Question: can a predetermined mixture of class-local coverage centers and
+boundary-aware centers outperform pure class-PCA and pure dipole prototypes
+without retaining train samples?
+
+1. Write a DNS05-HYB protocol before implementation. The protocol must freeze
+   center budgets, class/boundary allocation, quantiles, boundary construction,
+   readout grid, split seeds and pairwise comparisons.
+2. Use only the already explored digits train/validation boundary for this
+   development diagnostic. Test fields must remain null.
+3. Keep the candidate set small: class-PCA prototypes 192, dipole prototypes
+   192, the new hybrid 192, uniform Nystrom 192, spectral 192, full RBF and the
+   required baselines. Add width 64/128 only if the protocol needs a scaling
+   curve; otherwise avoid expanding the grid.
+4. Predetermine the hybrid allocation rather than searching it. A conservative
+   starting rule is most centers for class-local PCA/quantile coverage and a
+   fixed minority for rival-class boundary pairs. Any alternative allocation
+   must be chosen before running the diagnostic.
+5. Record the same metrics as DNS05-DIP: validation accuracy, RMSE, R2, kernel
+   reconstruction error, rank, feature budget, retained samples, exact train-row
+   matches, solve time, inference time and paired differences.
+6. Add an error audit only after the hybrid result, and only if the result
+   changes the model ranking or reveals a clear failure mode. Do not iterate
+   between audit and formula tuning on the same examples.
+7. Stop this branch if the hybrid does not beat dipole prototypes by a practically
+   meaningful validation margin or if the gain comes with worse kernel error and
+   less stable split behavior. Record the negative result.
+
+Deliverable: one locked protocol, one tested runner change, one complete
+validation-only record and one research-log decision.
+Decision: only if the hybrid gives a stable, meaningful improvement over dipole
+and remains close to uniform Nystrom should it become the train-sample-free
+candidate for fresh-data confirmation.
 
 ## 4. Measure Total Cost Reliably
 
@@ -121,6 +193,9 @@ against the strongest relevant simple baseline, not merely against a weak varian
    standard deviations, paired differences and all prespecified comparisons.
 6. Record a failed confirmation without adjusting the model against that test.
    Any revised model requires a newly defined independent confirmation boundary.
+7. Do not send every development variant to confirmation. At most one retained
+   landmark candidate and one train-sample-free synthetic-center candidate should
+   be promoted, with fixed readout-selection rules and resource accounting.
 
 Deliverable: auditable confirmation report, including negative outcomes.
 Decision: proceed toward scale only if the prespecified quality/cost criteria hold;
@@ -185,6 +260,9 @@ alone does not establish affordability, portability or freedom to redistribute.
 6. Keep economic implications conditional: the deliverable is a practical ability
    to create alternatives, not proof that data centers or monopolies disappear.
 
-Immediate execution order: establish the data boundary, lock and implement the
-validation-only readout diagnostic, publish its full result, then select the next
-bounded hypothesis with related-work support. Later stages depend on those findings.
+Immediate execution order after DNS05-DEA: lock DNS05-HYB or explicitly decide
+to stop prototype development; implement and test the frozen hybrid diagnostic;
+commit and push the protocol before evaluation; run validation-only on the
+existing digits development splits; record the full result and decision; then
+either close the prototype branch or choose fresh confirmation datasets before
+any test evaluation.
