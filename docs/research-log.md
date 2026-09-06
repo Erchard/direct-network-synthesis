@@ -26,7 +26,9 @@ claimed complete. These distinctions are reflected in the collaboration plan.
 Local verification: all 42 tests and `python -m ruff check .` passed. The skill
 passed the skill-creator validator, and both GitHub YAML files parsed with
 PyYAML 6.0.3, installed locally for this check. `git diff --check` passed for
-edited project text. Hosted CI execution remains to be observed after push.
+edited project text. Hosted CI also passed for commit
+`0700f87be5e640ea897364c8e2d975f9abd74301`:
+[Checks run](https://github.com/Erchard/direct-network-synthesis/actions/runs/34014883940).
 
 ## 2026-09-06: Bounded Composition-Theory Direction
 
