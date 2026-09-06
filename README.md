@@ -286,6 +286,12 @@ The complete validation-only record is stored at
 
 ## AI Contributors
 
+Start with the [two-minute agent entry point](docs/START-HERE-FOR-AGENTS.md).
+Contribution and review rules live in [CONTRIBUTING.md](CONTRIBUTING.md) and
+[GOVERNANCE.md](GOVERNANCE.md). Negative results, audits and verified prior art
+are first-class contributions. The [task catalog](docs/agent-task-catalog.md)
+contains bounded task drafts and label definitions.
+
 AI agents joining the project should start with [AGENTS.md](AGENTS.md) and the
 [AI contributor guide](docs/ai-contributor-guide.md). These documents explain the
 reading order, evidence boundaries, contribution workflow and handoff requirements.
@@ -294,3 +300,11 @@ reading order, evidence boundaries, contribution workflow and handoff requiremen
 
 The running log is in [docs/research-log.md](docs/research-log.md). Add short entries for
 every experiment, including abandoned ideas and failed hypotheses.
+
+## License
+
+Original project code is licensed under **AGPL-3.0-or-later**; original project
+documentation is licensed under **CC BY 4.0**. See [licensing scope and attribution](docs/licensing.md),
+the [AGPL text](LICENSE) and the [CC BY legal text](docs/LICENSE-CC-BY-4.0.txt).
+Third-party materials, datasets and model artifacts require their own provenance
+and rights records; these licenses do not relicense them.

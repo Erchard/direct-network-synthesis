@@ -1,5 +1,33 @@
 # Research Log
 
+## 2026-09-06: Open Agent Collaboration Repository Foundation
+
+Implemented the repository portion of the collaboration plan: contributor,
+governance and security rules; a short agent entry point; Issue/PR templates;
+ten bounded static task drafts and label taxonomy; a portable contributor skill;
+and an initially empty reproduction ledger. The owner explicitly approved
+AGPL-3.0-or-later for original code and CC BY 4.0 for original documentation.
+Official license texts are included unchanged, with scope and third-party/artifact
+exclusions in [licensing.md](licensing.md).
+
+CI is configured for pull requests and pushes to main, with pinned official
+actions, read-only permissions and no persisted checkout credentials. It runs
+lint and the existing tests, including protocol-isolation tests, without running
+historical benchmark commands. Passing CI is not a scientific review or proof of
+server-side branch protection. No new numerical experiment was run for this work.
+
+Task drafts and labels have not been published to GitHub Issues. No outreach
+account, social post or recruiter service has been created. OpenClaw's documented
+SKILL.md format was checked at https://docs.openclaw.ai/tools/skills; live loading
+and execution have not been tested. Branch protection and private vulnerability
+reporting remain unverified. No independent reproduction or rights audit is
+claimed complete. These distinctions are reflected in the collaboration plan.
+
+Local verification: all 42 tests and `python -m ruff check .` passed. The skill
+passed the skill-creator validator, and both GitHub YAML files parsed with
+PyYAML 6.0.3, installed locally for this check. `git diff --check` passed for
+edited project text. Hosted CI execution remains to be observed after push.
+
 ## 2026-09-06: Bounded Composition-Theory Direction
 
 Added a supporting theoretical branch in

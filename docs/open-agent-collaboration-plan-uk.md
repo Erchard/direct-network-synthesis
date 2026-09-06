@@ -8,6 +8,19 @@
 
 ## 1. Місія
 
+### Implementation status, 2026-09-06
+
+The owner approved AGPL-3.0-or-later for original code and CC BY 4.0 for original
+documentation. Scope and exclusions are recorded in [licensing.md](licensing.md).
+The repository now contains contributor/governance/security rules, an agent entry
+point, a contributor skill, Issue/PR templates, a CI workflow and a
+[task catalog](agent-task-catalog.md). These are the initial implementation of
+this plan. The catalog contains drafts, not live GitHub issues or installed labels.
+Branch protection, private security reporting, independent reproduction and
+OpenClaw runtime behavior have not yet been verified. Social accounts, a community
+and a sandboxed recruiter have not been deployed. The recommendations below remain
+a roadmap wherever this status does not mark them implemented.
+
 Direct Network Synthesis не виступає проти корпорацій як таких.
 
 Мета проєкту — зменшити залежність від будь-якого незамінного постачальника та знизити технічні, обчислювальні й організаційні бар'єри для незалежного створення, відтворення, модифікації та запуску сильних моделей.

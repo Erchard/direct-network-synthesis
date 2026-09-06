@@ -1,0 +1,46 @@
+name: Bounded research task
+description: Propose an implementation, reproduction, falsification or audit with explicit evidence boundaries.
+title: "[Research] "
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective and why it matters
+      description: One hypothesis or deliverable; state what would falsify the proposed explanation.
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Inputs and source commit
+      description: Exact source SHA, protocol, config, records and primary sources.
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Allowed and forbidden data
+      description: Name both explicitly, including seeds and protected partitions. For static work state no dataset access.
+    validations:
+      required: true
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands and resource limit
+      description: Exact approved command, environment, runtime/memory bound; static review may state no experiment.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Expected output and artifact location
+      description: Include all negative outcomes and the required provenance record.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance and stopping criteria
+      description: Reviewable completion, failure criteria and what requires a separate protocol.
+    validations:
+      required: true
