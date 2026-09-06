@@ -1,5 +1,39 @@
 # Research Log
 
+## 2026-09-06: Fixed-Geometry Resource Probe Completed
+
+Executed the preregistered synthetic probe at source 9d152aa using
+`.venv\Scripts\python.exe -m experiments.run_streaming_resource_probe`.
+Complete [record](results/streaming_resource_probe.json) includes all weights,
+validation scores, paired differences, seeds, platform, Python/NumPy versions,
+source hash and exact command. Twenty fresh Windows processes completed without
+errors, five seeds and batch plus three fixed block sizes, one BLAS thread.
+
+| Method | Peak working set MiB, mean +/- sample SD | Fit seconds, mean +/- sample SD | Inference seconds, mean |
+| --- | --- | --- | --- |
+| Batch | 57.946 +/- 0.176 | 0.07505 +/- 0.01910 | 0.01147 |
+| Stream 64 | 32.877 +/- 0.046 | 0.05312 +/- 0.00364 | 0.00901 |
+| Stream 256 (primary) | 33.813 +/- 0.095 | 0.07003 +/- 0.01067 | 0.00903 |
+| Stream 1024 | 39.804 +/- 0.171 | 0.07121 +/- 0.01440 | 0.01096 |
+
+Every weight and score comparison passed rtol=1e-8, atol=1e-10. Maximum absolute
+score difference across all 15 pairs was 8.20e-14; paired validation accuracy
+differences were zero (mean accuracy 0.9388 for each method). Primary block 256
+reduced peak working set by median 41.638%, mean 41.648% +/- 0.040 percentage
+points sample SD. It passes this probe's 25% target. Timings are short and noisy;
+they do not establish a robust speed improvement, and block 64 is not promoted
+after observing its faster time.
+
+Interpretation: positive evidence for a smaller fixed-geometry fitting stage.
+This probe retains raw inputs and uses a prescribed gamma; it excludes dense
+oracle selection, preprocessing and kernel reconstruction. It therefore does
+not establish bounded-memory full DNS or useful compositional depth. Next:
+integrate process measurement with the full DNS05-BM validation-only pipeline,
+including the oracle stage and mandatory baselines. No test data evaluated.
+Verification: 72 tests passed, Ruff passed. A one-off summary command attempted
+an empty batch-versus-itself aggregate and printed NaN warnings; no raw result
+was affected, and only actual paired comparisons are reported above.
+
 ## 2026-09-06: Layerwise Passes and Information Loss
 
 Clarified the owner's accepted scope: a separate pass per frozen layer is
