@@ -32,8 +32,9 @@ Datasets and split seeds are fixed in
 
 - `sklearn_digits`, seeds `101, 202, 303, 404, 505`;
 - `sklearn_breast_cancer`, seeds `1101, 1202, 1303, 1404, 1505`;
-- `synthetic_multiclass_v1`, fixed generator seed `90210`, split seeds
-  `2101, 2202, 2303, 2404, 2505`.
+- `synthetic_multiclass_v1`, the same fixed generator parameters as DNS05-FC1
+  (`1200` samples, `40` features, `6` classes, generator seed `62026`), split
+  seeds `2101, 2202, 2303, 2404, 2505`.
 
 Each split uses stratified `60% / 20% / 20%` train, validation and excluded
 partitions. The excluded partition is recorded but not evaluated.
@@ -44,7 +45,7 @@ For feature budgets `32, 64, 128, 192, 256`, compare:
 
 - `prototype_class_hybrid`: the frozen hybrid synthetic-center construction from
   DNS05-HYB/FC1, with shift fraction `0.25`, two boundary pairs per class and
-  fixed PCA quantiles;
+  the FC1 PCA quantiles `0.1, 0.25, 0.5, 0.75, 0.9`;
 - `nystrom_uniform`: uniform train-sample landmarks with fixed seed arithmetic;
 - `spectral`: compact spectral RBF reference at the same requested rank.
 

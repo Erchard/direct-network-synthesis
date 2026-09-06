@@ -10,16 +10,16 @@
       "split_seeds": [1101, 1202, 1303, 1404, 1505]
     },
     {
-      "class_sep": 1.0,
+      "class_sep": 1.2,
       "flip_y": 0.03,
-      "n_classes": 5,
+      "n_classes": 6,
       "n_clusters_per_class": 2,
-      "n_features": 30,
-      "n_informative": 18,
-      "n_redundant": 6,
+      "n_features": 40,
+      "n_informative": 16,
+      "n_redundant": 8,
       "n_samples": 1200,
       "name": "synthetic_multiclass_v1",
-      "random_seed": 90210,
+      "random_seed": 62026,
       "split_seeds": [2101, 2202, 2303, 2404, 2505]
     }
   ],
@@ -45,7 +45,7 @@
   ],
   "prediction_repeats": 5,
   "prediction_warmups": 1,
-  "prototype_quantiles": [0.1, 0.25, 0.4, 0.5, 0.6, 0.75, 0.9],
+  "prototype_quantiles": [0.1, 0.25, 0.5, 0.75, 0.9],
   "splits": {
     "split_seeds": [101, 202, 303, 404, 505],
     "train_fraction": 0.6,

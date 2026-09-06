@@ -23,6 +23,13 @@ next method should target bounded-memory kernel maps or a genuinely
 compositional depth mechanism. No novelty, energy or large-scale training claim
 can be drawn from this audit.
 
+Protocol correction before accepted audit evaluation: an initial local execution
+exposed that the first DNS05-FMSA config reused the existing
+`synthetic_multiclass_v1` name with different generator parameters and added
+extra prototype quantiles. That output is discarded and not used as evidence.
+The accepted audit reuses the DNS05-FC1 synthetic generator parameters and FC1
+prototype quantiles so the frozen hybrid formula remains unchanged.
+
 ## 2026-09-06: Fresh Confirmation Protocol v1 Result
 
 Evaluation commit: `75a138afc6dff7fabda7bf874e190ec18b78579b`.
