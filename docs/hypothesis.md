@@ -147,6 +147,28 @@ handling and portability. Test data cannot choose the storage scheme or update
 policy. This direction does not show that weights are unnecessary for all
 knowledge or that external storage is cheap; it defines a separate experiment.
 
+## Layerwise Passes
+
+One pass for the entire network is an optional stronger ambition. Separate
+passes for successive frozen layers are permitted: H_0 = X and
+H_l = sigma_l(H_(l-1) W_l + b_l). The preceding layer's outputs are the next
+layer's training inputs. They do not, by themselves, specify a learning target.
+Each layer therefore needs an explicit train-only objective or synthesis rule.
+Validation and query inputs use the frozen maps without refitting.
+
+For a predetermined target T_l, one pass over H_(l-1) and T_l can accumulate
+the normal equations for a linear projection. Target construction, normalization,
+eigendecomposition and subsequent nonlinear activation may require additional
+passes or storage. The tested streaming readout does not establish that every
+hidden layer or its targets can be constructed in one pass.
+
+An irreversible early-layer information loss cannot be repaired downstream.
+For example, h(x)=ReLU(x) maps both x=-1 and x=-2 to zero. If their labels differ,
+any deterministic later layer receiving only h(x) must return the same answer
+for both. Nonlinearity permits composition but does not guarantee useful depth.
+Future layerwise experiments must test information loss and compare with a
+matched one-shot model; a retained input/skip path must count toward the budget.
+
 ## Non-Claims
 
 - No claim of novelty is made by this repository.

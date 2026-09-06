@@ -1,5 +1,19 @@
 # Research Log
 
+## 2026-09-06: Layerwise Passes and Information Loss
+
+Clarified the owner's accepted scope: a separate pass per frozen layer is
+compatible with DNS. Previous-layer outputs supply training inputs, while each
+hidden layer still requires an explicit target or synthesis rule. The verified
+streaming readout only solves the fixed-feature, fixed-target case.
+
+Recorded a deterministic counterexample: ReLU merges -1 and -2 into zero, so
+no downstream deterministic function of that output can recover different
+labels. This is an analytical design constraint, not benchmark evidence. It
+motivates an information-preservation check and full accounting for any skip
+path in a future compositional protocol. No benchmark was executed; DNS05-BM
+remains the active resource experiment and layerwise synthesis stays queued.
+
 ## 2026-09-06: Streaming Equivalence Gate Executed
 
 Restored the project Python environment using the bundled Python 3.12.14

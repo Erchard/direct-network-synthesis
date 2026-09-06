@@ -204,7 +204,16 @@ an assessment of whether categorical language adds useful constraints beyond
 ordinary linear algebra and stability analysis. No performance, energy or
 accessibility claim follows from this planned work alone.
 
+The layerwise extension of section 3B permits separate passes over the outputs
+of each frozen preceding layer. Before implementation, specify each layer's
+target, nonlinear map, retained information and full pass/storage costs. Use the
+information-loss counterexample in hypothesis.md as a design check: a later
+layer cannot distinguish inputs already merged by an earlier layer. This remains
+a queued mechanism while DNS05-BM is active; the next numerical milestone is
+still its matched batch/streaming resource comparison.
+
 ## 3C. Multi-Layer Discovery and Interoperability
+
 
 Status: strategy prepared, no registry listing or protocol endpoint deployed.
 The [discovery strategy](discovery/README.md) records the candidate ecosystem;
