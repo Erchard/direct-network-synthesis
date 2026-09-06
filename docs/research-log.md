@@ -1,5 +1,21 @@
 # Research Log
 
+## 2026-09-06: OAC-01 Local Residual-Collapse Audit
+
+Audited source `57e529b6663b8340f3e524d781e76d726b6ffbf8` and recorded the
+[derivation](audits/oac-01-residual-collapse.md): both partitioned and full-basis
+residual embeddings equal one projection of the shared ReLU basis, and that
+projection can be absorbed into the final readout. This does not equate training
+procedures or their ridge penalties. The branch still does not establish useful
+compositional depth.
+
+Added eight synthetic unit cases covering both modes, block counts 1/3/5,
+uneven partitions, unseen query inputs, final scores and empty spectral targets.
+Seeds 260906/260907 and numeric tolerances were fixed before execution. All 12
+synthesis tests and all 50 repository tests passed; ruff passed. No benchmark
+partitions were accessed and no numerical research experiment was run. This is
+a local audit awaiting independent review, not an independent reproduction.
+
 ## 2026-09-06: Collaboration Plan Revised Around a Bounded Pilot
 
 Reviewed the collaboration roadmap against the implemented repository foundation.
