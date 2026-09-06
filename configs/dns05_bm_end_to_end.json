@@ -1,0 +1,14 @@
+{
+  "base_config": "configs/dns05_failure_scaling_audit.json",
+  "feature_budget": 192,
+  "block_size": 256,
+  "relu_seed": 81123,
+  "methods": ["batch", "stream", "linear", "relu", "rbf", "spectral"],
+  "timeout_seconds": 120,
+  "memory_limit_bytes": 8589934592,
+  "threads": 1,
+  "repeats": 5,
+  "rtol": 1e-8,
+  "atol": 1e-10,
+  "median_peak_reduction_target": 0.25
+}
