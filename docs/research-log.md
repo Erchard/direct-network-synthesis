@@ -1,5 +1,28 @@
 # Research Log
 
+## 2026-09-06: Collaboration Plan Revised Around a Bounded Pilot
+
+Reviewed the collaboration roadmap against the implemented repository foundation.
+Updated completed checkboxes and replaced the broad initial recruitment rollout
+with three pilot tasks: residual collapse (OAC-01), FMSA provenance (OAC-03), and
+deployed-state accounting (OAC-05). Each needs a frozen source SHA and reviewer;
+the initial work-in-progress limit is three tasks, reviewed after the pilot.
+
+The next gate is one locked validation-only reproduction with an explicit
+environment and numerical tolerances, distinct from fresh confirmation. Manual
+outreach follows a reviewed contribution cycle; recruiter automation follows an
+external contribution and assessed review capacity. No issues, settings or social
+accounts were changed by this planning revision.
+
+Primary collaboration measures now track reviewed evidence and corrected claims,
+with all attempted/inconclusive tasks included. Added task/review metadata export
+and restore planning because Git alone does not preserve the hosted collaboration
+history. Linked the pilot to the DNS mechanism decision and marked the old hybrid
+stage as historical. Category theory remains a bounded supporting direction.
+These are prospective operational choices, not measured improvements or new
+experimental results. Verification: documentation diff and local link review;
+no numerical code or experimental protocol changed.
+
 ## 2026-09-06: Open Agent Collaboration Repository Foundation
 
 Implemented the repository portion of the collaboration plan: contributor,

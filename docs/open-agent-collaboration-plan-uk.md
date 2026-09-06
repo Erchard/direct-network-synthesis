@@ -444,37 +444,39 @@ CI не замінює review.
 ## 34. Milestone checklist
 
 ### Legal
-- [ ] choose code license
-- [ ] add `LICENSE`
-- [ ] decide docs license
-- [ ] document dataset/model licensing rules
+- [x] choose code license: AGPL-3.0-or-later, owner approved
+- [x] add `LICENSE`
+- [x] decide docs license: CC BY 4.0, owner approved
+- [x] document dataset/model licensing scope and exclusions
+- [ ] complete artifact provenance and dependency compatibility review
 
 ### Repository
-- [ ] `CONTRIBUTING.md`
-- [ ] `GOVERNANCE.md`
-- [ ] `SECURITY.md`
-- [ ] `CONTRIBUTORS.md`
-- [ ] `docs/START-HERE-FOR-AGENTS.md`
-- [ ] optional `docs/licensing.md`
+- [x] `CONTRIBUTING.md`
+- [x] `GOVERNANCE.md`
+- [x] `SECURITY.md`
+- [x] `CONTRIBUTORS.md`
+- [x] `docs/START-HERE-FOR-AGENTS.md`
+- [x] `docs/licensing.md`
 
 ### Issues
 - [ ] labels created
-- [ ] 10–20 agent-ready issues
-- [ ] issue template
-- [ ] reproduction template
-- [ ] falsification template
+- [x] ten local task drafts and label taxonomy
+- [ ] three pilot agent-ready issues published with frozen source SHAs
+- [x] shared research issue form covering reproduction, falsification and audit
+- [ ] review pilot outcomes before publishing another task batch
 
 ### Automation
-- [ ] CI lint/tests
-- [ ] protocol checks where possible
+- [x] CI lint/tests; first hosted run passed on `0700f87`
+- [x] existing protocol-isolation unit tests run in CI
 - [ ] artifact consistency checks
-- [ ] PR template
+- [x] PR template
 
 ### Outreach
 - [ ] Moltbook project account
 - [ ] thematic community
 - [ ] first research challenge
-- [ ] OpenClaw contributor skill
+- [x] contributor SKILL.md, format validated locally
+- [ ] OpenClaw runtime loading and bounded execution verified
 
 ### Security
 - [ ] recruiter sandbox
@@ -482,37 +484,75 @@ CI не замінює review.
 - [ ] no secrets
 - [ ] branch protection
 
+Unchecked outreach and recruiter items are deferred, not requirements for the
+first contribution. Existing read-only CI permissions do not establish recruiter
+isolation or server-side branch protection.
+
 # Part XIII. Phased rollout
 
 ## 35. Phase 0 — Legal and repository readiness
 
 Goal: будь-який зовнішній contributor юридично і технічно розуміє правила.
 
+Repository files and initial CI are complete. Before inviting untrusted execution,
+verify branch protection, the private-report route and review ownership. Record
+actual settings or blockers. Prepare an artifact-rights inventory before inviting
+redistribution of datasets or trained artifacts. These checks do not delay static
+source or literature review.
+
 ## 36. Phase 1 — Agent-ready tasks
 
-Створити:
+Почати з трьох задач із [каталогу](agent-task-catalog.md):
 
-- 5 reproduction tasks;
-- 5 literature/prior-art tasks;
-- 3 audit tasks;
-- 3 performance tasks;
-- 3 documentation tasks.
+1. OAC-01: перевірити, чи згортаються наявні блоки в одне перетворення.
+2. OAC-03: перевірити походження та повноту запису останнього аудиту.
+3. OAC-05: перевірити облік пам'яті готової моделі.
 
-## 37. Phase 2 — Moltbook launch
+Для кожної зафіксувати повний source SHA, відповідального reviewer, дозволені
+входи, очікуваний файл і критерій завершення. Не більше трьох активних задач
+одночасно; одна основна задача на учасника. Інші чернетки залишаються в backlog.
+Це початкові організаційні обмеження, які можна переглянути після пілота.
 
-1. project introduction;
-2. one falsification challenge;
-3. one reproduction challenge;
-4. one prior-art challenge;
-5. links to agent-ready Issues.
+Після завершення або зупинки всіх трьох задач записати: що вдалося перевірити,
+скільки часу витратив reviewer, які інструкції були незрозумілі та які результати
+залишилися неперевіреними. Зупинений або негативний внесок також входить у звіт.
+Не відкривати наступну партію, поки є внески без призначеного reviewer.
+
+Далі підготувати одну незалежну репродукцію validation-only протоколу: точний
+commit, версії залежностей, контроль потоків, команда, ліміт ресурсів, дозволені
+дані та наперед визначені допуски для числових відмінностей. Час виконання
+порівнювати з урахуванням обладнання. Це відтворення відомого результату, а не
+нова перевірка на недоторканих даних. Не змінювати допуски після перегляду відповіді.
+
+## 37. Phase 2 — Small Manual Outreach Pilot
+
+Почати лише після проходження хоча б одного внеску через повний цикл
+задача → PR → CI → review → запис рішення. Локальна репетиція перевіряє процес,
+але не рахується незалежним внеском. Мати вільну задачу та reviewer перед запрошенням.
+
+Обрати один доступний канал після перевірки його поточних правил і можливостей.
+Moltbook залишається кандидатом, а створення акаунта чи спільноти не є критерієм
+наукового прогресу. Спочатку один вручну перевірений research packet із посиланням
+на конкретну задачу; публікація потребує окремого дозволу власника.
 
 ## 38. Phase 3 — Recruitment automation
 
 Sandboxed recruiter регулярно знаходить релевантні дискусії і направляє contributors.
 
+Автоматизація допускається після ручного пілота, який дав хоча б один перевірений
+зовнішній внесок і показав прийнятне навантаження на review. Перед запуском
+зафіксувати дозволені дії, бюджет, частоту повідомлень, спосіб вимкнення та
+перевірку ізоляції. Якщо росте черга неперевірених внесків або надходять скарги
+на повідомлення, призупинити recruitment і розібрати причину.
+
 ## 39. Phase 4 — Multi-platform federation
 
 Recruitment не залежить від одного provider.
+
+Не розгортати кілька каналів до оцінки першого. Окремо перевірити можливість
+відновити репозиторій, задачі та evidence metadata з резервної копії без акаунта
+власника. Git зберігає код, але не автоматично всі GitHub Issues, PR discussions
+чи налаштування. Записати, що реально експортується і що потребує відновлення.
 
 ## 40. Phase 5 — Protocol-level contribution
 
@@ -522,19 +562,24 @@ Recruitment не залежить від одного provider.
 
 з task ID, type, priority, dependencies, data boundary та acceptance criteria.
 
+Створювати цей формат тільки після виявленої потреби в пілоті. До того issue form
+і каталог достатні; паралельні реєстри не повинні суперечити один одному.
+
 # Part XIV. Success metrics
 
 ## 41. Primary
 
-- unique external agents;
-- valid PRs;
-- merged PRs;
-- independent reproductions;
-- falsifications;
-- prior-art discoveries;
-- audits that detect real issues;
-- provider diversity;
-- platform diversity.
+- independently reviewed reproductions, including failed reproductions;
+- specific claims corrected or falsified with evidence;
+- verified prior art that changes a research decision;
+- completed audits, including explicit reports that no defect was found;
+- research decisions supported by accepted evidence.
+
+Count unique claims/results, not repeated PRs about the same result. Record the
+denominator: attempted, completed, inconclusive and rejected tasks. Agent counts,
+stars, posts, provider diversity and merged-PR counts are secondary context, not
+evidence of scientific progress. Different model names do not establish independent
+operators, environments or data boundaries.
 
 ## 42. Operational
 
@@ -592,7 +637,9 @@ Mitigation: pin/review dependencies and minimize packages.
 
 ## 52. Platform capture
 
-Mitigation: GitHub canonical state + multi-channel discovery.
+Mitigation: GitHub as the current collaboration host, portable versioned evidence,
+exported task/review metadata and a documented restore check. Multi-channel
+discovery alone does not remove dependence on the host that stores the work.
 
 ## 53. Governance capture
 
@@ -600,33 +647,40 @@ Mitigation: transparent governance, recorded decisions, public protocols, reprod
 
 # Part XVI. Immediate next actions
 
-## 54. Priority 1 — License decision
+## 54. Priority 1 — Verify the Existing Contribution Path
 
-Compare AGPL-3.0-or-later vs Apache-2.0, verify compatibility, decide docs license.
+Check repository settings and review ownership; record enforcement gaps. Keep
+the owner-approved license choice and complete the separate provenance review.
+Do not describe the completed repository foundation as a future deliverable.
 
-Recommended starting preference:
+## 55. Priority 2 — Publish Three Pilot Issues
 
-> AGPL-3.0-or-later for code, subject to compatibility/legal review.
+Use OAC-01, OAC-03 and OAC-05, with exact inputs and assigned reviewers. Publish
+only the labels needed by the pilot. The remaining catalog is a backlog.
 
-## 55. Priority 2 — Contribution surface
+## 56. Priority 3 — Review the Pilot and Lock One Reproduction
 
-Add contribution, governance, security and onboarding docs plus templates.
+Record all outcomes and review effort. Resolve ambiguous instructions, then lock
+one validation-only reproduction with an explicit environment and numeric tolerances.
 
-## 56. Priority 3 — First 10 agent-ready Issues
+## 57. Priority 4 — Keep the Scientific Decision Moving
 
-Не запускати масовий recruitment, поки агентам нема чого брати.
+Use collapse and memory findings to choose one next DNS mechanism under the
+[research plan](research-plan.md). Category theory remains a bounded supporting
+analysis; neither outreach nor abstract formalization should block a justified
+numerical experiment. No experiment starts without its own committed protocol.
 
-## 57. Priority 4 — OpenClaw skill
+## 58. Priority 5 — Manual Outreach and Portable Evidence
 
-Створити DNS contributor skill.
+After the contribution path works, prepare one reviewed invitation to an available
+task and a repository/task-metadata restore procedure. Select a platform based on
+verified access and rules; no social account is a mandatory research dependency.
 
-## 58. Priority 5 — Moltbook launch
+## 59. Priority 6 — Automate Only the Demonstrated Need
 
-Опублікувати mission, research question, evidence, unknowns and first issues.
-
-## 59. Priority 6 — Sandboxed recruiter
-
-Автоматизувати лише після ручного розуміння, які outreach patterns дають якісні contributions.
+Deploy a recruiter or machine-readable task feed only after the pilot identifies
+the need, review capacity and acceptable cost. Record a stop condition and keep
+code execution, protected data and merge credentials outside outreach access.
 
 # Part XVII. Governance philosophy
 

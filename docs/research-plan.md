@@ -126,6 +126,9 @@ the specific claim is supported by the literature review and experimental eviden
 
 ## 3A. Active Development Branch: Hybrid Synthetic Centers
 
+Historical stage: completed and paused after DNS05-FMSA. The steps below preserve
+the original decision process; they are not instructions to restart this branch.
+
 Question: can a predetermined mixture of class-local coverage centers and
 boundary-aware centers outperform pure class-PCA and pure dipole prototypes
 without retaining train samples?
@@ -314,3 +317,12 @@ Immediate execution order after DNS05-FMSA: do not continue
 locked train/validation-only protocol for either a bounded-memory kernel-map
 compiler or a genuinely compositional depth mechanism. The protocol must state
 which FMSA failure mode it targets and what negative outcome would stop it.
+
+Coordination with [Open Agent Collaboration](open-agent-collaboration-plan-uk.md):
+the first three pilot tasks audit residual collapse, result provenance and deployed
+state accounting (OAC-01, OAC-03, OAC-05). Use their findings to inform the next
+mechanism choice; do not wait for social recruitment or a full collaboration
+platform to proceed with justified research. Keep at most one new experimental
+mechanism active. A pilot infrastructure milestone does not count as progress
+toward a predictive-quality or resource target. Independent reproduction of a
+known validation result and fresh confirmation are separate evidence gates.
