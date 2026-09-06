@@ -230,6 +230,8 @@ python -m experiments.run_dns05_error_geometry --config configs/dns05_dipole_err
 It records per-validation-example fixes and breaks for dipole prototypes versus
 class-PCA prototypes, uniform Nystrom, spectral and RBF references. It does not
 compute test scores.
+The complete validation-only record is stored at
+`docs/results/dns05_dipole_error_audit_digits.json`.
 
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and

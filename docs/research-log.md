@@ -1,5 +1,63 @@
 # Research Log
 
+## 2026-09-06: Dipole Error Audit Result
+
+Evaluation commit: `9b7baf08e30d6ae715fcade08c045c32625fab0c`.
+Worktree was clean at evaluation. Command:
+
+```text
+D:\Projects\direct-network-synthesis\.venv\Scripts\python.exe -m experiments.run_dns05_error_geometry --config configs/dns05_dipole_error_audit_digits.json --output results/dns05_dipole_error_audit_digits.json
+```
+
+Complete auditable record:
+`docs/results/dns05_dipole_error_audit_digits.json`. The run produced 400
+validation-only readout rows, 50 selected model/split rows and 1795
+per-validation-sample records. Test fields are null by design; this is not
+independent confirmation evidence.
+
+Selected validation accuracy matched DNS05-DIP: class-PCA prototypes 192 were
+0.9794 +/- 0.0080, dipole prototypes 192 were 0.9811 +/- 0.0060, uniform
+Nystrom 192 was 0.9833 +/- 0.0048, spectral 192 was 0.9900 +/- 0.0042 and full
+RBF was 0.9916 +/- 0.0028.
+
+Per-split diagnostic tags:
+
+| Tag | Mean count +/- SD | Mean same-minus-other RBF margin | Mean top-5 true-class fraction |
+|---|---:|---:|---:|
+| All selected models correct | 326.2 +/- 4.7 | +0.0599 | 0.974 |
+| All selected models wrong | 0.8 +/- 0.8 | -0.1443 | 0.150 |
+| Class-PCA miss / dipole hit | 2.2 +/- 1.6 | +0.0125 | 0.655 |
+| Class-PCA hit / dipole miss | 1.6 +/- 1.1 | -0.0010 | 0.450 |
+| Dipole miss / uniform Nystrom hit | 3.0 +/- 2.5 | -0.0117 | 0.480 |
+| Dipole hit / uniform Nystrom miss | 2.2 +/- 1.8 | +0.0306 | 0.727 |
+| Dipole miss / spectral hit | 3.2 +/- 1.5 | -0.0079 | 0.475 |
+| Dipole miss / RBF hit | 3.8 +/- 2.5 | -0.0032 | 0.463 |
+
+Error overlap: class-PCA prototypes averaged 7.4 errors per split, dipole
+prototypes 6.8, shared errors 5.2, class-PCA-only errors 2.2 and dipole-only
+errors 1.6. Against uniform Nystrom, dipole averaged 6.8 errors, uniform Nystrom
+6.0, shared errors 3.8, dipole-only errors 3.0 and Nystrom-only errors 2.2.
+
+Interpretation: the boundary hypothesis is only partly supported. Dipole fixes
+relative to class-PCA are closer to class boundaries than all-correct examples:
+their same-minus-other RBF margin is +0.0125 versus +0.0599 for all-correct
+examples. However, the examples broken by dipole are also boundary-like and even
+more ambiguous on average, with margin -0.0010 and top-5 true-class fraction
+0.450. This means dipole is not a clean boundary repair mechanism; it shifts a
+small number of difficult decisions in both directions.
+
+Negative result: dipole still misses examples that uniform Nystrom and spectral
+features recover, and dipole-only errors against uniform Nystrom are more
+ambiguous on average than dipole-only wins. The small average accuracy gain over
+class-PCA prototypes should therefore not justify test confirmation by itself.
+
+Decision: do not tune the dipole shift fraction or quantile layout on these
+examples. The next bounded development step should define a frozen
+train-sample-free hybrid-center protocol before evaluation: reserve most centers
+for class-local coverage and a small, predetermined allocation for boundary
+coverage. A later confirmation run should wait until the candidate family is
+fixed and an untouched data boundary is selected.
+
 ## 2026-09-06: Dipole Error Audit Preregistered
 
 Locked DNS05-DEA before development evaluation. This audit does not add a new
