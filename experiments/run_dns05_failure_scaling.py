@@ -170,8 +170,10 @@ def evaluate_development(
 
     start = time.perf_counter()
     kernel = rbf_kernel(train, gamma=selection.gamma)
+    train_kernel_time = time.perf_counter() - start
+    start = time.perf_counter()
     validation_cross = rbf_kernel(validation, train, gamma=selection.gamma)
-    kernel_time = time.perf_counter() - start
+    validation_cross_time = time.perf_counter() - start
 
     representations = _build_representations(
         train,
@@ -183,6 +185,8 @@ def evaluate_development(
         scaler,
         config,
         seed,
+        train_kernel_time,
+        validation_cross_time,
     )
     split_result = _score_representations(
         representations,
@@ -199,7 +203,8 @@ def evaluate_development(
     return split_result, {
         "oracle": asdict(selection),
         "preprocessing_seconds": preprocessing_time,
-        "train_kernel_build_seconds": kernel_time,
+        "train_kernel_build_seconds": train_kernel_time,
+        "validation_cross_kernel_build_seconds": validation_cross_time,
     }
 
 
@@ -213,6 +218,8 @@ def _build_representations(
     scaler: Standardizer,
     config: dict[str, Any],
     seed: int,
+    train_kernel_time: float,
+    validation_cross_time: float,
 ) -> list[dict[str, Any]]:
     families = set(config["model_families"])
     feature_counts = [int(value) for value in config["feature_counts"]]
@@ -255,10 +262,21 @@ def _build_representations(
                 gamma,
                 scaler,
                 feature_counts,
+                train_kernel_time,
+                validation_cross_time,
             )
         )
     if config.get("include_rbf_reference", True):
-        representations.append(_rbf_representation(train, validation_cross, kernel, scaler))
+        representations.append(
+            _rbf_representation(
+                train,
+                validation_cross,
+                kernel,
+                scaler,
+                train_kernel_time,
+                validation_cross_time,
+            )
+        )
     return representations
 
 
@@ -392,6 +410,8 @@ def _spectral_representations(
     gamma: float,
     scaler: Standardizer,
     requested_counts: list[int],
+    train_kernel_time: float,
+    validation_cross_time: float,
 ) -> list[dict[str, Any]]:
     start = time.perf_counter()
     values, vectors = np.linalg.eigh(kernel)
@@ -428,8 +448,12 @@ def _spectral_representations(
                 basis_kernel=None,
                 train_to_centers=None,
                 basis_rank=int(indices.size),
-                train_feature_construction_time_seconds=eigen_time + feature_time,
-                validation_feature_transform_time_seconds=validation_time,
+                train_feature_construction_time_seconds=(
+                    train_kernel_time + eigen_time + feature_time
+                ),
+                validation_feature_transform_time_seconds=(
+                    validation_cross_time + validation_time
+                ),
                 model_state_base_bytes=_arrays_nbytes(scaler.mean_, scaler.scale_, train, extension),
                 intermediate_array_bytes_estimate=intermediate,
                 requested_feature_count=requested_count,
@@ -449,6 +473,8 @@ def _rbf_representation(
     validation_cross: np.ndarray,
     kernel: np.ndarray,
     scaler: Standardizer,
+    train_kernel_time: float,
+    validation_cross_time: float,
 ) -> dict[str, Any]:
     return _representation(
         name="rbf",
@@ -462,8 +488,8 @@ def _rbf_representation(
         basis_kernel=None,
         train_to_centers=None,
         basis_rank=int(np.linalg.matrix_rank(kernel)),
-        train_feature_construction_time_seconds=0.0,
-        validation_feature_transform_time_seconds=0.0,
+        train_feature_construction_time_seconds=train_kernel_time,
+        validation_feature_transform_time_seconds=validation_cross_time,
         model_state_base_bytes=_arrays_nbytes(scaler.mean_, scaler.scale_, train),
         intermediate_array_bytes_estimate=kernel.nbytes + validation_cross.nbytes,
         requested_feature_count=None,
