@@ -1,5 +1,19 @@
 # Research Log
 
+## 2026-09-06: Dipole Error Audit Preregistered
+
+Locked DNS05-DEA before development evaluation. This audit does not add a new
+model family. It reuses the already selected class-PCA prototype 192, dipole
+prototype 192, uniform Nystrom 192, spectral 192, RBF and required baselines,
+then records per-validation-example fixes, breaks and RBF neighbor geometry.
+
+The predicted mechanism is boundary specificity. If dipole prototypes helped
+because they cover rival-class boundaries, class-PCA miss/dipole hit examples
+should have smaller same-minus-other RBF neighbor margins than examples both
+prototype models get correct. The falsifying outcome is that fixed and broken
+examples have similar geometry, implying the small DNS05-DIP gain may be a
+fragile redistribution of errors. No test scores are computed.
+
 ## 2026-09-05: Dipole Prototype Diagnostic Result
 
 Evaluation commit: `dc69292d2a8e029794af38d4baede248230aae8f`.

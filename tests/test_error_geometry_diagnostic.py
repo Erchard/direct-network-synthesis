@@ -19,6 +19,23 @@ def test_error_tags_capture_pair_direction():
     assert "compiled_192_miss_nystrom_farthest_192_hit" not in tags
 
 
+def test_error_tags_accept_configured_pairs():
+    predictions = {
+        "prototype_class_pca_192": {"correct": False},
+        "prototype_class_dipole_192": {"correct": True},
+        "nystrom_uniform_192": {"correct": True},
+    }
+    tags = diagnostic._tags(
+        predictions,
+        [
+            ["prototype_class_pca_192", "prototype_class_dipole_192"],
+            ["prototype_class_dipole_192", "nystrom_uniform_192"],
+        ],
+    )
+    assert "prototype_class_pca_192_miss_prototype_class_dipole_192_hit" in tags
+    assert "prototype_class_dipole_192_miss_nystrom_uniform_192_hit" not in tags
+
+
 def test_neighbor_records_capture_local_boundary():
     y_train = np.array([0, 0, 1, 1])
     y_validation = np.array([0, 1])
@@ -122,3 +139,54 @@ def test_synthetic_error_geometry_grid_and_samples():
         "nystrom_farthest_6",
         "nystrom_uniform_6",
     }
+
+
+def test_error_geometry_can_audit_prototypes():
+    rng = np.random.default_rng(31)
+    X = rng.normal(size=(72, 5))
+    y = np.tile([0, 1, 2, 3], 18)
+    config = {
+        "alphas": [0.01],
+        "analysis_pairs": [["prototype_class_pca_6", "prototype_class_dipole_6"]],
+        "compiled_feature_count": 6,
+        "diagnostic_landmark_count": 6,
+        "dipole_shift_fraction": 0.25,
+        "fixed_relu_hidden_units": 6,
+        "fixed_relu_seed": 1705,
+        "include_dipole_prototypes": True,
+        "include_prototype_representations": True,
+        "intercepts": [False],
+        "landmark_counts": [6],
+        "landmark_seed": 2309,
+        "models": [
+            "linear",
+            "fixed_relu_11",
+            "prototype_class_pca_6",
+            "prototype_class_dipole_6",
+            "nystrom_uniform_6",
+            "rbf",
+        ],
+        "neighbor_k": 3,
+        "oracle_selection": {"gamma_multipliers": [1.0], "alpha_values": [0.01]},
+        "prototype_quantiles": [0.25, 0.5, 0.75],
+        "rff_seed": 2310,
+    }
+    result, _ = diagnostic.evaluate_development(
+        X[:56],
+        y[:56],
+        X[56:],
+        y[56:],
+        config,
+        31,
+    )
+    assert len(result["rows"]) == 6
+    assert len(result["selected_rows"]) == 6
+    assert len(result["sample_records"]) == 16
+    sample = result["sample_records"][0]
+    assert "prototype_class_pca_6" in sample["predictions"]
+    assert "prototype_class_dipole_6" in sample["predictions"]
+    dipole_row = next(
+        row for row in result["selected_rows"] if row["model"] == "prototype_class_dipole_6"
+    )
+    assert dipole_row["prototype_count"] == 6
+    assert dipole_row["prototype_train_exact_match_count"] == 0

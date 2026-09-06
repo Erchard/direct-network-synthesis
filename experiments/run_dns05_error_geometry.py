@@ -33,6 +33,7 @@ from experiments.run_dns05_landmark import (
     farthest_first_indices,
     uniform_landmark_indices,
 )
+from experiments.run_dns05_prototype import _prototype_representations
 from experiments.run_dns05_readout import kernel_readout
 
 METRICS = [
@@ -47,6 +48,17 @@ METRICS = [
     "inference_time_seconds",
     "representation_time_seconds",
     "kernel_reconstruction_error",
+    "prototype_count",
+    "prototype_train_exact_match_count",
+]
+
+DEFAULT_ANALYSIS_PAIRS = [
+    ("compiled_192", "spectral_192"),
+    ("compiled_192", "nystrom_uniform_192"),
+    ("compiled_192", "nystrom_farthest_192"),
+    ("compiled_192", "fixed_relu_256"),
+    ("nystrom_uniform_192", "spectral_192"),
+    ("spectral_192", "rbf"),
 ]
 
 
@@ -206,6 +218,10 @@ def _build_representations(
     representations.extend(
         _landmark_representations(train, y_train, validation, kernel, gamma, seed, config)
     )
+    if config.get("include_prototype_representations", False):
+        representations.extend(
+            _prototype_representations(train, y_train, validation, kernel, gamma, config)
+        )
     representations.append(
         {
             "name": "rbf",
@@ -329,12 +345,16 @@ def _row_from_scores(
         "inference_time_seconds": inference_time,
         "representation_time_seconds": representation["representation_time_seconds"],
         "feature_family": representation["feature_family"],
-        "landmark_count": representation["landmark_count"],
-        "landmark_rank": representation["landmark_rank"],
-        "landmark_selection": representation.get("landmark_selection"),
-        "uses_train_labels_for_representation": representation[
-            "uses_train_labels_for_representation"
-        ],
+                        "landmark_count": representation["landmark_count"],
+                        "landmark_rank": representation["landmark_rank"],
+                        "landmark_selection": representation.get("landmark_selection"),
+                        "prototype_count": representation.get("prototype_count"),
+                        "prototype_train_exact_match_count": representation.get(
+                            "prototype_train_exact_match_count"
+                        ),
+                        "uses_train_labels_for_representation": representation[
+                            "uses_train_labels_for_representation"
+                        ],
         "uses_iterative_parameter_optimization": False,
     }
 
@@ -385,7 +405,7 @@ def _sample_records(
                     model: values[position] for model, values in coverage.items()
                 },
                 "predictions": per_model,
-                "tags": _tags(per_model),
+                "tags": _tags(per_model, config.get("analysis_pairs")),
             }
         )
     return records
@@ -448,18 +468,15 @@ def _landmark_coverage(train, y_train, validation, y_validation, gamma, config, 
     return coverage
 
 
-def _tags(predictions):
+def _tags(predictions, analysis_pairs=None):
     tags = []
     if all(item["correct"] for item in predictions.values()):
         tags.append("all_selected_correct")
     if not any(item["correct"] for item in predictions.values()):
         tags.append("all_selected_wrong")
-    _add_pair_tag(tags, predictions, "compiled_192", "spectral_192")
-    _add_pair_tag(tags, predictions, "compiled_192", "nystrom_uniform_192")
-    _add_pair_tag(tags, predictions, "compiled_192", "nystrom_farthest_192")
-    _add_pair_tag(tags, predictions, "compiled_192", "fixed_relu_256")
-    _add_pair_tag(tags, predictions, "nystrom_uniform_192", "spectral_192")
-    _add_pair_tag(tags, predictions, "spectral_192", "rbf")
+    pairs = DEFAULT_ANALYSIS_PAIRS if analysis_pairs is None else analysis_pairs
+    for left, right in pairs:
+        _add_pair_tag(tags, predictions, left, right)
     return tags
 
 
@@ -476,7 +493,7 @@ def _summary(rows):
     return {
         metric: summarize_values([r[metric] for r in rows])
         for metric in METRICS
-        if all(r[metric] is not None for r in rows)
+        if all(r.get(metric) is not None for r in rows)
     }
 
 

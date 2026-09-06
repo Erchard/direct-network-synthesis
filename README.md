@@ -219,6 +219,18 @@ RBF geometry.
 The complete validation-only record is stored at
 `docs/results/dns05_dipole_prototype_digits.json`.
 
+The dipole error audit is locked in
+[DNS05 Dipole Error Audit](docs/dns05-dipole-error-audit-protocol.md). Run it
+with:
+
+```bash
+python -m experiments.run_dns05_error_geometry --config configs/dns05_dipole_error_audit_digits.json --output results/dns05_dipole_error_audit_digits.json
+```
+
+It records per-validation-example fixes and breaks for dipole prototypes versus
+class-PCA prototypes, uniform Nystrom, spectral and RBF references. It does not
+compute test scores.
+
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
   train-only median heuristic when `gamma` is not specified.

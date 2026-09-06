@@ -12,6 +12,7 @@ The methodology is binding. Status describes execution, not success.
 | DNS05-CA | Which compact candidate has the best quality/resource tradeoff? | Only original train/validation for seeds 101,202,303,404,505 | dns05-cost-protocol.md, docs/results cost record | Completed, uniform Nystrom 192 is best compact development candidate |
 | DNS05-PT | Can synthetic RBF prototypes replace retained landmarks? | Only original train/validation for seeds 101,202,303,404,505 | dns05-prototype-protocol.md, docs/results prototype record | Completed, class-PCA prototypes close to Nystrom without retained train samples; global PCA negative |
 | DNS05-DIP | Can boundary-aware synthetic prototypes improve class-local synthesis? | Only original train/validation for seeds 101,202,303,404,505 | dns05-dipole-prototype-protocol.md, docs/results dipole-prototype record | Completed, small gain over class-PCA prototypes but still below uniform Nystrom and spectral/RBF |
+| DNS05-DEA | Which examples did dipole prototypes fix or break? | Only original train/validation for seeds 101,202,303,404,505 | dns05-dipole-error-audit-protocol.md, configs/dns05_dipole_error_audit_digits.json | Preregistered |
 
 Digits is development data. A sample excluded in one split can belong to another
 split's development portion; this is not a globally untouched holdout. The readout
