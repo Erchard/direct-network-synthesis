@@ -52,7 +52,8 @@ Do not confuse `DNS05KernelCompiler`, the weighted kernel combiner, with
 
 ## 4. Know the Current Evidence
 
-Snapshot as of 2026-09-06; verify newer log entries before relying on it:
+Snapshot as of 2026-09-06 after DNS05-FC1; verify newer log entries before
+relying on it:
 
 1. The 192-feature compiler and partitioned/full-basis residual variants have been
    evaluated on five digits splits. Residual construction did not outperform the
@@ -63,14 +64,16 @@ Snapshot as of 2026-09-06; verify newer log entries before relying on it:
    completed on validation-only digits development splits. Full RBF and spectral
    remain strong references; uniform Nystrom 192 is the best observed compact
    candidate if retaining 192 train-derived landmarks is acceptable.
-4. Train-sample-free synthetic centers are the active development branch.
+4. Train-sample-free synthetic centers remain interesting but are not confirmed.
    Class-PCA prototypes nearly matched uniform Nystrom without retaining train
-   rows. Dipole prototypes improved slightly over class-PCA, but the error audit
-   showed a mixed boundary trade rather than a clean repair mechanism.
-5. The current planned next step is not another unrestricted architecture search.
-   It is either a locked DNS05-HYB hybrid synthetic-center diagnostic, or an
-   explicit decision to stop prototype development and move to fresh-data
-   confirmation with already selected candidates.
+   rows; dipole and hybrid variants improved development numbers slightly. The
+   fresh DNS05-FC1 confirmation was mixed: hybrid prototypes did not clearly
+   transfer on `sklearn_breast_cancer`, beat uniform Nystrom on the fixed
+   synthetic multiclass task, and remained below spectral/full RBF references.
+5. The current planned next step is not another center-formula tweak. Do not tune
+   against inspected DNS05-FC1 test outcomes. The next bounded action should be a
+   train/validation-only failure-mode and scaling audit covering rank, coverage,
+   model-state cost and dense-kernel/inverse-root bottlenecks.
 6. Complete records live under `docs/results/`. Use those records for exact
    values and uncertainty rather than conversational rounding.
 

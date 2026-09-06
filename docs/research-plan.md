@@ -1,7 +1,7 @@
 # Research Plan: Direct Synthesis and Independent Model Creation
 
 Status: planned work, recorded 2026-09-05 and updated 2026-09-06 after the
-DNS05 prototype, dipole and dipole-error-audit diagnostics. This document
+DNS05 prototype, dipole, hybrid and fresh-confirmation diagnostics. This document
 summarizes direction; experimental results remain in [Research Log](research-log.md).
 
 This plan implements the motivation in [Hypothesis](hypothesis.md): enable small
@@ -23,23 +23,26 @@ quality reference, while uniform Nystrom 192 is the best observed compact
 development candidate when retaining train-derived landmarks is allowed. Both
 remain established kernel-approximation territory, not DNS novelty claims.
 
-Train-sample-free synthetic centers are the active DNS development branch.
+Train-sample-free synthetic centers remain interesting but are not confirmed.
 Class-PCA prototypes nearly matched uniform Nystrom 192 on reused validation
-splits without retaining real train rows. Dipole prototypes added a small
-boundary-aware gain, but the follow-up error audit showed a mixed trade: they
-fix some boundary-like examples and break other boundary-like examples. This is
-not enough to justify independent confirmation.
+splits without retaining real train rows. Dipole and hybrid prototypes added
+small development gains, but the fresh-confirmation run was mixed: hybrid
+prototypes did not clearly transfer on `sklearn_breast_cancer`, while they beat
+uniform Nystrom on the fixed synthetic multiclass task and still trailed spectral
+and full RBF references. This does not justify further formula tuning on the
+inspected test outcomes.
 
 Digits remains development data. The next meaningful confirmation must use a
 fresh boundary chosen before candidate outcomes are inspected. Further digits
 work is allowed only as bounded development diagnostics and must not be treated
 as new independent evidence.
 
-Immediate priority: define one frozen hybrid-center diagnostic that combines
-class-local coverage with a small predetermined boundary-center allocation, then
-decide whether the resulting train-sample-free candidate is strong enough to
-move to fresh datasets. Do not tune dipole shift fractions, quantiles or budgets
-using DNS05-DEA examples.
+Immediate priority: stop ad hoc center-formula expansion and diagnose the
+failure modes that now appear across datasets. Measure when synthetic centers
+lose rank, coverage or cost advantage; identify the dense kernel and inverse-root
+bottlenecks; and only then define either a bounded-memory kernel-map experiment
+or a true-depth experiment whose later features depend on earlier synthesized
+representations.
 
 ## 1. Establish the Starting Point
 
@@ -260,9 +263,9 @@ alone does not establish affordability, portability or freedom to redistribute.
 6. Keep economic implications conditional: the deliverable is a practical ability
    to create alternatives, not proof that data centers or monopolies disappear.
 
-Immediate execution order after DNS05-DEA: lock DNS05-HYB or explicitly decide
-to stop prototype development; implement and test the frozen hybrid diagnostic;
-commit and push the protocol before evaluation; run validation-only on the
-existing digits development splits; record the full result and decision; then
-either close the prototype branch or choose fresh confirmation datasets before
-any test evaluation.
+Immediate execution order after DNS05-FC1: do not tune hybrid prototypes against
+the inspected confirmation tests. Preregister a failure-mode and scaling audit
+that uses train/validation data only, records rank/coverage/cost bottlenecks for
+synthetic centers versus retained landmarks, and decides whether the next method
+should target bounded-memory kernel maps or genuinely compositional synthesized
+depth.

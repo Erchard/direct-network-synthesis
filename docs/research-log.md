@@ -1,5 +1,72 @@
 # Research Log
 
+## 2026-09-06: Fresh Confirmation Protocol v1 Result
+
+Evaluation commit: `75a138afc6dff7fabda7bf874e190ec18b78579b`.
+Worktree was clean at evaluation. Command:
+
+```text
+D:\Projects\direct-network-synthesis\.venv\Scripts\python.exe -m experiments.run_dns05_confirmation --config configs/dns05_fresh_confirmation_v1.json --output results/dns05_fresh_confirmation_v1.json
+```
+
+Complete auditable record: `docs/results/dns05_fresh_confirmation_v1.json`.
+SHA256: `C395F01A1482DC150B3BC8E471F6DC1B46CB18DD852D65ADB34F6F85520C5F1E`.
+The run produced 480 validation grid rows and 60 validation-selected test rows:
+six models, five splits and two datasets. Grid rows have null test fields; test
+metrics are present only after validation-selected readouts. The datasets were
+`sklearn_breast_cancer` (569 samples, 30 features, 2 classes) and
+`synthetic_multiclass_v1` (1200 samples, 40 features, 6 classes).
+
+Selected test summary:
+
+| Dataset | Model | Test accuracy, mean +/- SD | Validation accuracy | Kernel error | Rank / budget | Retained train samples |
+|---|---|---:|---:|---:|---:|---:|
+| breast cancer | Fixed ReLU 256 | 0.9617 +/- 0.0078 | 0.9717 | n/a | 255.8 / 256 | 0 |
+| breast cancer | Uniform Nystrom 192 | 0.9652 +/- 0.0106 | 0.9717 | 0.003615 | 192.0 / 192 | 192 |
+| breast cancer | Hybrid prototypes 192 | 0.9600 +/- 0.0180 | 0.9646 | 0.011157 | 144.0 / 192 | 0 |
+| breast cancer | Spectral 192 | 0.9687 +/- 0.0158 | 0.9752 | 0.000089 | 192.0 / 192 | 341 |
+| breast cancer | RBF oracle | 0.9670 +/- 0.0129 | 0.9788 | 0.000000 | 341.0 / 341 | 341 |
+| synthetic multiclass | Fixed ReLU 256 | 0.5112 +/- 0.0274 | 0.5280 | n/a | 248.0 / 256 | 0 |
+| synthetic multiclass | Uniform Nystrom 192 | 0.6373 +/- 0.0234 | 0.6686 | 0.015075 | 192.0 / 192 | 192 |
+| synthetic multiclass | Hybrid prototypes 192 | 0.6531 +/- 0.0263 | 0.6979 | 0.013823 | 192.0 / 192 | 0 |
+| synthetic multiclass | Spectral 192 | 0.6697 +/- 0.0123 | 0.7004 | 0.006857 | 192.0 / 192 | 720 |
+| synthetic multiclass | RBF oracle | 0.6797 +/- 0.0298 | 0.7163 | 0.000000 | 720.0 / 720 | 720 |
+
+Selected paired differences:
+
+| Dataset | Comparison | Test accuracy delta, mean +/- SD | Kernel error delta | Retained train samples delta |
+|---|---|---:|---:|---:|
+| breast cancer | Hybrid prototypes 192 - Uniform Nystrom 192 | -0.0052 +/- 0.0117 | +0.007542 | -192 |
+| breast cancer | Hybrid prototypes 192 - Fixed ReLU 256 | -0.0017 +/- 0.0143 | n/a | 0 |
+| breast cancer | Hybrid prototypes 192 - RBF oracle | -0.0070 +/- 0.0143 | +0.011157 | -341 |
+| breast cancer | Spectral 192 - RBF oracle | +0.0017 +/- 0.0095 | +0.000089 | 0 |
+| synthetic multiclass | Hybrid prototypes 192 - Uniform Nystrom 192 | +0.0158 +/- 0.0261 | -0.001252 | -192 |
+| synthetic multiclass | Hybrid prototypes 192 - Fixed ReLU 256 | +0.1419 +/- 0.0439 | n/a | 0 |
+| synthetic multiclass | Hybrid prototypes 192 - RBF oracle | -0.0266 +/- 0.0267 | +0.013823 | -720 |
+| synthetic multiclass | Spectral 192 - RBF oracle | -0.0100 +/- 0.0307 | +0.006857 | 0 |
+
+Interpretation: the confirmation is mixed. The hybrid candidate did not satisfy
+the preregistered success rule because it was not consistently close to uniform
+Nystrom and clearly above fixed ReLU on both datasets. On breast cancer it was
+slightly below fixed ReLU, uniform Nystrom, spectral and RBF. On the synthetic
+multiclass task it beat fixed ReLU and uniform Nystrom, with zero retained train
+samples and zero exact train-row prototype matches, but it remained below the
+spectral and full RBF references.
+
+Negative result: the small digits-development advantage of hybrid prototypes
+does not transfer cleanly as a general train-sample-free candidate. The method
+still depends on the task geometry, and the dense inverse-root state means it is
+not automatically smaller than retained-landmark methods at this scale. This run
+does not support claims about useful analytical depth, single-pass learning,
+energy savings or large-scale model creation.
+
+Decision: keep `prototype_class_hybrid_192` as a useful development clue, not as
+a confirmed final candidate. Do not tune the hybrid formula against these test
+outcomes. The next step should shift from formula tweaking to failure-mode and
+scaling analysis: identify when synthetic centers lose rank or coverage, measure
+the dense kernel/inverse-root bottleneck, and only then design a bounded-memory
+or true-depth variant under a new locked protocol.
+
 ## 2026-09-06: Fresh Confirmation Protocol v1 Preregistered
 
 Locked DNS05-FC1 before confirmation evaluation. The protocol moves the frozen

@@ -257,6 +257,8 @@ python -m experiments.run_dns05_confirmation --config configs/dns05_fresh_confir
 It evaluates only validation-selected readouts on test partitions for
 `sklearn_breast_cancer` and a fixed synthetic multiclass task. It is a narrow
 confirmation step, not evidence for large-scale model creation.
+The complete confirmation record is stored at
+`docs/results/dns05_fresh_confirmation_v1.json`.
 
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
