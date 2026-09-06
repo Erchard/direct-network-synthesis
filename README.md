@@ -243,6 +243,8 @@ python -m experiments.run_dns05_prototype --config configs/dns05_hybrid_prototyp
 
 It tests a fixed train-sample-free mixture of class-local synthetic coverage
 centers and predetermined boundary centers. It does not compute test scores.
+The complete validation-only record is stored at
+`docs/results/dns05_hybrid_prototype_digits.json`.
 
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and

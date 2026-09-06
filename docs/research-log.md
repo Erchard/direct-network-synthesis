@@ -1,5 +1,65 @@
 # Research Log
 
+## 2026-09-06: Hybrid Prototype Diagnostic Result
+
+Evaluation commit: `414d9e14dadc019108d71396792369ddca550937`.
+Worktree was clean at evaluation. Command:
+
+```text
+D:\Projects\direct-network-synthesis\.venv\Scripts\python.exe -m experiments.run_dns05_prototype --config configs/dns05_hybrid_prototype_digits.json --output results/dns05_hybrid_prototype_digits.json
+```
+
+Complete auditable record: `docs/results/dns05_hybrid_prototype_digits.json`.
+SHA256: `227FCD299577ABE573B6A733DF4EEDE9D7CFC383F4BCA85191567997F100A8C4`.
+The run produced 560 validation-only readout rows and 70 selected model/split
+rows. Test fields are null by design; this is not independent confirmation
+evidence.
+
+Selected validation summary:
+
+| Model | Validation accuracy, mean +/- SD | Kernel error | Rank | Retained train samples | Exact train-row prototype matches | Readout solve s | Inference s |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Fixed ReLU 256 | 0.9749 +/- 0.0079 | n/a | 252.2 | 0 | n/a | 0.0129 | 0.00025 |
+| Compiled 192 | 0.9638 +/- 0.0044 | 0.032062 | 184.4 | 0 | n/a | 0.0082 | 0.00033 |
+| Class-PCA prototypes 192 | 0.9794 +/- 0.0080 | 0.005312 | 192.0 | 0 | 0 | 0.0117 | 0.00023 |
+| Dipole prototypes 192 | 0.9811 +/- 0.0060 | 0.004937 | 192.0 | 0 | 0 | 0.0117 | 0.00025 |
+| Hybrid prototypes 192 | 0.9822 +/- 0.0047 | 0.004915 | 192.0 | 0 | 0 | 0.0112 | 0.00021 |
+| Uniform Nystrom 192 | 0.9833 +/- 0.0048 | 0.004250 | 192.0 | 192 | n/a | 0.0075 | 0.00023 |
+| Spectral 192 | 0.9900 +/- 0.0042 | 0.000355 | 192.0 | 1078 | n/a | 0.0226 | 0.00024 |
+| RBF oracle | 0.9916 +/- 0.0028 | 0.000000 | 1078.0 | 1078 | n/a | 0.1382 | 0.00078 |
+
+Selected paired differences:
+
+| Comparison | Validation accuracy delta, mean +/- SD | Kernel error delta | Retained train samples delta |
+|---|---:|---:|---:|
+| Hybrid prototypes 192 - Dipole prototypes 192 | +0.00111 +/- 0.00153 | -0.000023 | 0 |
+| Hybrid prototypes 192 - Class-PCA prototypes 192 | +0.00279 +/- 0.00682 | -0.000398 | 0 |
+| Hybrid prototypes 192 - Uniform Nystrom 192 | -0.00111 +/- 0.00641 | +0.000664 | -192 |
+| Hybrid prototypes 192 - Fixed ReLU 256 | +0.00724 +/- 0.00422 | n/a | 0 |
+| Hybrid prototypes 192 - Compiled 192 | +0.01838 +/- 0.00543 | -0.027147 | 0 |
+| Hybrid prototypes 192 - Spectral 192 | -0.00780 +/- 0.00305 | +0.004559 | -1078 |
+| Dipole prototypes 192 - Uniform Nystrom 192 | -0.00223 +/- 0.00694 | +0.000687 | -192 |
+| Uniform Nystrom 192 - Spectral 192 | -0.00669 +/- 0.00641 | +0.003895 | -886 |
+
+Interpretation: the fixed hybrid allocation produced a small, stable development
+gain over pure dipole prototypes and reduced train-kernel reconstruction error
+slightly. It is now the best observed train-sample-free synthetic-center
+candidate on the reused digits validation boundary, with zero retained train
+samples and zero exact train-row prototype matches.
+
+Negative result and limitation: the gain over dipole is only 0.00111 validation
+accuracy, less than one validation example per split on average. Hybrid
+prototypes remain below uniform Nystrom 192, spectral 192 and full RBF. The
+result does not justify claims of strong improvement, useful neural depth,
+novelty, single-pass learning, energy savings or test performance.
+
+Decision: freeze `prototype_class_hybrid_192` as the current synthetic-center
+candidate, but do not tune this formula further on digits. The next scientifically
+justified step is to choose a fresh confirmation boundary and preregister a small
+candidate set before any test evaluation: fixed ReLU 256, uniform Nystrom 192,
+hybrid prototypes 192, spectral 192 and full RBF, with resource accounting kept
+visible.
+
 ## 2026-09-06: Hybrid Prototype Diagnostic Preregistered
 
 Locked DNS05-HYB before development evaluation. The diagnostic adds exactly one
