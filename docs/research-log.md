@@ -1,5 +1,28 @@
 # Research Log
 
+## 2026-09-06: Failure-Mode and Scaling Audit Preregistered
+
+Locked DNS05-FMSA before evaluation. This protocol follows the mixed fresh
+confirmation result without tuning the hybrid formula against inspected test
+outcomes. The audit is train/validation-only: stratified excluded partitions are
+recorded but not transformed, scored or used for model choice.
+
+The fixed comparison spans `sklearn_digits`, `sklearn_breast_cancer` and
+`synthetic_multiclass_v1`, with five recorded split seeds per dataset. At
+feature budgets 32, 64, 128, 192 and 256 it compares frozen hybrid synthetic
+centers, uniform Nystrom landmarks and a spectral RBF reference, plus exact RBF
+once per split. It records validation accuracy/RMSE/R2, kernel reconstruction
+error, rank, effective rank, basis condition, train-to-basis coverage, retained
+train samples, exact train-row matches, state bytes, solve time and validation
+inference time.
+
+The main decision criterion is explanatory rather than celebratory: if hybrid
+centers lose rank or coverage versus uniform Nystrom, the synthetic-center
+branch remains unconfirmed; if dense kernel or inverse-root costs dominate, the
+next method should target bounded-memory kernel maps or a genuinely
+compositional depth mechanism. No novelty, energy or large-scale training claim
+can be drawn from this audit.
+
 ## 2026-09-06: Fresh Confirmation Protocol v1 Result
 
 Evaluation commit: `75a138afc6dff7fabda7bf874e190ec18b78579b`.

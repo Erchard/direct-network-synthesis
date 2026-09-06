@@ -260,6 +260,19 @@ confirmation step, not evidence for large-scale model creation.
 The complete confirmation record is stored at
 `docs/results/dns05_fresh_confirmation_v1.json`.
 
+The failure-mode and scaling audit is locked in
+[DNS05 Failure-Mode and Scaling Audit Protocol](docs/dns05-failure-scaling-audit-protocol.md).
+Run it with:
+
+```bash
+python -m experiments.run_dns05_failure_scaling --config configs/dns05_failure_scaling_audit.json --output results/dns05_failure_scaling_audit.json
+```
+
+It is a train/validation-only diagnostic across digits, breast cancer and a
+fixed synthetic multiclass task. It records validation accuracy, kernel
+reconstruction, rank, basis coverage and timing across feature budgets. It does
+not compute test scores.
+
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
   train-only median heuristic when `gamma` is not specified.
