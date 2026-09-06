@@ -1,5 +1,20 @@
 # Research Log
 
+## 2026-09-06: Hybrid Prototype Diagnostic Preregistered
+
+Locked DNS05-HYB before development evaluation. The diagnostic adds exactly one
+new train-sample-free family, `prototype_class_hybrid_192`: 152 class-PCA
+coverage centers plus 40 boundary centers. Boundary centers are two rival-axis
+pairs per digit class, using the previously fixed nearest-rival RBF rule and
+the same 0.25 shift fraction from DNS05-DIP. This is not a validation grid.
+
+The predicted mechanism is complementarity: class-PCA coverage supplies broad
+within-class support, while a small boundary allocation repairs some difficult
+rival-class cases without letting boundary shifts dominate the whole center set.
+The falsifying outcome is no meaningful improvement over dipole prototypes, or
+a less stable result that remains below uniform Nystrom. No test scores are
+computed.
+
 ## 2026-09-06: Research Plan Updated After Dipole Audit
 
 Updated [Research Plan](research-plan.md) and

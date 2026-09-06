@@ -31,6 +31,32 @@ def test_class_dipole_prototypes_are_synthetic_and_deterministic():
     assert diagnostic._exact_train_match_count(X, first) == 0
 
 
+def test_class_hybrid_prototypes_mix_coverage_and_boundary_centers():
+    rng = np.random.default_rng(46)
+    X = rng.normal(size=(90, 6))
+    y = np.repeat([0, 1, 2], 30)
+    count = 24
+    centers = diagnostic.class_hybrid_prototypes(
+        X,
+        y,
+        count,
+        [0.25, 0.5, 0.75],
+        0.25,
+        0.2,
+        boundary_pairs_per_class=2,
+    )
+    boundary_count = min(count, 2 * 2 * len(np.unique(y)))
+    coverage = diagnostic.class_pca_prototypes(
+        X,
+        y,
+        count - boundary_count,
+        [0.25, 0.5, 0.75],
+    )
+    assert centers.shape == (count, 6)
+    np.testing.assert_allclose(centers[: len(coverage)], coverage)
+    assert diagnostic._exact_train_match_count(X, centers) == 0
+
+
 def test_prototype_runner_never_passes_excluded_samples_to_evaluation(monkeypatch):
     X = np.arange(60).reshape(20, 3).astype(float)
     y = np.tile([0, 1], 10)
@@ -128,3 +154,38 @@ def test_dipole_prototype_grid_can_be_enabled():
     assert dipole_rows[0]["retained_train_samples"] == 0
     assert dipole_rows[0]["prototype_count"] == 6
     assert dipole_rows[0]["prototype_train_exact_match_count"] == 0
+
+
+def test_hybrid_prototype_grid_can_be_enabled():
+    rng = np.random.default_rng(51)
+    X = rng.normal(size=(72, 5))
+    y = np.tile([0, 1, 2, 3], 18)
+    rows, _ = diagnostic.evaluate_development(
+        X[:56],
+        y[:56],
+        X[56:],
+        y[56:],
+        {
+            "alphas": [0.01],
+            "compiled_feature_count": 8,
+            "dipole_shift_fraction": 0.25,
+            "fixed_relu_hidden_units": 8,
+            "fixed_relu_seed": 1705,
+            "hybrid_boundary_pairs_per_class": 1,
+            "include_dipole_prototypes": True,
+            "include_hybrid_prototypes": True,
+            "intercepts": [False],
+            "landmark_counts": [8],
+            "landmark_seed": 2309,
+            "oracle_selection": {"gamma_multipliers": [1.0], "alpha_values": [0.01]},
+            "prototype_quantiles": [0.25, 0.5, 0.75],
+            "rff_seed": 2310,
+        },
+        51,
+    )
+    assert len(rows) == 14
+    hybrid_rows = [row for row in rows if row["model"] == "prototype_class_hybrid_8"]
+    assert len(hybrid_rows) == 1
+    assert hybrid_rows[0]["retained_train_samples"] == 0
+    assert hybrid_rows[0]["prototype_count"] == 8
+    assert hybrid_rows[0]["prototype_train_exact_match_count"] == 0

@@ -233,6 +233,17 @@ compute test scores.
 The complete validation-only record is stored at
 `docs/results/dns05_dipole_error_audit_digits.json`.
 
+The hybrid prototype diagnostic is locked in
+[DNS05 Hybrid Prototype Protocol](docs/dns05-hybrid-prototype-protocol.md).
+Run it with:
+
+```bash
+python -m experiments.run_dns05_prototype --config configs/dns05_hybrid_prototype_digits.json --output results/dns05_hybrid_prototype_digits.json
+```
+
+It tests a fixed train-sample-free mixture of class-local synthetic coverage
+centers and predetermined boundary centers. It does not compute test scores.
+
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
   train-only median heuristic when `gamma` is not specified.
