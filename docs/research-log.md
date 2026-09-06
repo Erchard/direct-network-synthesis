@@ -1,5 +1,109 @@
 # Research Log
 
+## 2026-09-06: Streaming Equivalence Gate Executed
+
+Restored the project Python environment using the bundled Python 3.12.14
+runtime and the existing project virtual environment. Earlier assertions that
+Python or Git could not be used were premature: sandbox process creation failed,
+but approved execution outside that sandbox works.
+
+Executed synthetic Nystrom equivalence checks with seeds 260910 through 260914,
+79 training rows, 17 separate query rows, 6 inputs, 13 fixed sampled centers,
+gamma 0.2, alphas 0.001/0.01/0.1/1.0, both intercept modes and block sizes
+1/7/64/256. All 160 matched batch/streaming configurations passed weight and
+query-score comparisons at rtol=1e-8, atol=1e-10. Additional tests cover singular
+features, empty input, changed widths and unequal iterator lengths. This is a
+synthetic implementation check, not benchmark evidence or independent replication.
+
+Verification commands: `.venv\Scripts\python.exe -m pytest -p no:cacheprovider`
+(72 passed) and `.venv\Scripts\python.exe -m ruff check .` (passed).
+No benchmark partitions were loaded by the new tests.
+
+Corrected the unexecuted BM draft before any benchmark access: removed the
+accuracy-loss allowance, made block size 256 primary without quality selection,
+restored the mandatory ReLU baseline, and required separate process measurements
+of the dense oracle stage and streamed fitting. End-to-end bounded memory is
+still unproven. Next gate: commit a runnable process-memory protocol and config
+before the paired resource benchmark; the current draft is not a locked run.
+
+## 2026-09-06: Research Plan Priority and Branch Budget
+
+The plan was refined after adding the incremental-facts direction and the
+agent-discovery work. The main risk is now branch proliferation rather than a
+missing list of ideas. The revised plan therefore makes the evidence order
+explicit: complete the bounded OAC audits and independent-reproduction gate,
+select one primary DNS mechanism from the measured bottleneck, and keep
+incremental updates and discovery as separate, bounded axes.
+
+The new branch budget requires a concrete artifact, falsifiable validation
+question, fixed resources, recorded seeds/splits and a stopping rule before a
+branch can advance. At most one new experimental mechanism and one adapter
+pilot may be active. Each milestone must mark branches `active`, `paused`,
+`closed-negative` or `ready-for-confirmation`; at most one primary candidate is
+promoted to fresh confirmation. This is a planning control, not an experimental
+result, and it does not change the existing train/validation/test protocol.
+
+## 2026-09-06: Local OAC-03 and OAC-05 Audit Preparation
+
+Performed a static owner audit of the published DNS05 failure-scaling artifact
+and source-level deployed-state formulas without running the historical runner.
+The artifact hash is
+`CF02C55097383D12A36850081CD9ED749601D6F7572CE8C96CE13439D783AEFB`; it records
+1,920 grid rows, 240 selected rows, 45 paired differences and
+`test_status=not_evaluated`. The audit also confirms that compact center models
+store center/inverse-root state while spectral and exact RBF representations
+retain train-sized state for inference.
+
+The resulting records are [OAC-03 provenance](audits/oac-03-provenance.md) and
+[OAC-05 state accounting](audits/oac-05-state-accounting.md). Both are local
+owner audits, not independent reproductions or maintainer-accepted external
+contributions. The provenance snapshot's incomplete status field and the
+byte-accounting estimates' lack of process-level peak RAM remain explicit
+limitations. No test data was evaluated and no numerical rerun was performed.
+
+## 2026-09-06: Operator Channel Boundary
+
+Clarified the practical distinction between making DNS discoverable and opening
+a live channel to this Codex session. The current session does not listen for
+inbound HTTP/WebSocket/A2A traffic, so a public URL or Agent Card alone cannot
+deliver messages into it. The first usable channel is a manual operator relay;
+an automatic path requires an approved connector or external relay with an
+allowlist and explicit confirmation before repository changes.
+
+Added [the operator channel guide](discovery/operator-channel-guide-uk.md) with
+the three connection levels, a minimal task envelope and security boundaries.
+OAC-03 remains the recommended first task because it is bounded and uses only
+published artifacts. No credentials, endpoint or external agent account was
+created.
+
+## 2026-09-06: DNS05 Bounded-Memory Protocol Draft
+
+After rereading the evidence and plan, the next DNS mechanism was narrowed to a
+single resource hypothesis: a streaming Nystrom-style RBF map that accumulates
+closed-form readout normal equations in fixed row blocks. It uses the existing
+uniform landmarks, oracle-selection grid, feature budgets and fifteen
+train/validation splits, so it does not introduce a new quality-tuning axis.
+
+The protocol compares ordinary and streaming Nystrom at matched geometry and
+records validation quality, kernel reconstruction, rank, state bytes, measured
+peak memory, solve/inference time, data passes and paired differences. The
+streaming candidate must not retain the full train-feature or train-to-center
+matrix. It is a protocol draft only; no benchmark rerun was performed because
+the local Python runtime is currently unavailable. The experiment is not a
+depth claim, novelty claim or energy measurement.
+
+Implemented the first reusable accumulation primitive for DNS05-BM:
+`solve_streaming_primal_ridge` consumes matching feature/target blocks once,
+retains only `X^T X` and `X^T Y`, symmetrizes the normal equations and performs
+one stable closed-form solve. Added synthetic equivalence tests against the
+existing batch solver for both intercept modes and a malformed-block negative
+test. The full streaming experiment runner is not yet implemented, so no
+benchmark result or memory claim follows from this code milestone.
+
+Verification status: `git diff --check` passed. `python -m pytest` and
+`python -m ruff` could not run because the configured Windows Python launcher
+is unavailable in this environment.
+
 ## 2026-09-06: Open Agent Collaboration Operational Launch
 
 Readiness audit found repository licenses, onboarding, governance/security,
@@ -74,6 +178,39 @@ These are prospective operational choices, not measured improvements or new
 experimental results. Verification: documentation diff and local link review;
 no numerical code or experimental protocol changed.
 
+## 2026-09-06: Incremental Facts as a Separate Research Direction
+
+Recorded a broader hypothesis: new examples, new concepts and factual records
+should not automatically be treated as the same kind of weight update. For a
+fixed representation, sufficient-statistic updates can add `Delta(Phi^T Phi)` and
+`Delta(Phi^T Y)` before a new closed-form readout solve. New concepts may require
+new features. Facts may instead live in a portable, versioned store with source,
+time, confidence and contradiction status while the model supplies the processing
+procedure.
+
+Added this as section 3D of the research plan and a corresponding hypothesis.
+It is not implemented and has no result. A future validation-only comparison must
+include batch recomputation, statistic updates, frozen representation plus new
+readout, and store-only fact updates, while measuring update cost, memory, data
+passes, forgetting, conflicts, retrieval misses and portability. This preserves
+the distinction between a direct update, single-pass access and low total cost.
+
+## 2026-09-06: Static Discovery-Layer Comparison
+
+Compared A2A, Agentverse, OpenServ, ANP and social networks using their official
+documentation. The comparison separates protocol, registry, service-market and
+discussion roles and records identity, portability, payment, lock-in and pilot
+risks. A2A is the first protocol study candidate because its specification
+defines Agent Cards and discovery mechanisms; Agentverse is the first
+platform-registry candidate because its documentation describes searchable
+discovery. This is a prioritization decision, not evidence of adoption or value.
+
+The capability card remains protocol-neutral. Before any adapter or endpoint,
+the plan now requires schema validation, identity/authentication review,
+synthetic request tests, data-boundary checks, export/shutdown behavior and a
+stop rule for provider dependence. No account, listing, payment or endpoint was
+created. The comparison matrix is [here](discovery/comparison-matrix.md).
+
 ## 2026-09-06: Open Agent Collaboration Repository Foundation
 
 Implemented the repository portion of the collaboration plan: contributor,
@@ -90,12 +227,45 @@ lint and the existing tests, including protocol-isolation tests, without running
 historical benchmark commands. Passing CI is not a scientific review or proof of
 server-side branch protection. No new numerical experiment was run for this work.
 
-Task drafts and labels have not been published to GitHub Issues. No outreach
-account, social post or recruiter service has been created. OpenClaw's documented
-SKILL.md format was checked at https://docs.openclaw.ai/tools/skills; live loading
-and execution have not been tested. Branch protection and private vulnerability
-reporting remain unverified. No independent reproduction or rights audit is
-claimed complete. These distinctions are reflected in the collaboration plan.
+The original task-draft stage is historical: the drafts were later promoted to
+live Issues #1-#12 in the operational launch. No outreach account, social post or
+recruiter service has been created. OpenClaw's documented SKILL.md format was
+checked at https://docs.openclaw.ai/tools/skills; live loading and execution have
+not been tested. Branch protection and private vulnerability reporting remain
+unverified. No independent reproduction or rights audit is claimed complete.
+These distinctions are reflected in the collaboration plan.
+
+## 2026-09-06: Research Plan Updated for Multi-Layer Discovery
+
+Added section 3C to connect the collaboration launch to the scientific plan.
+The new gate keeps GitHub canonical, treats social networks, registries and
+service markets as replaceable discovery layers, and requires a protocol-neutral
+capability card before any A2A, ANP or platform adapter. An adapter must expose
+only bounded public task metadata, use a separate protocol, and be judged by
+reviewed evidence and maintainer effort rather than registrations or messages.
+
+The plan now requires comparison of at least two candidate layers, a static or
+synthetic pilot, explicit shutdown/export behavior and a stop rule for provider
+lock-in or unreviewable work. This is an operational refinement, not a DNS
+experiment or evidence of interoperability. The discovery artifacts remain
+uncommitted local documentation pending the next Git milestone.
+
+## 2026-09-06: Discovery Strategy Expanded Beyond Social Networks
+
+Reframed agent recruitment as a layered discovery problem: GitHub task/result
+state, social networks, registries/directories, service markets and open
+agent-to-agent protocols serve different roles. Official descriptions checked
+include Linux Foundation A2A context, Fetch.ai Agentverse Marketplace, OpenServ
+Agent Market, Agent Network Protocol and OpenClaw skills. This is ecosystem
+context, not evidence that any platform improves DNS research.
+
+Added a protocol-neutral [capability card draft](discovery/capability-card-draft.json)
+and [discovery strategy](discovery/README.md). It is explicitly not an A2A Agent
+Card, ANP description, Agentverse manifest or deployed `/.well-known/agent.json`.
+The promotion gate requires a schema/identity/authentication/data-boundary audit,
+synthetic endpoint test and shutdown path before any adapter or registry listing.
+No accounts, endpoints, payments or external messages were created. GitHub stays
+canonical; a listing counts only when it leads to a reviewed PR or evidence record.
 
 Local verification: all 42 tests and `python -m ruff check .` passed. The skill
 passed the skill-creator validator, and both GitHub YAML files parsed with

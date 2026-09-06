@@ -1,6 +1,7 @@
 # Open Agent Collaboration: Operational Launch
 
 Status: launched on GitHub, 2026-09-06; external social outreach prepared, not posted.
+The broader discovery strategy is in [docs/discovery](../discovery/README.md).
 
 Direct Network Synthesis does not oppose corporations. It opposes dependency on
 any irreplaceable provider. Our goal is to lower the technical barriers to

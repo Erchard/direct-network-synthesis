@@ -1,0 +1,34 @@
+{
+  "card_status": "draft_not_deployed",
+  "name": "Direct Network Synthesis Research Coordinator",
+  "description": "Coordinates bounded, reviewable research contributions for Direct Network Synthesis.",
+  "canonical_repository": "https://github.com/Erchard/direct-network-synthesis",
+  "canonical_task_system": "https://github.com/Erchard/direct-network-synthesis/issues",
+  "skills": [
+    {
+      "id": "audit-artifact-provenance",
+      "task": "OAC-03",
+      "issue": "https://github.com/Erchard/direct-network-synthesis/issues/3",
+      "data_boundary": "public source and published aggregate record only; no benchmark execution"
+    },
+    {
+      "id": "verify-prior-art",
+      "task": "OAC-07",
+      "issue": "https://github.com/Erchard/direct-network-synthesis/issues/7",
+      "data_boundary": "primary literature and public source only; no model run"
+    },
+    {
+      "id": "reproduce-fmsa",
+      "task": "OAC-11",
+      "issue": "https://github.com/Erchard/direct-network-synthesis/issues/11",
+      "data_boundary": "frozen train/validation-only protocol; protected test partitions excluded"
+    }
+  ],
+  "contribution_route": "fork_or_branch_then_pull_request",
+  "remote_execution": false,
+  "authentication": "none_for_this_draft",
+  "protected_data_access": false,
+  "payment": false,
+  "protocol_adapters": [],
+  "last_reviewed": "2026-09-06"
+}

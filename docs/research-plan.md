@@ -1,9 +1,8 @@
 # Research Plan: Direct Synthesis and Independent Model Creation
 
 Status: planned work, recorded 2026-09-05 and updated 2026-09-06 after the
-DNS05 prototype, dipole, hybrid, fresh-confirmation and failure-scaling
-diagnostics. This document summarizes direction; experimental results remain in
-[Research Log](research-log.md).
+DNS05 diagnostics and the Open Agent Collaboration launch. This document
+summarizes direction; experimental results remain in [Research Log](research-log.md).
 
 This plan implements the motivation in [Hypothesis](hypothesis.md): enable small
 independent teams to create, modify and run useful models within affordable
@@ -205,6 +204,117 @@ an assessment of whether categorical language adds useful constraints beyond
 ordinary linear algebra and stability analysis. No performance, energy or
 accessibility claim follows from this planned work alone.
 
+## 3C. Multi-Layer Discovery and Interoperability
+
+Status: strategy prepared, no registry listing or protocol endpoint deployed.
+The [discovery strategy](discovery/README.md) records the candidate ecosystem;
+this section defines how it enters the research plan without becoming a new
+scientific success metric.
+
+1. Keep GitHub as the canonical task, code and evidence system. Treat social
+   networks, registries, directories and service markets as replaceable discovery
+   layers. A listing, follower count or platform ranking is not research evidence.
+2. Maintain one protocol-neutral capability card that advertises real bounded
+   tasks and links to live Issues. Do not label it an A2A Agent Card, ANP
+   description or platform manifest until the selected schema and semantics are
+   verified against primary documentation.
+3. Before implementing an adapter, compare at least two candidate layers on
+   discoverability, identity, authentication, moderation, exportability, cost,
+   portability and shutdown behavior. Record platform-specific lock-in and the
+   minimum data exposed to the adapter.
+4. Pilot one adapter with a static or synthetic endpoint. It may publish task
+   metadata and route contributors to GitHub; it must not execute arbitrary remote
+   code, access protected data, hold merge credentials or accept payments by
+   default. Use a separate issue and protocol document for any real endpoint.
+5. Measure operational value with reviewed outcomes: time to a qualified task
+   claim, completed evidence packages, independent reproductions and maintainer
+   review effort. Do not count registrations or messages as successful research
+   contributions. Record zero-result outreach and inaccessible platforms.
+6. Stop an adapter if it requires undisclosed data, cannot export task state,
+   creates unreviewable work, increases reviewer load without evidence gains or
+   makes the project dependent on one provider. A second adapter is justified
+   only when it tests provider diversity or solves a measured failure.
+
+Deliverable: one reviewed capability-card schema and one bounded adapter proposal
+with a comparison matrix, threat model, shutdown path and success/failure rule.
+Decision: implement an adapter only after a static audit and maintainer review;
+do not let discovery work delay the next locked DNS mechanism experiment.
+
+## 3D. Incremental Direct Updates and External Facts
+
+Status: proposed hypothesis, no implementation or canonical result.
+
+Question: can a directly synthesized model update new examples or facts without
+rebuilding all parameters, while keeping the representation and the knowledge
+auditable and portable?
+
+1. Separate three cases before designing the update: new examples for known
+   classes, genuinely new concepts/classes, and factual records that may change
+   or conflict. Do not treat them as one kind of fine-tuning.
+2. For a fixed representation, test sufficient-statistic updates of the closed-form
+   readout against a batch recomputation. Record `Delta(Phi^T Phi)` and
+   `Delta(Phi^T Y)`, retained data, solve time, numerical drift and performance
+   on earlier and newly added examples.
+3. For new concepts, test whether adding features or a small adapter is necessary.
+   Measure the cost of recomputing the representation and whether the old model
+   forgets previous concepts. A fixed map that cannot express the new concept is
+   a valid negative result.
+4. For facts, define a versioned external store with source, timestamp, confidence,
+   scope and contradiction status. Compare store-only updates with weight/readout
+   updates. Test stale records, conflicting sources, retrieval misses and queries
+   outside the update batch.
+5. Keep the fact store separate from the model artifact and record its data rights,
+   portability, indexing cost and inference overhead. A retrieval system is not
+   automatically a learned representation, and a fact record is not automatically
+   true.
+6. Lock a train/validation/test protocol before evaluation. Select update policy,
+   representation, thresholds and contradiction rules on train/validation only;
+   evaluate the finalized update path once on untouched data. Report update cost,
+   memory, data passes, latency, forgetting, conflict accuracy and provenance
+   completeness alongside predictive metrics.
+
+Deliverable: one validation-only incremental-update protocol and either a matched
+closed-form implementation or a documented counterexample. Decision: continue
+only if the update path lowers total update cost without unacceptable forgetting,
+provenance loss or hidden rereads; otherwise preserve the negative result and keep
+the fact-store direction separate from DNS weight synthesis.
+
+## 3E. Priority, Branch Budget and Decision Gates
+
+The project now has several useful directions. This section prevents breadth from
+being mistaken for progress and makes the order of work explicit.
+
+1. Finish the bounded audits already in flight (OAC-01, OAC-03 and OAC-05),
+   then perform the planned independent reproduction gate. These tasks may expose
+   invalid evidence or deployment assumptions, but they do not count as evidence
+   that a new synthesis mechanism improves predictive quality or total cost.
+2. Select one primary mechanism for the next DNS experiment using the recorded
+   bottleneck and validation evidence: either bounded-memory kernel-map
+   compilation or a genuinely compositional depth mechanism. Do not develop both
+   as active primary experiments at the same time.
+3. Treat incremental examples, new concepts and external facts as a separate
+   maintenance axis. First lock its update protocol and data model; do not use a
+   fact-store demo as evidence for cheaper neural synthesis, and do not change
+   the DNS quality target to accommodate it.
+4. Treat discovery and interoperability as enabling infrastructure. Keep at most
+   one adapter pilot active, use static or synthetic endpoints first, and pause
+   platform work whenever it delays a locked DNS experiment or creates
+   provider-specific work without a measured research benefit.
+5. A branch may advance only when it has a concrete artifact, a falsifiable
+   validation question, a fixed resource budget, a recorded seed/split protocol,
+   and an explicit stopping rule. Pause a branch when it duplicates another
+   experiment, depends on an unreviewed test boundary, or has no measurable
+   decision to make.
+6. At each milestone record the status of every branch as `active`, `paused`,
+   `closed-negative` or `ready-for-confirmation`. Promote at most one primary
+   candidate to fresh confirmation. A favorable result on one split, a working
+   integration, or increased agent activity is not a promotion criterion.
+
+Deliverable: one milestone decision record showing the active branch, paused
+branches, evidence gate, next experiment, resource budget and stop condition.
+Decision: prefer a narrower completed experiment over parallel speculative work;
+reopen a paused branch only when new evidence changes its expected value.
+
 ## 4. Measure Total Cost Reliably
 
 1. Add separate timing for preprocessing, feature construction, oracle selection,
@@ -313,10 +423,12 @@ alone does not establish affordability, portability or freedom to redistribute.
    to create alternatives, not proof that data centers or monopolies disappear.
 
 Immediate execution order after DNS05-FMSA: do not continue
-`prototype_class_hybrid` formula tweaks on the inspected boundaries. Draft one
-locked train/validation-only protocol for either a bounded-memory kernel-map
-compiler or a genuinely compositional depth mechanism. The protocol must state
-which FMSA failure mode it targets and what negative outcome would stop it.
+`prototype_class_hybrid` formula tweaks on the inspected boundaries. The draft
+train/validation-only [bounded-memory kernel-map protocol](dns05-bounded-memory-kernel-map-protocol.md)
+now selects one primary mechanism: streaming Nystrom-style accumulation with
+fixed row blocks. Implement and test that protocol before considering a
+genuinely compositional depth mechanism. Its resource and quality stopping
+criteria must be applied exactly as written, including negative outcomes.
 
 Coordination with [Open Agent Collaboration](open-agent-collaboration-plan-uk.md):
 the first three pilot tasks audit residual collapse, result provenance and deployed

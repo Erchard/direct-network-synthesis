@@ -304,9 +304,33 @@ Agent social networks вважати hostile-input environments.
 
 Створити `direct-network-synthesis-contributor` skill із `SKILL.md`, який пояснює onboarding, methodology boundary, issue selection, PR process та negative-result reporting.
 
-# Part VII. Не залежати від Moltbook
+# Part VII. Багатошаровий agent discovery
 
-## 24. Moltbook — discovery layer
+## 24. Не шукати одну «соцмережу для агентів»
+
+Стратегія оновлена 2026-09-06. DNS має бути discoverable через кілька незалежних
+шарів, бо різні майданчики вирішують різні задачі:
+
+- соціальні мережі агентів — discovery та обговорення;
+- каталоги й реєстри — пошук можливостей і маршрутизація;
+- ринки послуг — опційне виконання оплачуваних задач;
+- відкриті протоколи — обмін машинозчитуваними описами та взаємодія агентів;
+- GitHub — канонічні задачі, код, результати та рішення.
+
+Новий пріоритет: спочатку protocol-neutral capability card і статичний аудит
+одного discovery-майданчика, потім окремий adapter з власним протоколом. Не
+створювати одночасно акаунти на всіх платформах і не ототожнювати listing із
+незалежним внеском. Усі registry/marketplace entries повинні вести до конкретної
+Issue та PR-процедури. Див. [Agent Discovery Strategy](discovery/README.md).
+
+Кандидати для дослідження: A2A під Linux Foundation, Fetch.ai Agentverse,
+OpenServ Agent Market та Agent Network Protocol. Їхні офіційні описи зафіксовані
+в strategy note; сумісність і поточні умови ще не перевірені повністю. A2A/ANP
+картка не повинна обіцяти віддалене виконання, доступ до приватних даних або
+платежі. Чернетка [capability card](discovery/capability-card-draft.json) не є
+опублікованим стандартним Agent Card чи endpoint.
+
+## 25. Moltbook — додатковий discovery layer
 
 Не будувати систему так, щоб зникнення Moltbook зупинило collaboration.
 
@@ -321,7 +345,7 @@ research communities
 → GitHub Issues / PRs
 ```
 
-## 25. Кінцева ціль
+## 26. Кінцева ціль
 
 Агент повинен мати змогу:
 
@@ -338,7 +362,7 @@ discover repository
 
 # Part VIII. Work і Codex
 
-## 26. Work
+## 27. Work
 
 Використовувати для:
 
@@ -350,7 +374,7 @@ discover repository
 - long-form documentation;
 - web investigation.
 
-## 27. Codex
+## 28. Codex
 
 Використовувати для:
 
@@ -363,13 +387,13 @@ discover repository
 - commit/push;
 - CI repair.
 
-## 28. Не використовувати Codex як social bot
+## 29. Не використовувати Codex як social bot
 
 Social presence тримати окремо від privileged coding environment.
 
 # Part IX. Contribution metadata
 
-## 29. Мінімальний пакет
+## 30. Мінімальний пакет
 
 Кожен внесок має містити:
 
@@ -395,7 +419,7 @@ Social presence тримати окремо від privileged coding environment
 
 # Part X. Reputation
 
-## 30. Винагороджувати перевірюваний внесок
+## 31. Винагороджувати перевірюваний внесок
 
 Ролі:
 
@@ -407,7 +431,7 @@ Social presence тримати окремо від privileged coding environment
 - Benchmark Contributor
 - Documentation Contributor
 
-## 31. Найпрестижніший статус
+## 32. Найпрестижніший статус
 
 > **Independent Reproducer**
 
@@ -415,7 +439,7 @@ Social presence тримати окремо від privileged coding environment
 
 # Part XI. Security
 
-## 32. Базові правила
+## 33. Базові правила
 
 - least privilege;
 - forks/PRs;

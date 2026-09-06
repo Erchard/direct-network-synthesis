@@ -1,3 +1,5 @@
+from itertools import pairwise
+
 import numpy as np
 import pytest
 
@@ -9,6 +11,7 @@ from dns.synthesis import (
     DNS05KernelCompiler,
     KernelSpec,
 )
+from dns.synthesis.linear_algebra import solve_primal_ridge, solve_streaming_primal_ridge
 
 
 def test_dns04_synthesizer_predicts_and_declares_closed_form_rule():
@@ -61,6 +64,101 @@ def test_dns05_compiled_feature_classifier_records_residual_diagnostics():
     assert model.compiled_rank_ <= 12
     assert np.isfinite(model.kernel_reconstruction_error_)
     assert model.uses_iterative_parameter_optimization is False
+
+
+@pytest.mark.parametrize("fit_intercept", [False, True])
+def test_streaming_primal_ridge_matches_batch_solution(fit_intercept):
+    rng = np.random.default_rng(260908)
+    features = rng.normal(size=(23, 5))
+    targets = rng.normal(size=(23, 3))
+    boundaries = [0, 4, 11, 17, len(features)]
+    feature_blocks = (features[start:end] for start, end in pairwise(boundaries))
+    target_blocks = (targets[start:end] for start, end in pairwise(boundaries))
+
+    expected = solve_primal_ridge(features, targets, alpha=0.3, fit_intercept=fit_intercept)
+    actual = solve_streaming_primal_ridge(
+        feature_blocks,
+        target_blocks,
+        alpha=0.3,
+        fit_intercept=fit_intercept,
+    )
+
+    np.testing.assert_allclose(actual, expected, rtol=1e-12, atol=1e-12)
+
+
+def test_streaming_primal_ridge_rejects_mismatched_block_lengths():
+    with pytest.raises(ValueError, match="same number of samples"):
+        solve_streaming_primal_ridge(
+            [np.ones((2, 3))],
+            [np.ones((1, 1))],
+            alpha=0.1,
+        )
+
+
+@pytest.mark.parametrize("block_size", [1, 7, 64])
+@pytest.mark.parametrize("fit_intercept", [False, True])
+def test_streaming_ridge_with_singular_features(block_size, fit_intercept):
+    rng = np.random.default_rng(260909)
+    column = rng.normal(size=(31, 1))
+    features = np.column_stack([column, column, np.zeros_like(column)])
+    targets = rng.normal(size=31)
+    expected = solve_primal_ridge(features, targets, alpha=0, fit_intercept=fit_intercept)
+    actual = solve_streaming_primal_ridge(
+        (features[i:i + block_size] for i in range(0, 31, block_size)),
+        (targets[i:i + block_size] for i in range(0, 31, block_size)),
+        alpha=0,
+        fit_intercept=fit_intercept,
+    )
+    np.testing.assert_allclose(actual, expected, rtol=1e-8, atol=1e-10)
+
+
+def test_streaming_ridge_rejects_unequal_iterator_lengths():
+    with pytest.raises(ValueError):
+        solve_streaming_primal_ridge([np.ones((2, 3))], [], alpha=0.1)
+
+
+def test_streaming_ridge_rejects_empty_input():
+    with pytest.raises(ValueError, match="non-empty"):
+        solve_streaming_primal_ridge([], [], alpha=0.1)
+
+
+def test_streaming_ridge_rejects_changed_width():
+    with pytest.raises(ValueError, match="consistent"):
+        solve_streaming_primal_ridge(
+            [np.ones((2, 3)), np.ones((2, 4))],
+            [np.ones(2), np.ones(2)], alpha=0.1,
+        )
+
+
+@pytest.mark.parametrize("seed", [260910, 260911, 260912, 260913, 260914])
+@pytest.mark.parametrize("fit_intercept", [False, True])
+def test_streamed_nystrom_blocks_preserve_query_scores(seed, fit_intercept):
+    from dns.kernels import rbf_kernel
+    from experiments.run_dns05_landmark import _inverse_square_root_psd
+
+    rng = np.random.default_rng(seed)
+    train = rng.normal(size=(79, 6))
+    query = rng.normal(size=(17, 6))
+    targets = np.eye(3)[np.arange(79) % 3]
+    centers = train[rng.choice(len(train), 13, replace=False)]
+    inverse_root, _ = _inverse_square_root_psd(rbf_kernel(centers, gamma=0.2))
+    features = rbf_kernel(train, centers, gamma=0.2) @ inverse_root
+    query_features = rbf_kernel(query, centers, gamma=0.2) @ inverse_root
+    design = (
+        np.column_stack([np.ones(len(query)), query_features])
+        if fit_intercept else query_features
+    )
+    for alpha in [0.001, 0.01, 0.1, 1.0]:
+        batch = solve_primal_ridge(features, targets, alpha=alpha, fit_intercept=fit_intercept)
+        for block_size in [1, 7, 64, 256]:
+            streamed = solve_streaming_primal_ridge(
+                (rbf_kernel(train[i:i + block_size], centers, gamma=0.2) @ inverse_root
+                 for i in range(0, len(train), block_size)),
+                (targets[i:i + block_size] for i in range(0, len(train), block_size)),
+                alpha=alpha, fit_intercept=fit_intercept,
+            )
+            np.testing.assert_allclose(streamed, batch, rtol=1e-8, atol=1e-10)
+            np.testing.assert_allclose(design @ streamed, design @ batch, rtol=1e-8, atol=1e-10)
 
 
 def test_full_basis_residuals_keep_output_budget_and_collapse_to_fixed_basis():

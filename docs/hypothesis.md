@@ -100,6 +100,53 @@ The [research plan](research-plan.md) translates this motivation into staged
 experiments, measurable resource criteria and independent reproduction. Later
 stages depend on evidence from the earlier ones.
 
+## Incremental Facts and Model Updates
+
+**Status: proposed research direction, not an implemented DNS capability.**
+
+The project may be asking the wrong question if every new fact must be encoded
+by changing neural weights. A directly synthesized system could separate the
+method for processing information from the information itself.
+
+For new labeled examples under a fixed feature map `Phi`, a closed-form readout
+can be updated from sufficient statistics:
+
+\[
+A = \Phi^T\Phi,\qquad B = \Phi^T Y,
+\]
+
+with each new batch contributing `Delta A` and `Delta B`, followed by a new solve
+for `W`. This may avoid retaining every old example, but it does not prove that
+the fixed feature map can represent a new concept. New classes, new geometry or
+changed preprocessing may require new features and a broader recomputation.
+
+Facts are a different object from examples. A fact may be stored in a portable,
+versioned fact store with its source, timestamp, confidence and contradiction
+status. A model can then retrieve relevant facts and compute an answer using the
+stored procedure. Adding a fact would update the store rather than silently
+rewrite the model. This creates a possible architecture:
+
+```text
+facts and sources -> versioned portable store
+query -> fact retrieval -> directly synthesized computation -> answer
+```
+
+This separation could improve update cost, auditability and portability. It also
+creates new failure modes: stale facts, retrieval misses, contradictory sources,
+leakage from the store, and the mistaken belief that a stored fact is a verified
+truth. A fact system therefore needs explicit provenance, versioning and tests
+for conflicts and unseen queries.
+
+The testable hypothesis is that, for a specified task, a fixed or incrementally
+updated synthesized representation plus an external fact store can maintain
+quality with lower update cost than rebuilding all weights. The comparison must
+include batch recomputation, sufficient-statistic updates, frozen representation
+with a new readout, and store-only fact updates. It must measure update time,
+memory, data passes, query latency, forgetting of earlier facts, contradiction
+handling and portability. Test data cannot choose the storage scheme or update
+policy. This direction does not show that weights are unnecessary for all
+knowledge or that external storage is cheap; it defines a separate experiment.
+
 ## Non-Claims
 
 - No claim of novelty is made by this repository.
