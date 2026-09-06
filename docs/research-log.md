@@ -1,5 +1,26 @@
 # Research Log
 
+## 2026-09-06: Fresh Confirmation Protocol v1 Preregistered
+
+Locked DNS05-FC1 before confirmation evaluation. The protocol moves the frozen
+`prototype_class_hybrid_192` candidate off the reused digits development
+boundary and tests it on two fresh boundaries: `sklearn_breast_cancer` and a
+fixed six-class synthetic classification task generated with seed 62026. Split
+seeds are 1101, 1202, 1303, 1404 and 1505.
+
+The candidate set is deliberately small: linear, fixed ReLU 256, uniform
+Nystrom 192, hybrid prototypes 192, spectral 192 and full RBF. The run uses the
+same train/validation RBF selection grid and readout alpha/intercept grid as the
+development diagnostics. Test metrics are computed only once per model/split
+after validation selects the readout setting.
+
+The predicted positive signal is that hybrid prototypes remain close to uniform
+Nystrom and clearly above fixed ReLU on both datasets while retaining zero train
+samples. The falsifying outcome is mixed or worse test behavior, especially if
+the hybrid advantage from digits does not transfer. This protocol does not test
+large-scale learning, useful neural depth, novelty, one-pass data access or
+energy savings.
+
 ## 2026-09-06: Hybrid Prototype Diagnostic Result
 
 Evaluation commit: `414d9e14dadc019108d71396792369ddca550937`.

@@ -14,6 +14,7 @@ The methodology is binding. Status describes execution, not success.
 | DNS05-DIP | Can boundary-aware synthetic prototypes improve class-local synthesis? | Only original train/validation for seeds 101,202,303,404,505 | dns05-dipole-prototype-protocol.md, docs/results dipole-prototype record | Completed, small gain over class-PCA prototypes but still below uniform Nystrom and spectral/RBF |
 | DNS05-DEA | Which examples did dipole prototypes fix or break? | Only original train/validation for seeds 101,202,303,404,505 | dns05-dipole-error-audit-protocol.md, docs/results dipole-error-audit record | Completed, boundary signal is present but mixed; gain is a small error trade |
 | DNS05-HYB | Can a fixed hybrid of class-local and boundary synthetic centers improve the train-sample-free candidate? | Only original train/validation for seeds 101,202,303,404,505 | dns05-hybrid-prototype-protocol.md, docs/results hybrid-prototype record | Completed, weak positive over dipole and class-PCA; still below uniform Nystrom, spectral and RBF |
+| DNS05-FC1 | Does frozen hybrid prototype synthesis survive fresh non-digits boundaries? | `sklearn_breast_cancer` and fixed synthetic multiclass v1; stratified train/validation/test seeds 1101,1202,1303,1404,1505 | dns05-fresh-confirmation-protocol.md, configs/dns05_fresh_confirmation_v1.json | Preregistered |
 
 Digits is development data. A sample excluded in one split can belong to another
 split's development portion; this is not a globally untouched holdout. The readout

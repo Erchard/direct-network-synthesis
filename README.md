@@ -246,6 +246,18 @@ centers and predetermined boundary centers. It does not compute test scores.
 The complete validation-only record is stored at
 `docs/results/dns05_hybrid_prototype_digits.json`.
 
+The first fresh-boundary confirmation protocol is locked in
+[DNS05 Fresh Confirmation Protocol v1](docs/dns05-fresh-confirmation-protocol.md).
+Run it with:
+
+```bash
+python -m experiments.run_dns05_confirmation --config configs/dns05_fresh_confirmation_v1.json --output results/dns05_fresh_confirmation_v1.json
+```
+
+It evaluates only validation-selected readouts on test partitions for
+`sklearn_breast_cancer` and a fixed synthetic multiclass task. It is a narrow
+confirmation step, not evidence for large-scale model creation.
+
 - `LinearRidgeRegressor`: closed-form primal ridge regression.
 - `RBFKernelRidgeRegressor`: closed-form dual ridge regression with an RBF kernel and
   train-only median heuristic when `gamma` is not specified.
