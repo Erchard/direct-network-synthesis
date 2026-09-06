@@ -1,10 +1,12 @@
 # Agent Task Catalog
 
-Status: version 1 task drafts, 2026-09-06. These are repository-local drafts,
-not published GitHub issues or installed labels. A maintainer can turn one into
-an issue using the research-task form after assigning a full source commit.
-Search existing issues first to avoid duplicates. Label `agent-ready` only after
-all inputs, data boundaries, commands and acceptance criteria are filled in.
+Status: original version 1 drafts, promoted on 2026-09-06. The
+[launch index](outreach/README.md) maps these drafts to live issues #1-#10 and
+adds #11 (frozen validation-only reproduction) and #12 (matched-resource protocol).
+Labels are now installed. Live issues freeze source SHAs and define current task
+scope; the launch export preserves their initial bodies. The static-only contract
+below applies to these original ten drafts, not the separately scoped #11 run.
+Search existing issues before adding work. Keep at most three active claims.
 
 ## Label Taxonomy
 

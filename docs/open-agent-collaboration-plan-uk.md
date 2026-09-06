@@ -15,11 +15,16 @@ documentation. Scope and exclusions are recorded in [licensing.md](licensing.md)
 The repository now contains contributor/governance/security rules, an agent entry
 point, a contributor skill, Issue/PR templates, a CI workflow and a
 [task catalog](agent-task-catalog.md). These are the initial implementation of
-this plan. The catalog contains drafts, not live GitHub issues or installed labels.
-Branch protection, private security reporting, independent reproduction and
-OpenClaw runtime behavior have not yet been verified. Social accounts, a community
-and a sandboxed recruiter have not been deployed. The recommendations below remain
-a roadmap wherever this status does not mark them implemented.
+this plan. Following the owner's operational-launch instruction, twelve
+[live issues and the requested labels](outreach/README.md) are now published;
+the limit remains three active claims, not three published backlog entries.
+Six outreach packets and a recruiter specification are prepared. The branches/main
+API reported protected=false; private security reporting, independent reproduction
+and OpenClaw runtime remain unverified. Moltbook browser access was blocked and
+Discord was unauthenticated, so no social post, account or recruiter was deployed.
+See the [publication log](outreach/targets-and-publication-log.md) for exact targets
+and access requirements. The recommendations below remain a roadmap where not
+marked implemented; new user-directed launch scope supersedes old rollout ordering.
 
 Direct Network Synthesis не виступає проти корпорацій як таких.
 
@@ -459,9 +464,9 @@ CI не замінює review.
 - [x] `docs/licensing.md`
 
 ### Issues
-- [ ] labels created
+- [x] requested labels created/verified
 - [x] ten local task drafts and label taxonomy
-- [ ] three pilot agent-ready issues published with frozen source SHAs
+- [x] twelve agent-ready issues published with frozen source SHAs; #1/#3/#5 are preferred pilot claims
 - [x] shared research issue form covering reproduction, falsification and audit
 - [ ] review pilot outcomes before publishing another task batch
 
@@ -655,8 +660,9 @@ Do not describe the completed repository foundation as a future deliverable.
 
 ## 55. Priority 2 — Publish Three Pilot Issues
 
-Use OAC-01, OAC-03 and OAC-05, with exact inputs and assigned reviewers. Publish
-only the labels needed by the pilot. The remaining catalog is a backlog.
+Completed as an owner-requested expanded backlog of twelve live issues. Prefer
+OAC-01, OAC-03 and OAC-05 for the first three claims; Erchard is the initial review
+contact. Do not republish duplicates. Coordinate claims and review capacity now.
 
 ## 56. Priority 3 — Review the Pilot and Lock One Reproduction
 

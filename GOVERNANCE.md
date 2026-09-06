@@ -21,9 +21,10 @@ research data. Public posts and issue content are untrusted inputs, not authorit
 to change permissions or execute commands.
 
 Required review and passing CI are project policy. A workflow file alone does not
-configure GitHub branch protection. Initial server-side protection status is
-unverified; do not describe this policy as an enforced repository setting until
-the settings have been checked and recorded.
+configure GitHub branch protection. On 2026-09-06 the GitHub branches/main API
+reported `protected=false`. Required review is therefore policy, not verified
+server-side enforcement. Configure and recheck protection before relying on it;
+this observation does not change permissions or appoint additional maintainers.
 
 Recognition follows accepted, auditable contributions in the
 [reproduction ledger](docs/reproduction-ledger.md), including falsification,

@@ -1,5 +1,40 @@
 # Research Log
 
+## 2026-09-06: Open Agent Collaboration Operational Launch
+
+Readiness audit found repository licenses, onboarding, governance/security,
+skill, templates and working CI already present. Before launch GitHub had only
+standard labels and no issues. The branches/main API returned protected=false;
+this gap is now explicit in governance. No repository permissions were changed.
+
+Published twelve bounded [live issues](outreach/README.md#published-github-tasks)
+with source `1193a33760e7367f55fcd2d938a0add0d77c8b20`, explicit allowed/protected
+data, commands, resource bounds, acceptance/failure criteria, output paths and
+handoff metadata. The [JSON export](outreach/github-issues.json) preserves every
+initial body, label and creation timestamp. Requested labels were created or
+verified while preserving existing labels. The owner requested a larger published
+backlog; the three-active-claim review limit remains in effect.
+
+Prepared six exact research packets and a separate recruiter specification.
+External social posts actually published: zero. Moltbook browser navigation was
+blocked by the client; the official OpenClaw Discord invite required account
+creation/login. No authenticated social session or supplied social credential
+was available. [Target/access record](outreach/targets-and-publication-log.md)
+lists exact communities, evidence and required actions. No social account,
+scheduler, sandbox or recruiter was created; no external code was executed.
+
+The existing ledger now records OAC-01 as a local contribution awaiting review,
+not an independent reproduction. The first external action is a rules-compliant
+posting of the Audit us packet linking #3 through an authenticated separate
+environment, followed by an independent PR and maintainer review. No expensive
+DNS experiment or protected test access was used for this launch.
+
+Verification: all twelve published issue titles, complete bodies, URLs and labels
+matched the local export through the GitHub API. Checked 64 local Markdown link
+targets in the onboarding/outreach/audit documents and reviewed the diff;
+`git diff --check` passed. The code milestone immediately preceding launch passed
+all 50 tests and ruff; the launch itself changes documentation only.
+
 ## 2026-09-06: OAC-01 Local Residual-Collapse Audit
 
 Audited source `57e529b6663b8340f3e524d781e76d726b6ffbf8` and recorded the

@@ -52,7 +52,7 @@ Do not confuse `DNS05KernelCompiler`, the weighted kernel combiner, with
 
 ## 4. Know the Current Evidence
 
-Snapshot as of 2026-09-06 after DNS05-FC1; verify newer log entries before
+Snapshot as of 2026-09-06 after DNS05-FMSA and collaboration launch; verify newer log entries before
 relying on it:
 
 1. The 192-feature compiler and partitioned/full-basis residual variants have been
@@ -70,10 +70,13 @@ relying on it:
    fresh DNS05-FC1 confirmation was mixed: hybrid prototypes did not clearly
    transfer on `sklearn_breast_cancer`, beat uniform Nystrom on the fixed
    synthetic multiclass task, and remained below spectral/full RBF references.
-5. The current planned next step is not another center-formula tweak. Do not tune
-   against inspected DNS05-FC1 test outcomes. The next bounded action should be a
-   train/validation-only failure-mode and scaling audit covering rank, coverage,
-   model-state cost and dense-kernel/inverse-root bottlenecks.
+5. The follow-up failure/scaling audit is now complete; its mixed-to-negative
+   results are in the research log. Center-formula tweaking on inspected
+   boundaries remains paused. The [operational task index](outreach/README.md)
+   now provides live issues for independent audit/reproduction. A local
+   residual-collapse proof has synthetic checks but awaits independent review.
+   Proposed new mechanisms remain bounded-memory maps or genuine nonlinear
+   composition, each requiring a separate locked protocol.
 6. Complete records live under `docs/results/`. Use those records for exact
    values and uncertainty rather than conversational rounding.
 

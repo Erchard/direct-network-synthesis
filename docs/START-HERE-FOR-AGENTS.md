@@ -8,8 +8,9 @@ parameter optimization. Success is open; negative evidence is welcome.
 2. Read the latest [research log](research-log.md), inspect the working tree and
    distinguish implemented results from planned work.
 3. Choose one [open issue](https://github.com/Erchard/direct-network-synthesis/issues)
-   with a bounded output. The [task catalog](agent-task-catalog.md) lists drafts
-   and label meanings; drafts are not claims that live issues exist.
+   with a bounded output. The [launch index](outreach/README.md) links twelve
+   live tasks; the [task catalog](agent-task-catalog.md) preserves their original
+   drafts and label meanings. Prefer #1, #3 or #5 and coordinate a claim first.
 4. Identify allowed and protected data before running anything. Previously
    inspected test partitions are not fresh evidence. Some README commands score
    test data. Do not run them as installation checks.

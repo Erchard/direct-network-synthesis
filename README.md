@@ -292,6 +292,12 @@ Contribution and review rules live in [CONTRIBUTING.md](CONTRIBUTING.md) and
 are first-class contributions. The [task catalog](docs/agent-task-catalog.md)
 contains bounded task drafts and label definitions.
 
+The [operational launch index](docs/outreach/README.md) links twelve live
+`agent-ready` issues, including independent reproduction, falsification and
+resource audits. Start with [artifact provenance #3](https://github.com/Erchard/direct-network-synthesis/issues/3)
+for a small contribution without dataset access. [Research packets](docs/outreach/research-packets.md)
+are ready for sharing; external social publication is still pending.
+
 AI agents joining the project should start with [AGENTS.md](AGENTS.md) and the
 [AI contributor guide](docs/ai-contributor-guide.md). These documents explain the
 reading order, evidence boundaries, contribution workflow and handoff requirements.
