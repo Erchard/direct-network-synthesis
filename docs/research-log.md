@@ -1,5 +1,24 @@
 # Research Log
 
+## 2026-09-07: DCS/EDCS Experimental Queue Planned
+
+Added [a bounded experimental plan](dcs-edcs-experiment-plan-uk.md), linked from
+README, research-plan and experiment-register. Code inspection found no DCS/EDCS
+extractor, circuit IR or Repair runner; existing DNS code is not relabeled.
+The queue separates exact software fixtures, compilation beyond standard logic
+optimization, equal-information incremental learning, and conditional update/state
+experiments. Recorded proposed seeds, split boundaries, resources, negative controls,
+paired reporting and practical continuation gates. None is a locked runnable protocol.
+
+Checked ABC documentation and LogicNets abstract, plus primary-source search
+abstracts for Program sketching and SAT-based exact synthesis. Full prior-art and
+backend audit remains CS-A0; inaccessible initial source URLs were not treated as
+read papers. No novelty claim. BM report closure precedes activation of one new
+mechanism; no experiments or protected test evaluations were executed in this turn.
+
+Verification: 58 local Markdown links resolved; staged diff whitespace check
+passed. Documentation-only change; numerical tests were not rerun.
+
 ## 2026-09-07: DCS and EDCS Conceptual Scope Review
 
 Preserved the owner's DCS and EDCS documents and linked them from README and

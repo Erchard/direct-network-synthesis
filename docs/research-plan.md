@@ -1,7 +1,7 @@
 # Research Plan: Direct Synthesis and Independent Model Creation
 
-Status: planned work, recorded 2026-09-05 and updated 2026-09-06 after the
-DNS05 diagnostics and the Open Agent Collaboration launch. This document
+Status: planned work, recorded 2026-09-05 and updated 2026-09-07 with the
+bounded DCS/EDCS experimental queue. This document
 summarizes direction; experimental results remain in [Research Log](research-log.md).
 
 This plan implements the motivation in [Hypothesis](hypothesis.md): enable small
@@ -49,8 +49,9 @@ representations and cannot collapse to one wide map.
 ## 1. Establish the Starting Point
 
 Supporting branch status, 2026-09-07: [DCS](direct-computational-synthesis-uk.md)
-and [EDCS](error-driven-computational-synthesis-uk.md) are conceptual and paused
-for execution. They do not replace the active DNS05 bounded-memory diagnostic.
+and [EDCS](error-driven-computational-synthesis-uk.md) now have a
+[bounded experimental plan](dcs-edcs-experiment-plan-uk.md). They remain queued,
+not implemented or locked, and do not replace the DNS05 bounded-memory diagnostic.
 DCS concerns executable simplification; EDCS concerns iterative structural
 learning, not a single-pass DNS result. Before activation, require a related-work
 audit and a separate locked protocol distinguishing full-specification synthesis
@@ -332,6 +333,16 @@ Deliverable: one milestone decision record showing the active branch, paused
 branches, evidence gate, next experiment, resource budget and stop condition.
 Decision: prefer a narrower completed experiment over parallel speculative work;
 reopen a paused branch only when new evidence changes its expected value.
+
+## 3F. New Structural-Synthesis Queue
+
+The [DCS/EDCS plan](dcs-edcs-experiment-plan-uk.md) defines CS-A0 (source/backend
+audit), DCS-V0 (exact transformation fixtures), DCS-C1 (value beyond standard
+optimization), EDCS-V0 (repair correctness), EDCS-L1 (equal-data incremental
+learning), and conditional EDCS-U2/CS-S3 (updates/scaling/state). Close the current
+BM result report before activating one new mechanism. Full-specification fixtures
+are software checks, not held-out learning evidence. Every model experiment needs
+its own committed runnable protocol before evaluation; the roadmap is not one.
 
 ## 4. Measure Total Cost Reliably
 

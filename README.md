@@ -32,6 +32,8 @@ Two supporting hypotheses explore executable structures beyond neural weights:
 These are conceptual branches, not implemented capabilities or DNS results.
 EDCS is iterative structural search, not single-pass closed-form learning.
 They do not replace the active DNS05 resource diagnostic or its evidence gates.
+The [DCS/EDCS experimental plan (Ukrainian)](docs/dcs-edcs-experiment-plan-uk.md)
+defines the bounded queue, controls, budgets and activation requirements.
 
 ## Research Question
 

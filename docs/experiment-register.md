@@ -2,6 +2,23 @@
 
 The methodology is binding. Status describes execution, not success.
 
+## Structural-Synthesis Queue, 2026-09-07
+
+All entries refer to [DCS/EDCS experimental plan](dcs-edcs-experiment-plan-uk.md).
+No runner/config is locked yet; V0 entries are verification checks, not ML results.
+
+| ID | Question | Boundary | Status |
+|---|---|---|---|
+| CS-A0 | Which established synthesis/repair tools and assumptions apply? | Primary-source and backend audit, no benchmark | Planned, next preparation artifact |
+| DCS-V0 | Does circuit extraction preserve exact finite behavior? | Fully specified software fixtures | Queued after CS-A0 |
+| DCS-C1 | Does extraction beat standard logic optimization? | Five proposed 128/64/64 splits, test sealed during development | Planned, separate protocol required |
+| EDCS-V0 | Can generic repair start from constants and preserve seen constraints? | Fully specified software fixtures | Queued |
+| EDCS-L1 | Is local repair cheaper than rebuilding with the same examples? | Same proposed split manifest; no test feedback | Planned, separate protocol required |
+| EDCS-U2 | Are updates cheap without forgetting unchanged behavior? | New update protocol/boundary required | Conditional on L1 |
+| CS-S3 | Does a retained mechanism survive larger domains and state? | New scaling/sequence protocol required | Conditional, not authorized for execution |
+
+## DNS Experiments
+
 | ID | Question | Data boundary | Protocol / evidence | Status |
 |---|---|---|---|---|
 | DNS05-DW | Does sequential compilation beat equal output width? | Digits five 60/20/20 splits; test already inspected | research-log.md, depth-width config | Completed, negative |
