@@ -9,8 +9,8 @@ No runner/config is locked yet; V0 entries are verification checks, not ML resul
 
 | ID | Question | Boundary | Status |
 |---|---|---|---|
-| CS-A0 | Which established synthesis/repair tools and assumptions apply? | Primary-source and backend audit, no benchmark | Planned, next preparation artifact |
-| DCS-V0 | Does circuit extraction preserve exact finite behavior? | Fully specified software fixtures | Queued after CS-A0 |
+| CS-A0 | Which established synthesis/repair tools and assumptions apply? | Primary-source and backend audit, no benchmark | V0 backend readiness checked; audits/cs-a0-backend.md; broader novelty audit pending |
+| DCS-V0 | Does circuit extraction preserve exact finite behavior? | Fully specified software fixtures | Implemented and locked; dcs-v0-protocol.md |
 | DCS-C1 | Does extraction beat standard logic optimization? | Five proposed 128/64/64 splits, test sealed during development | Planned, separate protocol required |
 | EDCS-V0 | Can generic repair start from constants and preserve seen constraints? | Fully specified software fixtures | Queued |
 | EDCS-L1 | Is local repair cheaper than rebuilding with the same examples? | Same proposed split manifest; no test feedback | Planned, separate protocol required |

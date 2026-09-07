@@ -336,6 +336,11 @@ reopen a paused branch only when new evidence changes its expected value.
 
 ## 3F. New Structural-Synthesis Queue
 
+Execution update 2026-09-07: [BM end-to-end report](dns05-bm-end-to-end-result.md)
+closed the memory gate negative; larger BM runs are paused. CS-A0 established
+V0 backend readiness with explicitly incomplete novelty coverage. The sole active
+new mechanism is [DCS-V0 verification](dcs-v0-protocol.md); C1/L1 remain queued.
+
 The [DCS/EDCS plan](dcs-edcs-experiment-plan-uk.md) defines CS-A0 (source/backend
 audit), DCS-V0 (exact transformation fixtures), DCS-C1 (value beyond standard
 optimization), EDCS-V0 (repair correctness), EDCS-L1 (equal-data incremental

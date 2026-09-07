@@ -1,0 +1,10 @@
+{
+  "fixtures": ["xor", "half_adder", "full_adder", "majority3", "mux2"],
+  "duplicate_copies": 2,
+  "solver_seed": 93007,
+  "max_and_nodes": 12,
+  "solver_timeout_ms": 5000,
+  "backend_timeout_seconds": 60,
+  "suite_timeout_seconds": 600,
+  "memory_limit_bytes": 4294967296
+}

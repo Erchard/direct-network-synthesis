@@ -15,6 +15,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+circuits = [
+    "yowasp-yosys==0.68.0.0.post1208",
+    "z3-solver==5.1.0.0",
+]
 dev = [
     "psutil>=7.2.2",
     "pytest>=8.0",

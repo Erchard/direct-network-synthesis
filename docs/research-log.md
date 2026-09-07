@@ -1,5 +1,19 @@
 # Research Log
 
+## 2026-09-07: DCS-V0 Verification Suite Locked
+
+CS-A0 [backend audit](audits/cs-a0-backend.md) established a working YoWASP
+Yosys/ABC adapter and Z3 backend. Added a restricted AIG interpreter, generic
+full-table bounded synthesis and structured JSON importer. This is not a learned
+teacher compiler or local EDCS Repair. The [V0 protocol](dcs-v0-protocol.md)
+fixes five complete-specification fixtures, a 12-node search cap, seed 93007,
+5 seconds per solver check, 60 seconds per ABC call and 600-second suite budget.
+
+All 79 tests passed with `.venv\Scripts\python.exe -m pytest -p no:cacheprovider`.
+Real ABC smoke check on a separate implication fixture preserved equivalence.
+No V0 suite outcomes were inspected before this commit. Partial prior-art scope
+and the missing full-text encoding audit are explicit; no novelty claim.
+
 ## 2026-09-07: BM End-to-End Gate Closed Negative
 
 Analyzed the existing 90-worker record without rerunning any dataset. Full
