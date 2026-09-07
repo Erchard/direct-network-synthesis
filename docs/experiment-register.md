@@ -44,4 +44,4 @@ confirmation is a separate milestone; new digits seeds do not create fresh evide
 
 | ID | Question | Boundary | Protocol / evidence | Status |
 |---|---|---|---|---|
-| DAS-V0 | Can finite-rank sequence behavior be reconstructed directly from complete Hankel subblocks into a compact weighted automaton? | Synthetic weighted automata with fixed seeds; complete short-word tables; `a^n b^n` finite-window rank control | das-v0-protocol.md, configs/das_v0.json | Locked source/protocol; evaluation pending |
+| DAS-V0 | Can finite-rank sequence behavior be reconstructed directly from complete Hankel subblocks into a compact weighted automaton? | Synthetic weighted automata with fixed seeds; complete short-word tables; `a^n b^n` finite-window rank control | das-v0-protocol.md, das-v0-result.md, docs/results/das_v0.json | Completed, positive exact reconstruction; negative rank-growth control passed |

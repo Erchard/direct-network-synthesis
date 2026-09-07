@@ -39,6 +39,9 @@ The current mathematical branch is [DAS-V0: Direct Automaton Synthesis](docs/das
 It tests exact spectral reconstruction of finite-rank weighted automata from
 Hankel subblocks, with a non-finite-rank control. This is a theorem-shaped
 supporting experiment, not a neural or language-model result.
+The completed [DAS-V0 result](docs/das-v0-result.md) and
+[theorem note](docs/das-theorem-note.md) define the next DAS-L1 question:
+incomplete or noisy sequence observations under train/validation/test separation.
 
 ## Research Question
 

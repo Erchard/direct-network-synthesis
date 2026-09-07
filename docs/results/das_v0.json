@@ -1,0 +1,176 @@
+{
+  "command": "D:\\Projects\\direct-network-synthesis\\experiments\\run_das_v0.py --config configs\\das_v0.json --output results\\das_v0.json",
+  "config": {
+    "alphabet": [
+      "a",
+      "b"
+    ],
+    "basis_max_length": 5,
+    "error_tolerance": 1e-08,
+    "experiment_id": "DAS-V0",
+    "finite_rank_fixtures": [
+      {
+        "name": "rank2_seed_97001",
+        "seed": 97001,
+        "state_count": 2
+      },
+      {
+        "name": "rank3_seed_97002",
+        "seed": 97002,
+        "state_count": 3
+      },
+      {
+        "name": "rank4_seed_97003",
+        "seed": 97003,
+        "state_count": 4
+      }
+    ],
+    "heldout_max_length": 9,
+    "negative_fixture": {
+      "name": "anbn_indicator",
+      "rank_windows": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "rank_tolerance": 1e-09
+  },
+  "experiment_id": "DAS-V0",
+  "finite_rank_results": [
+    {
+      "basis_max_abs_error": 1.6653345369377348e-16,
+      "candidate_count": 63,
+      "hankel_condition": 10.934678159021363,
+      "heldout_max_abs_error": 1.6653345369377348e-16,
+      "heldout_word_count": 1023,
+      "inference_seconds": 0.014264900000853231,
+      "name": "rank2_seed_97001",
+      "passed": true,
+      "prefix_count": 2,
+      "prefixes": [
+        "<empty>",
+        "a"
+      ],
+      "reconstructed_state_count": 2,
+      "seed": 97001,
+      "selected_hankel_rank": 2,
+      "singular_values": [
+        0.29117866510610874,
+        0.026628919559546393
+      ],
+      "suffix_count": 2,
+      "suffixes": [
+        "<empty>",
+        "a"
+      ],
+      "synthesis_seconds": 0.06491910000113421,
+      "teacher_state_count": 2
+    },
+    {
+      "basis_max_abs_error": 1.8023776915399026e-15,
+      "candidate_count": 63,
+      "hankel_condition": 263.77606305590444,
+      "heldout_max_abs_error": 1.8023776915399026e-15,
+      "heldout_word_count": 1023,
+      "inference_seconds": 0.014581799998268252,
+      "name": "rank3_seed_97002",
+      "passed": true,
+      "prefix_count": 3,
+      "prefixes": [
+        "<empty>",
+        "a",
+        "b"
+      ],
+      "reconstructed_state_count": 3,
+      "seed": 97002,
+      "selected_hankel_rank": 3,
+      "singular_values": [
+        0.4598740044779309,
+        0.3598227994715786,
+        0.0017434258406550925
+      ],
+      "suffix_count": 3,
+      "suffixes": [
+        "<empty>",
+        "a",
+        "b"
+      ],
+      "synthesis_seconds": 0.061731699999654666,
+      "teacher_state_count": 3
+    },
+    {
+      "basis_max_abs_error": 1.7763568394002505e-15,
+      "candidate_count": 63,
+      "hankel_condition": 32.06220691081306,
+      "heldout_max_abs_error": 1.7763568394002505e-15,
+      "heldout_word_count": 1023,
+      "inference_seconds": 0.016052099999797065,
+      "name": "rank4_seed_97003",
+      "passed": true,
+      "prefix_count": 4,
+      "prefixes": [
+        "<empty>",
+        "a",
+        "b",
+        "aa"
+      ],
+      "reconstructed_state_count": 4,
+      "seed": 97003,
+      "selected_hankel_rank": 4,
+      "singular_values": [
+        3.471411257852137,
+        1.5161072361327939,
+        0.17059594896010835,
+        0.10827112642334656
+      ],
+      "suffix_count": 4,
+      "suffixes": [
+        "<empty>",
+        "a",
+        "b",
+        "aa"
+      ],
+      "synthesis_seconds": 0.06369740000081947,
+      "teacher_state_count": 4
+    }
+  ],
+  "negative_fixture": {
+    "name": "anbn_indicator",
+    "ranks": [
+      {
+        "hankel_rank": 1,
+        "max_length": 1,
+        "word_count": 3
+      },
+      {
+        "hankel_rank": 4,
+        "max_length": 2,
+        "word_count": 7
+      },
+      {
+        "hankel_rank": 6,
+        "max_length": 3,
+        "word_count": 15
+      },
+      {
+        "hankel_rank": 8,
+        "max_length": 4,
+        "word_count": 31
+      },
+      {
+        "hankel_rank": 10,
+        "max_length": 5,
+        "word_count": 63
+      }
+    ],
+    "strictly_increasing": true
+  },
+  "numpy_version": "2.5.2",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "source_commit": "21821221606bf901bf9b6cfd2d2631afc1bd8e2c",
+  "status": "complete"
+}

@@ -1,5 +1,30 @@
 # Research Log
 
+## 2026-09-07: DAS-V0 Completed With Exact Positive Reconstruction
+
+Executed the locked DAS-V0 runner at source
+`21821221606bf901bf9b6cfd2d2631afc1bd8e2c` using
+`.venv\Scripts\python.exe -m experiments.run_das_v0 --config configs\das_v0.json --output results\das_v0.json`.
+The complete [record](results/das_v0.json) and [report](das-v0-result.md)
+preserve the fixed config, seeds, platform, NumPy/Python versions, timings and
+negative-control ranks. Raw result SHA256:
+`0DFFB8B114328C03A6424A51BDD4A2E83FEF5014B38A6D1AF5555A8B2BFDF0A2`.
+
+All three finite-rank teachers reconstructed to the expected state counts 2, 3
+and 4. Held-out maximum absolute errors over all 1,023 words up to length 9 were
+`1.67e-16`, `1.80e-15` and `1.78e-15`, well below the locked `1e-8` threshold.
+Synthesis times were approximately 0.062-0.065 seconds; held-out inference times
+were approximately 0.014-0.016 seconds.
+
+The negative `a^n b^n` control showed strictly increasing finite-window Hankel
+ranks: 1, 4, 6, 8, 10 for windows 1 through 5. Interpretation: DAS-V0 is a
+positive exact reconstruction result for finite-rank sequence behavior and a
+useful mathematical foothold for DNS, but it is not a neural result, not a sparse
+sample learning result and not a language-model scaling claim. Added
+[DAS theorem note](das-theorem-note.md) to separate classical weighted-automata
+facts from what this implementation numerically verifies. Next: design DAS-L1
+for incomplete/noisy observations with real train/validation/test separation.
+
 ## 2026-09-07: DAS-V0 Protocol and Source Locked
 
 Redirected the active research line toward a theorem-shaped reconstruction
