@@ -1,5 +1,17 @@
 # Research Log
 
+## 2026-09-07: BM End-to-End Gate Closed Negative
+
+Analyzed the existing 90-worker record without rerunning any dataset. Full
+[report](dns05-bm-end-to-end-result.md) preserves the complete compressed record,
+hashes, all methods and paired summaries. Weights/scores and selections match,
+but median peak savings are 0.1394%, -0.0671%, 0.0544% across the three datasets,
+all below the locked 25% target. In every batch/stream worker the peak was already
+reached during oracle selection. Streaming is slower on average. Pause this full
+pipeline mechanism; do not promote the larger BM grid. Fixed-geometry evidence
+remains valid within its narrower scope. This closes the queued BM reporting gate
+and permits CS-A0 / DCS-V0 preparation, not C1/L1 benchmark activation.
+
 ## 2026-09-07: DCS/EDCS Experimental Queue Planned
 
 Added [a bounded experimental plan](dcs-edcs-experiment-plan-uk.md), linked from

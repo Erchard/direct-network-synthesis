@@ -1,0 +1,1133 @@
+{
+  "source_commit": "1b0b5608571a9b8666d0270eb79b1172384240dc",
+  "status": "complete",
+  "summaries": [
+    {
+      "dataset": "sklearn_digits",
+      "method": "batch",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9832869080779945,
+          "sd": 0.004824654060080414
+        },
+        "rmse": {
+          "mean": 0.11521925372144501,
+          "sd": 0.003706982796408161
+        },
+        "r2": {
+          "mean": 0.852368866714764,
+          "sd": 0.00945030885993294
+        },
+        "peak_mib": {
+          "mean": 157.04140625,
+          "sd": 0.42378401988254877
+        },
+        "fit_seconds": {
+          "mean": 0.6867086400008702,
+          "sd": 0.07176217589141506
+        },
+        "oracle_seconds": {
+          "mean": 0.6351123800006462,
+          "sd": 0.07252143042247343
+        },
+        "inference_seconds": {
+          "mean": 0.0020317320000322074,
+          "sd": 0.00044407889380106814
+        },
+        "readout_grid_seconds": {
+          "mean": 0.0229008199981763,
+          "sd": 0.001285530319566743
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 409632.0,
+          "sd": 43.81780460041329
+        },
+        "kernel_error": {
+          "mean": 0.004250409376841355,
+          "sd": 0.0005706654001132914
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_digits",
+      "method": "stream",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9832869080779945,
+          "sd": 0.004824654060080414
+        },
+        "rmse": {
+          "mean": 0.11521925372144473,
+          "sd": 0.003706982796407947
+        },
+        "r2": {
+          "mean": 0.8523688667147645,
+          "sd": 0.009450308859932333
+        },
+        "peak_mib": {
+          "mean": 156.71328125,
+          "sd": 0.07974875096984278
+        },
+        "fit_seconds": {
+          "mean": 0.8079391999992367,
+          "sd": 0.10886924356494397
+        },
+        "oracle_seconds": {
+          "mean": 0.699737740001001,
+          "sd": 0.09383162538615086
+        },
+        "inference_seconds": {
+          "mean": 0.0024590760000864974,
+          "sd": 0.0009003238045860529
+        },
+        "readout_grid_seconds": {
+          "mean": 0.09058188000126392,
+          "sd": 0.012851692690237835
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 409632.0,
+          "sd": 43.81780460041329
+        },
+        "kernel_error": {
+          "mean": 0.004250409376841355,
+          "sd": 0.0005706654001132914
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_digits",
+      "method": "linear",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9353760445682452,
+          "sd": 0.007210127635400973
+        },
+        "rmse": {
+          "mean": 0.19102096508203098,
+          "sd": 0.015568456281110176
+        },
+        "r2": {
+          "mean": 0.5924019142502119,
+          "sd": 0.06913151335256543
+        },
+        "peak_mib": {
+          "mean": 108.26875,
+          "sd": 0.20000991796697545
+        },
+        "fit_seconds": {
+          "mean": 0.00850786000082735,
+          "sd": 0.0009883757349225526
+        },
+        "oracle_seconds": {
+          "mean": 7.199996616691351e-07,
+          "sd": 4.4720886640693283e-08
+        },
+        "inference_seconds": {
+          "mean": 5.8999999746447434e-05,
+          "sd": 3.468630954909792e-06
+        },
+        "readout_grid_seconds": {
+          "mean": 0.005203420001635095,
+          "sd": 0.0006365212069484422
+        },
+        "rank": {
+          "mean": 60.2,
+          "sd": 0.4472135954999579
+        },
+        "model_array_bytes": {
+          "mean": 6224.0,
+          "sd": 0.0
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_digits",
+      "method": "relu",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9665738161559888,
+          "sd": 0.01350328651090899
+        },
+        "rmse": {
+          "mean": 0.2322948240631984,
+          "sd": 0.1462491982370538
+        },
+        "r2": {
+          "mean": 0.21029194859539424,
+          "sd": 1.0501472818933344
+        },
+        "peak_mib": {
+          "mean": 112.7875,
+          "sd": 0.19197539744106862
+        },
+        "fit_seconds": {
+          "mean": 0.037677919999987354,
+          "sd": 0.0038227044396770375
+        },
+        "oracle_seconds": {
+          "mean": 1.0399984603282063e-06,
+          "sd": 2.4083191268393444e-07
+        },
+        "inference_seconds": {
+          "mean": 0.0007756919995881618,
+          "sd": 0.0002486725910838653
+        },
+        "readout_grid_seconds": {
+          "mean": 0.02737410000045202,
+          "sd": 0.0031836211997112907
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 116256.0,
+          "sd": 43.81780460041329
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_digits",
+      "method": "rbf",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9916434540389971,
+          "sd": 0.0027855153203342753
+        },
+        "rmse": {
+          "mean": 0.09482872168153272,
+          "sd": 0.0036419019384071735
+        },
+        "r2": {
+          "mean": 0.8999630854180882,
+          "sd": 0.007631001890153771
+        },
+        "peak_mib": {
+          "mean": 156.78671875,
+          "sd": 0.1276154597468749
+        },
+        "fit_seconds": {
+          "mean": 1.1616042800014839,
+          "sd": 0.17186494703020042
+        },
+        "oracle_seconds": {
+          "mean": 0.6386767400006648,
+          "sd": 0.10920472309267702
+        },
+        "inference_seconds": {
+          "mean": 0.01413110799927381,
+          "sd": 0.0022870393683297584
+        },
+        "readout_grid_seconds": {
+          "mean": 0.4442911800004367,
+          "sd": 0.05610122660559831
+        },
+        "rank": {
+          "mean": 1078.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 641012.8,
+          "sd": 3856.770047591637
+        },
+        "kernel_error": {
+          "mean": 0.0,
+          "sd": 0.0
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_digits",
+      "method": "spectral",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9899721448467966,
+          "sd": 0.0042244431443184075
+        },
+        "rmse": {
+          "mean": 0.1089546105366049,
+          "sd": 0.004025607642708017
+        },
+        "r2": {
+          "mean": 0.8679514589099846,
+          "sd": 0.009605170829414257
+        },
+        "peak_mib": {
+          "mean": 156.88046875,
+          "sd": 0.15313297173127022
+        },
+        "fit_seconds": {
+          "mean": 1.0345231400009651,
+          "sd": 0.14661856522271835
+        },
+        "oracle_seconds": {
+          "mean": 0.5675453200004995,
+          "sd": 0.0598671061843195
+        },
+        "inference_seconds": {
+          "mean": 0.02326910000061616,
+          "sd": 0.01470987830070998
+        },
+        "readout_grid_seconds": {
+          "mean": 0.033449880000262056,
+          "sd": 0.017623951483559618
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 2224128.0,
+          "sd": 0.0
+        },
+        "kernel_error": {
+          "mean": 0.00035549007323748707,
+          "sd": 6.286301722780662e-06
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "method": "batch",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9716814159292035,
+          "sd": 0.021128029002324442
+        },
+        "rmse": {
+          "mean": 0.1995968308671687,
+          "sd": 0.012132089527054695
+        },
+        "r2": {
+          "mean": 0.8289046278965904,
+          "sd": 0.020485240631677407
+        },
+        "peak_mib": {
+          "mean": 110.77109375,
+          "sd": 0.12019576317148205
+        },
+        "fit_seconds": {
+          "mean": 0.06693777999898884,
+          "sd": 0.003314454600602099
+        },
+        "oracle_seconds": {
+          "mean": 0.04578955999968457,
+          "sd": 0.001870829604685115
+        },
+        "inference_seconds": {
+          "mean": 0.0005632199998944999,
+          "sd": 6.851550552029188e-05
+        },
+        "readout_grid_seconds": {
+          "mean": 0.010485040000639856,
+          "sd": 0.002335492994430559
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 344556.8,
+          "sd": 7.155417527999327
+        },
+        "kernel_error": {
+          "mean": 0.0036150016013741042,
+          "sd": 0.002088595228112931
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "method": "stream",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9716814159292035,
+          "sd": 0.021128029002324442
+        },
+        "rmse": {
+          "mean": 0.19959683086716787,
+          "sd": 0.012132089527053695
+        },
+        "r2": {
+          "mean": 0.8289046278965919,
+          "sd": 0.020485240631675602
+        },
+        "peak_mib": {
+          "mean": 110.89921875,
+          "sd": 0.24925731970351692
+        },
+        "fit_seconds": {
+          "mean": 0.08758305999945151,
+          "sd": 0.012754767953062457
+        },
+        "oracle_seconds": {
+          "mean": 0.04851918000058504,
+          "sd": 0.006328017876997274
+        },
+        "inference_seconds": {
+          "mean": 0.0007105560002673882,
+          "sd": 0.00019152477060210688
+        },
+        "readout_grid_seconds": {
+          "mean": 0.029181560000870375,
+          "sd": 0.007929856052789654
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 344556.8,
+          "sd": 7.155417527999327
+        },
+        "kernel_error": {
+          "mean": 0.0036150016013741042,
+          "sd": 0.002088595228112931
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "method": "linear",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9663716814159292,
+          "sd": 0.011538411336641822
+        },
+        "rmse": {
+          "mean": 0.45063598950626593,
+          "sd": 0.1893348894271049
+        },
+        "r2": {
+          "mean": 0.007636502849112814,
+          "sd": 0.6749017557484892
+        },
+        "peak_mib": {
+          "mean": 105.22421875,
+          "sd": 0.19577289487359453
+        },
+        "fit_seconds": {
+          "mean": 0.0026688199992349836,
+          "sd": 0.00014158879671474588
+        },
+        "oracle_seconds": {
+          "mean": 7.999995432328433e-07,
+          "sd": 7.07112165633613e-08
+        },
+        "inference_seconds": {
+          "mean": 1.4607999910367653e-05,
+          "sd": 3.1887492453099555e-06
+        },
+        "readout_grid_seconds": {
+          "mean": 0.0012172200011264067,
+          "sd": 9.108873230821252e-05
+        },
+        "rank": {
+          "mean": 30.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 966.4,
+          "sd": 8.763560920082657
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "method": "relu",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9557522123893806,
+          "sd": 0.01769911504424776
+        },
+        "rmse": {
+          "mean": 0.2314826450627569,
+          "sd": 0.025605544352488636
+        },
+        "r2": {
+          "mean": 0.7683050387408533,
+          "sd": 0.05173614799800005
+        },
+        "peak_mib": {
+          "mean": 107.86328125,
+          "sd": 0.19245963329804708
+        },
+        "fit_seconds": {
+          "mean": 0.01353527999963262,
+          "sd": 0.0017692788053749076
+        },
+        "oracle_seconds": {
+          "mean": 8.199989679269493e-07,
+          "sd": 1.0954534562698978e-07
+        },
+        "inference_seconds": {
+          "mean": 0.00014433600081247276,
+          "sd": 6.43195607764123e-05
+        },
+        "readout_grid_seconds": {
+          "mean": 0.01027119999853312,
+          "sd": 0.0012845276055384208
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 51174.4,
+          "sd": 8.763560920082657
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "method": "rbf",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9787610619469026,
+          "sd": 0.013421018485047013
+        },
+        "rmse": {
+          "mean": 0.21096558502461513,
+          "sd": 0.03052080628780997
+        },
+        "r2": {
+          "mean": 0.8062310940324634,
+          "sd": 0.05700955762323672
+        },
+        "peak_mib": {
+          "mean": 110.88515625,
+          "sd": 0.2525142129353811
+        },
+        "fit_seconds": {
+          "mean": 0.07079871999958413,
+          "sd": 0.005701827450466602
+        },
+        "oracle_seconds": {
+          "mean": 0.040993980000348526,
+          "sd": 0.0032253483693702417
+        },
+        "inference_seconds": {
+          "mean": 0.0006103280003299005,
+          "sd": 8.982174729605732e-05
+        },
+        "readout_grid_seconds": {
+          "mean": 0.02259406000157469,
+          "sd": 0.00319527592950171
+        },
+        "rank": {
+          "mean": 341.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 90528.0,
+          "sd": 0.0
+        },
+        "kernel_error": {
+          "mean": 0.0,
+          "sd": 0.0
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "method": "spectral",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.9752212389380531,
+          "sd": 0.017022463771390564
+        },
+        "rmse": {
+          "mean": 0.20076803491284104,
+          "sd": 0.015500513204597196
+        },
+        "r2": {
+          "mean": 0.8265778968517583,
+          "sd": 0.025966641573143025
+        },
+        "peak_mib": {
+          "mean": 110.82421875,
+          "sd": 0.24169872553611293
+        },
+        "fit_seconds": {
+          "mean": 0.0824895399993693,
+          "sd": 0.01575348744008136
+        },
+        "oracle_seconds": {
+          "mean": 0.04408928000048036,
+          "sd": 0.008674392783131429
+        },
+        "inference_seconds": {
+          "mean": 0.0010420120001072065,
+          "sd": 0.0003334780789641593
+        },
+        "readout_grid_seconds": {
+          "mean": 0.010248819999833358,
+          "sd": 0.002458524409578342
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 609184.0,
+          "sd": 0.0
+        },
+        "kernel_error": {
+          "mean": 8.906028594396331e-05,
+          "sd": 6.279336050608591e-05
+        }
+      }
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "method": "batch",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.6870292887029288,
+          "sd": 0.01809351323049342
+        },
+        "rmse": {
+          "mean": 0.30428676437061514,
+          "sd": 0.0014937996042740252
+        },
+        "r2": {
+          "mean": 0.3333243438409494,
+          "sd": 0.006548207571782265
+        },
+        "peak_mib": {
+          "mean": 129.32734375,
+          "sd": 0.1421198757459042
+        },
+        "fit_seconds": {
+          "mean": 0.2810522799991304,
+          "sd": 0.02885611333384373
+        },
+        "oracle_seconds": {
+          "mean": 0.2417078799997398,
+          "sd": 0.023885043378753912
+        },
+        "inference_seconds": {
+          "mean": 0.001171228000166593,
+          "sd": 0.0001467705903807923
+        },
+        "readout_grid_seconds": {
+          "mean": 0.02015864000059082,
+          "sd": 0.0051115362546601175
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 366227.2,
+          "sd": 26.29068276024797
+        },
+        "kernel_error": {
+          "mean": 0.014823941284784207,
+          "sd": 0.013495952179700472
+        }
+      }
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "method": "stream",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.6870292887029288,
+          "sd": 0.01809351323049342
+        },
+        "rmse": {
+          "mean": 0.3042867643706147,
+          "sd": 0.001493799604273487
+        },
+        "r2": {
+          "mean": 0.33332434384095144,
+          "sd": 0.00654820757177988
+        },
+        "peak_mib": {
+          "mean": 129.315625,
+          "sd": 0.2940397091991786
+        },
+        "fit_seconds": {
+          "mean": 0.30919958000013137,
+          "sd": 0.043282364472414424
+        },
+        "oracle_seconds": {
+          "mean": 0.23526345999998738,
+          "sd": 0.02631703415012168
+        },
+        "inference_seconds": {
+          "mean": 0.0014696840001852253,
+          "sd": 0.00038380510112696474
+        },
+        "readout_grid_seconds": {
+          "mean": 0.06047635999930208,
+          "sd": 0.016130522925340937
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 366227.2,
+          "sd": 26.29068276024797
+        },
+        "kernel_error": {
+          "mean": 0.014823941284784207,
+          "sd": 0.013495952179700472
+        }
+      }
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "method": "linear",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.5682008368200836,
+          "sd": 0.019490903261677173
+        },
+        "rmse": {
+          "mean": 0.33153805974872735,
+          "sd": 0.002472952592213405
+        },
+        "r2": {
+          "mean": 0.20854502654363585,
+          "sd": 0.011757306779440589
+        },
+        "peak_mib": {
+          "mean": 106.20078125,
+          "sd": 0.11756449775681646
+        },
+        "fit_seconds": {
+          "mean": 0.005052799999975832,
+          "sd": 0.001647146216951799
+        },
+        "oracle_seconds": {
+          "mean": 1.1399992217775433e-06,
+          "sd": 5.079376844440007e-07
+        },
+        "inference_seconds": {
+          "mean": 2.8311999631114305e-05,
+          "sd": 1.4448942360171935e-06
+        },
+        "readout_grid_seconds": {
+          "mean": 0.0027896199993847405,
+          "sd": 0.0008953914917832695
+        },
+        "rank": {
+          "mean": 32.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 2608.0,
+          "sd": 0.0
+        }
+      }
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "method": "relu",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.5389121338912134,
+          "sd": 0.036881842461989965
+        },
+        "rmse": {
+          "mean": 0.35242414022606666,
+          "sd": 0.00480299893435765
+        },
+        "r2": {
+          "mean": 0.1055914883595384,
+          "sd": 0.024262837684513493
+        },
+        "peak_mib": {
+          "mean": 110.0171875,
+          "sd": 0.1706409891203422
+        },
+        "fit_seconds": {
+          "mean": 0.024346879999211524,
+          "sd": 0.004199004115198682
+        },
+        "oracle_seconds": {
+          "mean": 7.59998511057347e-07,
+          "sd": 5.477267281349489e-08
+        },
+        "inference_seconds": {
+          "mean": 0.0003394480000133627,
+          "sd": 0.00014504490510295717
+        },
+        "readout_grid_seconds": {
+          "mean": 0.019500519998837264,
+          "sd": 0.004317212200658072
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 72870.4,
+          "sd": 21.46625258399798
+        }
+      }
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "method": "rbf",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.7221757322175733,
+          "sd": 0.0208366520468431
+        },
+        "rmse": {
+          "mean": 0.29179091464444407,
+          "sd": 0.005169541790055342
+        },
+        "r2": {
+          "mean": 0.3868133812960287,
+          "sd": 0.021702669570473492
+        },
+        "peak_mib": {
+          "mean": 129.28125,
+          "sd": 0.2783185992271829
+        },
+        "fit_seconds": {
+          "mean": 0.4232027999998536,
+          "sd": 0.04201277066413903
+        },
+        "oracle_seconds": {
+          "mean": 0.22225388000006205,
+          "sd": 0.0178263855827476
+        },
+        "inference_seconds": {
+          "mean": 0.006511047999956646,
+          "sd": 0.0007095898372643569
+        },
+        "readout_grid_seconds": {
+          "mean": 0.1667008199983684,
+          "sd": 0.01904582601374914
+        },
+        "rank": {
+          "mean": 720.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 267960.0,
+          "sd": 3154.881931229757
+        },
+        "kernel_error": {
+          "mean": 0.0,
+          "sd": 0.0
+        }
+      }
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "method": "spectral",
+      "n": 5,
+      "metrics": {
+        "accuracy": {
+          "mean": 0.7188284518828452,
+          "sd": 0.011227119552300215
+        },
+        "rmse": {
+          "mean": 0.29415669026299335,
+          "sd": 0.00357405436058909
+        },
+        "r2": {
+          "mean": 0.37691277367056963,
+          "sd": 0.01521149046134491
+        },
+        "peak_mib": {
+          "mean": 129.32578125,
+          "sd": 0.060427048766725736
+        },
+        "fit_seconds": {
+          "mean": 0.38637113999939177,
+          "sd": 0.03081706870790502
+        },
+        "oracle_seconds": {
+          "mean": 0.22619618000098854,
+          "sd": 0.020943697956142152
+        },
+        "inference_seconds": {
+          "mean": 0.007370127999747638,
+          "sd": 0.0010702920665387426
+        },
+        "readout_grid_seconds": {
+          "mean": 0.017440979998355033,
+          "sd": 0.002155584832216683
+        },
+        "rank": {
+          "mean": 192.0,
+          "sd": 0.0
+        },
+        "model_array_bytes": {
+          "mean": 1346185.6,
+          "sd": 21.46625258399798
+        },
+        "kernel_error": {
+          "mean": 0.006840637318807472,
+          "sd": 0.006546330440942896
+        }
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "dataset": "sklearn_digits",
+      "seed": 101,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": 0.005870405231348408,
+      "fit_difference_seconds": 0.13723120000213385
+    },
+    {
+      "dataset": "sklearn_digits",
+      "seed": 202,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": 0.0012453920494172044,
+      "fit_difference_seconds": 0.08975689999715541
+    },
+    {
+      "dataset": "sklearn_digits",
+      "seed": 303,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": 0.0022370252535295343,
+      "fit_difference_seconds": 0.14062619999822346
+    },
+    {
+      "dataset": "sklearn_digits",
+      "seed": 404,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": -0.0003243108394661576,
+      "fit_difference_seconds": -0.008665400004247203
+    },
+    {
+      "dataset": "sklearn_digits",
+      "seed": 505,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": 0.00139386698526478,
+      "fit_difference_seconds": 0.24720389999856707
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "seed": 1101,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": -0.0034213960706852564,
+      "fit_difference_seconds": 0.03309540000191191
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "seed": 1202,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": 0.0008463518707902962,
+      "fit_difference_seconds": 0.02852129999882891
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "seed": 1303,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": 0.0014786129202605247,
+      "fit_difference_seconds": 0.007695200001762714
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "seed": 1404,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": -0.0040204549462175,
+      "fit_difference_seconds": 0.009715899999719113
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "seed": 1505,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": -0.0006709276457501634,
+      "fit_difference_seconds": 0.024198600000090664
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "seed": 2101,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": 0.00036200187034296505,
+      "fit_difference_seconds": 0.023468399998819223
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "seed": 2202,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": 0.0005437245129135126,
+      "fit_difference_seconds": 0.02942820000316715
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "seed": 2303,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": 0.002263126131563098,
+      "fit_difference_seconds": -0.005403299997851718
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "seed": 2404,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": -0.004171957192091513,
+      "fit_difference_seconds": 0.054042800002207514
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "seed": 2505,
+      "weights_match": true,
+      "scores_match": true,
+      "prediction_disagreements": 0,
+      "same_selected_index": true,
+      "accuracy_difference": 0.0,
+      "peak_reduction": 0.0014515982701787111,
+      "fit_difference_seconds": 0.03920039999866276
+    }
+  ],
+  "errors": [],
+  "paired_summaries": [
+    {
+      "dataset": "sklearn_digits",
+      "n": 5,
+      "metrics": {
+        "accuracy_difference": {
+          "mean": 0.0,
+          "sd": 0.0,
+          "median": 0.0
+        },
+        "peak_reduction": {
+          "mean": 0.002084475736018754,
+          "sd": 0.002309750427258049,
+          "median": 0.00139386698526478
+        },
+        "fit_difference_seconds": {
+          "mean": 0.12123055999836652,
+          "sd": 0.09268905736549056,
+          "median": 0.13723120000213385
+        }
+      }
+    },
+    {
+      "dataset": "sklearn_breast_cancer",
+      "n": 5,
+      "metrics": {
+        "accuracy_difference": {
+          "mean": 0.0,
+          "sd": 0.0,
+          "median": 0.0
+        },
+        "peak_reduction": {
+          "mean": -0.0011575627743204198,
+          "sd": 0.0024760352747682525,
+          "median": -0.0006709276457501634
+        },
+        "fit_difference_seconds": {
+          "mean": 0.020645280000462663,
+          "sd": 0.01136682872724721,
+          "median": 0.024198600000090664
+        }
+      }
+    },
+    {
+      "dataset": "synthetic_multiclass_v1",
+      "n": 5,
+      "metrics": {
+        "accuracy_difference": {
+          "mean": 0.0,
+          "sd": 0.0,
+          "median": 0.0
+        },
+        "peak_reduction": {
+          "mean": 8.969871858135469e-05,
+          "sd": 0.002501027620673792,
+          "median": 0.0005437245129135126
+        },
+        "fit_difference_seconds": {
+          "mean": 0.028147300001000984,
+          "sd": 0.022033630603011042,
+          "median": 0.02942820000316715
+        }
+      }
+    }
+  ]
+}
