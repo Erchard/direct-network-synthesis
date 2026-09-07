@@ -1,0 +1,4726 @@
+{
+  "config": {
+    "fixtures": [
+      "xor",
+      "half_adder",
+      "full_adder",
+      "majority3",
+      "mux2"
+    ],
+    "duplicate_copies": 2,
+    "solver_seed": 93007,
+    "max_and_nodes": 12,
+    "solver_timeout_ms": 5000,
+    "backend_timeout_seconds": 60,
+    "suite_timeout_seconds": 600,
+    "memory_limit_bytes": 4294967296
+  },
+  "versions": {
+    "yowasp-yosys": "0.68.0.0.post1208",
+    "yowasp-runtime": "1.96",
+    "wasmtime": "47.0.1",
+    "z3-solver": "5.1.0.0",
+    "psutil": "7.2.2"
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "cpu": "Intel64 Family 6 Model 78 Stepping 3, GenuineIntel",
+  "source_commit": "2e642ac8164e7942414a4108c65b7a662b10c626",
+  "source_sha256": {
+    "src/dns/synthesis/circuits.py": "69fbb2c626d324d1a064bb0d8656e7576caa78fd4195d91213e9a5a74db76379",
+    "experiments/run_dcs_v0.py": "a0f3c68bccec9fea8abb2fce4636f93d95ae43037e68dabacca8c1fb0f105017",
+    "configs/dcs_v0.json": "14e46c7061c92a01877f52513582e40813d4fa875216d19358792720ca59d607"
+  },
+  "command": "D:\\Projects\\direct-network-synthesis\\.venv\\Scripts\\python.exe D:\\Projects\\direct-network-synthesis\\experiments\\run_dcs_v0.py",
+  "backend_version": "Yosys 0.68 (git sha1 38e001a6f, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)\n",
+  "rows": [
+    {
+      "fixture": "xor",
+      "inputs": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "targets": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "models": {
+        "literal": {
+          "circuit": {
+            "inputs": 2,
+            "gates": [
+              [
+                1,
+                2
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                12,
+                5
+              ],
+              [
+                10,
+                15
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                18,
+                4
+              ],
+              [
+                16,
+                21
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                24,
+                4
+              ],
+              [
+                22,
+                27
+              ]
+            ],
+            "outputs": [
+              29
+            ]
+          },
+          "metrics": {
+            "and_nodes": 12,
+            "depth": 6,
+            "inverted_edges": 14,
+            "serialized_bytes": 118
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "abc": {
+          "circuit": {
+            "inputs": 2,
+            "gates": [
+              [
+                3,
+                5
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                7,
+                9
+              ]
+            ],
+            "outputs": [
+              10
+            ]
+          },
+          "metrics": {
+            "and_nodes": 3,
+            "depth": 2,
+            "inverted_edges": 4,
+            "serialized_bytes": 55
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "exact": {
+          "circuit": {
+            "inputs": 2,
+            "gates": [
+              [
+                2,
+                5
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                7,
+                9
+              ]
+            ],
+            "outputs": [
+              11
+            ]
+          },
+          "metrics": {
+            "and_nodes": 3,
+            "depth": 2,
+            "inverted_edges": 5,
+            "serialized_bytes": 55
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "exact_abc": {
+          "circuit": {
+            "inputs": 2,
+            "gates": [
+              [
+                5,
+                3
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                7,
+                9
+              ]
+            ],
+            "outputs": [
+              10
+            ]
+          },
+          "metrics": {
+            "and_nodes": 3,
+            "depth": 2,
+            "inverted_edges": 4,
+            "serialized_bytes": 55
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        }
+      },
+      "solver_attempts": [
+        {
+          "gates": 0,
+          "status": "unsat",
+          "seconds": 0.009396899999956076,
+          "reason": null
+        },
+        {
+          "gates": 1,
+          "status": "unsat",
+          "seconds": 0.009327400000074704,
+          "reason": null
+        },
+        {
+          "gates": 2,
+          "status": "unsat",
+          "seconds": 0.014504600000236678,
+          "reason": null
+        },
+        {
+          "gates": 3,
+          "status": "sat",
+          "seconds": 0.032065700000202924,
+          "reason": null
+        }
+      ],
+      "solver_completed": true,
+      "backend_logs": {
+        "abc": {
+          "seconds": 0.8045455999999831,
+          "script": "read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json",
+          "stdout": "\n-- Running command `read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json' --\n\n1. Executing Verilog-2005 frontend: input.v\nParsing Verilog input from `input.v' to AST representation.\nGenerating RTLIL representation for module `\\top'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\top\n\n2.2. Analyzing design hierarchy..\nTop module:  \\top\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n<suppressed ~5 debug messages>\n\n4. Executing FLATTEN pass (flatten design).\n\n5. Executing TECHMAP pass (map to technology primitives).\n\n5.1. Executing Verilog-2005 frontend: /share/techmap.v\nParsing Verilog input from `/share/techmap.v' to AST representation.\nGenerating RTLIL representation for module `\\_90_simplemap_bool_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_reduce_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_logic_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_compare_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_various'.\nGenerating RTLIL representation for module `\\_90_simplemap_registers'.\nGenerating RTLIL representation for module `\\_90_shift_ops_shr_shl_sshl_sshr'.\nGenerating RTLIL representation for module `\\_90_shift_shiftx'.\nGenerating RTLIL representation for module `\\_90_fa'.\nGenerating RTLIL representation for module `\\_90_lcu_brent_kung'.\nGenerating RTLIL representation for module `\\_90_alu'.\nGenerating RTLIL representation for module `\\_90_macc'.\nGenerating RTLIL representation for module `\\_90_alumacc'.\nGenerating RTLIL representation for module `$__div_mod_u'.\nGenerating RTLIL representation for module `$__div_mod_trunc'.\nGenerating RTLIL representation for module `\\_90_div'.\nGenerating RTLIL representation for module `\\_90_mod'.\nGenerating RTLIL representation for module `$__div_mod_floor'.\nGenerating RTLIL representation for module `\\_90_divfloor'.\nGenerating RTLIL representation for module `\\_90_modfloor'.\nGenerating RTLIL representation for module `\\_90_pow'.\nGenerating RTLIL representation for module `\\_90_demux'.\nGenerating RTLIL representation for module `\\_90_lut'.\nGenerating RTLIL representation for module `$connect'.\nGenerating RTLIL representation for module `$input_port'.\nSuccessfully finished Verilog frontend.\n\n5.2. Continuing TECHMAP pass.\nUsing extmapper simplemap for cells of type $not.\nUsing extmapper simplemap for cells of type $and.\nNo more expansions possible.\n<suppressed ~93 debug messages>\n\n6. Executing OPT pass (performing simple optimizations).\n\n6.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 16 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 14 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 12 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 10 cells of `\\top'.\nFinding duplicate cells in `\\top'.\n<suppressed ~18 debug messages>\nRemoved a total of 6 cells.\n\n6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 10 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\nRemoved 0 unused cells and 19 unused wires.\n<suppressed ~1 debug messages>\n\n6.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n<suppressed ~1 debug messages>\n\n6.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 9 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\n\n6.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.16. Finished fast OPT passes. (There is nothing left to do.)\n\n7. Executing ABC pass (technology mapping using ABC).\n\n7.1. Extracting gate netlist of module `\\top' to `<abc-temp-dir>/input.blif'..\n",
+          "stderr": "",
+          "netlist": {
+            "creator": "Yosys 0.68 (git sha1 38e001a6f, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)",
+            "modules": {
+              "top": {
+                "attributes": {
+                  "top": "00000000000000000000000000000001",
+                  "src": "input.v:1.1-17.10"
+                },
+                "ports": {
+                  "x": {
+                    "direction": "input",
+                    "bits": [
+                      2,
+                      3
+                    ]
+                  },
+                  "y": {
+                    "direction": "output",
+                    "bits": [
+                      4
+                    ]
+                  }
+                },
+                "cells": {
+                  "$abc$109$auto$blifparse.cc:397:parse_blif$110": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "Y": [
+                        5
+                      ]
+                    }
+                  },
+                  "$abc$109$auto$blifparse.cc:397:parse_blif$111": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        3
+                      ],
+                      "Y": [
+                        6
+                      ]
+                    }
+                  },
+                  "$abc$109$auto$blifparse.cc:397:parse_blif$112": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        5
+                      ],
+                      "B": [
+                        6
+                      ],
+                      "Y": [
+                        7
+                      ]
+                    }
+                  },
+                  "$abc$109$auto$blifparse.cc:397:parse_blif$113": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        7
+                      ],
+                      "Y": [
+                        8
+                      ]
+                    }
+                  },
+                  "$abc$109$auto$blifparse.cc:397:parse_blif$114": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "B": [
+                        3
+                      ],
+                      "Y": [
+                        9
+                      ]
+                    }
+                  },
+                  "$abc$109$auto$blifparse.cc:397:parse_blif$115": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        9
+                      ],
+                      "Y": [
+                        10
+                      ]
+                    }
+                  },
+                  "$abc$109$auto$blifparse.cc:397:parse_blif$116": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        8
+                      ],
+                      "B": [
+                        10
+                      ],
+                      "Y": [
+                        4
+                      ]
+                    }
+                  }
+                },
+                "netnames": {
+                  "$abc$109$new_n4": {
+                    "hide_name": 1,
+                    "bits": [
+                      5
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$109$new_n5": {
+                    "hide_name": 1,
+                    "bits": [
+                      6
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$109$new_n6": {
+                    "hide_name": 1,
+                    "bits": [
+                      7
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$109$new_n7": {
+                    "hide_name": 1,
+                    "bits": [
+                      8
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$109$new_n8": {
+                    "hide_name": 1,
+                    "bits": [
+                      9
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$109$new_n9": {
+                    "hide_name": 1,
+                    "bits": [
+                      10
+                    ],
+                    "attributes": {}
+                  },
+                  "n1": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:2.6-2.8"
+                    }
+                  },
+                  "n2": {
+                    "hide_name": 0,
+                    "bits": [
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:3.6-3.8"
+                    }
+                  },
+                  "n3": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:4.6-4.8"
+                    }
+                  },
+                  "n6": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:7.6-7.8"
+                    }
+                  },
+                  "x": {
+                    "hide_name": 0,
+                    "bits": [
+                      2,
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.24-1.25"
+                    }
+                  },
+                  "y": {
+                    "hide_name": 0,
+                    "bits": [
+                      4
+                    ],
+                    "attributes": {
+                      "single_bit_vector": "00000000000000000000000000000001",
+                      "src": "input.v:1.40-1.41"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "exact_abc": {
+          "seconds": 0.9372056999995948,
+          "script": "read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json",
+          "stdout": "\n-- Running command `read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json' --\n\n1. Executing Verilog-2005 frontend: input.v\nParsing Verilog input from `input.v' to AST representation.\nGenerating RTLIL representation for module `\\top'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\top\n\n2.2. Analyzing design hierarchy..\nTop module:  \\top\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n4. Executing FLATTEN pass (flatten design).\n\n5. Executing TECHMAP pass (map to technology primitives).\n\n5.1. Executing Verilog-2005 frontend: /share/techmap.v\nParsing Verilog input from `/share/techmap.v' to AST representation.\nGenerating RTLIL representation for module `\\_90_simplemap_bool_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_reduce_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_logic_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_compare_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_various'.\nGenerating RTLIL representation for module `\\_90_simplemap_registers'.\nGenerating RTLIL representation for module `\\_90_shift_ops_shr_shl_sshl_sshr'.\nGenerating RTLIL representation for module `\\_90_shift_shiftx'.\nGenerating RTLIL representation for module `\\_90_fa'.\nGenerating RTLIL representation for module `\\_90_lcu_brent_kung'.\nGenerating RTLIL representation for module `\\_90_alu'.\nGenerating RTLIL representation for module `\\_90_macc'.\nGenerating RTLIL representation for module `\\_90_alumacc'.\nGenerating RTLIL representation for module `$__div_mod_u'.\nGenerating RTLIL representation for module `$__div_mod_trunc'.\nGenerating RTLIL representation for module `\\_90_div'.\nGenerating RTLIL representation for module `\\_90_mod'.\nGenerating RTLIL representation for module `$__div_mod_floor'.\nGenerating RTLIL representation for module `\\_90_divfloor'.\nGenerating RTLIL representation for module `\\_90_modfloor'.\nGenerating RTLIL representation for module `\\_90_pow'.\nGenerating RTLIL representation for module `\\_90_demux'.\nGenerating RTLIL representation for module `\\_90_lut'.\nGenerating RTLIL representation for module `$connect'.\nGenerating RTLIL representation for module `$input_port'.\nSuccessfully finished Verilog frontend.\n\n5.2. Continuing TECHMAP pass.\nUsing extmapper simplemap for cells of type $not.\nUsing extmapper simplemap for cells of type $and.\nNo more expansions possible.\n<suppressed ~85 debug messages>\n\n6. Executing OPT pass (performing simple optimizations).\n\n6.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 8 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 8 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\nRemoved 0 unused cells and 4 unused wires.\n<suppressed ~1 debug messages>\n\n6.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 8 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\n\n6.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.16. Finished fast OPT passes. (There is nothing left to do.)\n\n7. Executing ABC pass (technology mapping using ABC).\n\n7.1. Extracting gate netlist of module `\\top' to `<abc-temp-dir>/input.blif'..\n",
+          "stderr": "",
+          "netlist": {
+            "creator": "Yosys 0.68 (git sha1 38e001a6f, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)",
+            "modules": {
+              "top": {
+                "attributes": {
+                  "top": "00000000000000000000000000000001",
+                  "src": "input.v:1.1-8.10"
+                },
+                "ports": {
+                  "x": {
+                    "direction": "input",
+                    "bits": [
+                      2,
+                      3
+                    ]
+                  },
+                  "y": {
+                    "direction": "output",
+                    "bits": [
+                      4
+                    ]
+                  }
+                },
+                "cells": {
+                  "$abc$88$auto$blifparse.cc:397:parse_blif$89": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        3
+                      ],
+                      "Y": [
+                        5
+                      ]
+                    }
+                  },
+                  "$abc$88$auto$blifparse.cc:397:parse_blif$90": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "Y": [
+                        6
+                      ]
+                    }
+                  },
+                  "$abc$88$auto$blifparse.cc:397:parse_blif$91": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        5
+                      ],
+                      "B": [
+                        6
+                      ],
+                      "Y": [
+                        7
+                      ]
+                    }
+                  },
+                  "$abc$88$auto$blifparse.cc:397:parse_blif$92": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        7
+                      ],
+                      "Y": [
+                        8
+                      ]
+                    }
+                  },
+                  "$abc$88$auto$blifparse.cc:397:parse_blif$93": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        3
+                      ],
+                      "B": [
+                        2
+                      ],
+                      "Y": [
+                        9
+                      ]
+                    }
+                  },
+                  "$abc$88$auto$blifparse.cc:397:parse_blif$94": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        9
+                      ],
+                      "Y": [
+                        10
+                      ]
+                    }
+                  },
+                  "$abc$88$auto$blifparse.cc:397:parse_blif$95": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        8
+                      ],
+                      "B": [
+                        10
+                      ],
+                      "Y": [
+                        4
+                      ]
+                    }
+                  }
+                },
+                "netnames": {
+                  "$abc$88$new_n4": {
+                    "hide_name": 1,
+                    "bits": [
+                      5
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$88$new_n5": {
+                    "hide_name": 1,
+                    "bits": [
+                      6
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$88$new_n6": {
+                    "hide_name": 1,
+                    "bits": [
+                      7
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$88$new_n7": {
+                    "hide_name": 1,
+                    "bits": [
+                      8
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$88$new_n8": {
+                    "hide_name": 1,
+                    "bits": [
+                      9
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$88$new_n9": {
+                    "hide_name": 1,
+                    "bits": [
+                      10
+                    ],
+                    "attributes": {}
+                  },
+                  "n1": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:2.6-2.8"
+                    }
+                  },
+                  "n2": {
+                    "hide_name": 0,
+                    "bits": [
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:3.6-3.8"
+                    }
+                  },
+                  "x": {
+                    "hide_name": 0,
+                    "bits": [
+                      2,
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.24-1.25"
+                    }
+                  },
+                  "y": {
+                    "hide_name": 0,
+                    "bits": [
+                      4
+                    ],
+                    "attributes": {
+                      "single_bit_vector": "00000000000000000000000000000001",
+                      "src": "input.v:1.40-1.41"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "test_status": "not_applicable_verification_fixture",
+      "worker_seconds": 2.25,
+      "sampled_process_tree_peak_bytes": 187826176
+    },
+    {
+      "fixture": "half_adder",
+      "inputs": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "targets": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "models": {
+        "literal": {
+          "circuit": {
+            "inputs": 2,
+            "gates": [
+              [
+                1,
+                2
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                12,
+                5
+              ],
+              [
+                10,
+                15
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                18,
+                4
+              ],
+              [
+                16,
+                21
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                24,
+                4
+              ],
+              [
+                22,
+                27
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                30,
+                4
+              ],
+              [
+                1,
+                33
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                36,
+                4
+              ],
+              [
+                34,
+                39
+              ]
+            ],
+            "outputs": [
+              29,
+              41
+            ]
+          },
+          "metrics": {
+            "and_nodes": 18,
+            "depth": 6,
+            "inverted_edges": 20,
+            "serialized_bytes": 162
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "abc": {
+          "circuit": {
+            "inputs": 2,
+            "gates": [
+              [
+                4,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                7,
+                9
+              ]
+            ],
+            "outputs": [
+              10,
+              6
+            ]
+          },
+          "metrics": {
+            "and_nodes": 3,
+            "depth": 2,
+            "inverted_edges": 4,
+            "serialized_bytes": 57
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "exact": {
+          "circuit": {
+            "inputs": 2,
+            "gates": [
+              [
+                3,
+                5
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                7,
+                9
+              ]
+            ],
+            "outputs": [
+              10,
+              8
+            ]
+          },
+          "metrics": {
+            "and_nodes": 3,
+            "depth": 2,
+            "inverted_edges": 4,
+            "serialized_bytes": 57
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "exact_abc": {
+          "circuit": {
+            "inputs": 2,
+            "gates": [
+              [
+                3,
+                5
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                7,
+                9
+              ]
+            ],
+            "outputs": [
+              10,
+              8
+            ]
+          },
+          "metrics": {
+            "and_nodes": 3,
+            "depth": 2,
+            "inverted_edges": 4,
+            "serialized_bytes": 57
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        }
+      },
+      "solver_attempts": [
+        {
+          "gates": 0,
+          "status": "unsat",
+          "seconds": 0.015612599999712984,
+          "reason": null
+        },
+        {
+          "gates": 1,
+          "status": "unsat",
+          "seconds": 0.012204799999835814,
+          "reason": null
+        },
+        {
+          "gates": 2,
+          "status": "unsat",
+          "seconds": 0.025659800000084942,
+          "reason": null
+        },
+        {
+          "gates": 3,
+          "status": "sat",
+          "seconds": 0.04111760000023423,
+          "reason": null
+        }
+      ],
+      "solver_completed": true,
+      "backend_logs": {
+        "abc": {
+          "seconds": 0.9081434999998237,
+          "script": "read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json",
+          "stdout": "\n-- Running command `read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json' --\n\n1. Executing Verilog-2005 frontend: input.v\nParsing Verilog input from `input.v' to AST representation.\nGenerating RTLIL representation for module `\\top'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\top\n\n2.2. Analyzing design hierarchy..\nTop module:  \\top\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n<suppressed ~8 debug messages>\n\n4. Executing FLATTEN pass (flatten design).\n\n5. Executing TECHMAP pass (map to technology primitives).\n\n5.1. Executing Verilog-2005 frontend: /share/techmap.v\nParsing Verilog input from `/share/techmap.v' to AST representation.\nGenerating RTLIL representation for module `\\_90_simplemap_bool_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_reduce_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_logic_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_compare_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_various'.\nGenerating RTLIL representation for module `\\_90_simplemap_registers'.\nGenerating RTLIL representation for module `\\_90_shift_ops_shr_shl_sshl_sshr'.\nGenerating RTLIL representation for module `\\_90_shift_shiftx'.\nGenerating RTLIL representation for module `\\_90_fa'.\nGenerating RTLIL representation for module `\\_90_lcu_brent_kung'.\nGenerating RTLIL representation for module `\\_90_alu'.\nGenerating RTLIL representation for module `\\_90_macc'.\nGenerating RTLIL representation for module `\\_90_alumacc'.\nGenerating RTLIL representation for module `$__div_mod_u'.\nGenerating RTLIL representation for module `$__div_mod_trunc'.\nGenerating RTLIL representation for module `\\_90_div'.\nGenerating RTLIL representation for module `\\_90_mod'.\nGenerating RTLIL representation for module `$__div_mod_floor'.\nGenerating RTLIL representation for module `\\_90_divfloor'.\nGenerating RTLIL representation for module `\\_90_modfloor'.\nGenerating RTLIL representation for module `\\_90_pow'.\nGenerating RTLIL representation for module `\\_90_demux'.\nGenerating RTLIL representation for module `\\_90_lut'.\nGenerating RTLIL representation for module `$connect'.\nGenerating RTLIL representation for module `$input_port'.\nSuccessfully finished Verilog frontend.\n\n5.2. Continuing TECHMAP pass.\nUsing extmapper simplemap for cells of type $not.\nUsing extmapper simplemap for cells of type $and.\nNo more expansions possible.\n<suppressed ~99 debug messages>\n\n6. Executing OPT pass (performing simple optimizations).\n\n6.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 22 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 19 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 16 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 14 cells of `\\top'.\nFinding duplicate cells in `\\top'.\n<suppressed ~24 debug messages>\nRemoved a total of 8 cells.\n\n6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 14 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\nRemoved 0 unused cells and 28 unused wires.\n<suppressed ~1 debug messages>\n\n6.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n<suppressed ~3 debug messages>\n\n6.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 11 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\nRemoved 1 unused cells and 2 unused wires.\n<suppressed ~3 debug messages>\n\n6.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.16. Rerunning OPT passes. (Maybe there is more to do..)\n\n6.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.19. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 10 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.20. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.21. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\n\n6.22. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.23. Finished fast OPT passes. (There is nothing left to do.)\n\n7. Executing ABC pass (technology mapping using ABC).\n\n7.1. Extracting gate netlist of module `\\top' to `<abc-temp-dir>/input.blif'..\n",
+          "stderr": "",
+          "netlist": {
+            "creator": "Yosys 0.68 (git sha1 38e001a6f, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)",
+            "modules": {
+              "top": {
+                "attributes": {
+                  "top": "00000000000000000000000000000001",
+                  "src": "input.v:1.1-24.10"
+                },
+                "ports": {
+                  "x": {
+                    "direction": "input",
+                    "bits": [
+                      2,
+                      3
+                    ]
+                  },
+                  "y": {
+                    "direction": "output",
+                    "bits": [
+                      4,
+                      5
+                    ]
+                  }
+                },
+                "cells": {
+                  "$abc$124$auto$blifparse.cc:397:parse_blif$125": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        3
+                      ],
+                      "Y": [
+                        6
+                      ]
+                    }
+                  },
+                  "$abc$124$auto$blifparse.cc:397:parse_blif$126": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "Y": [
+                        7
+                      ]
+                    }
+                  },
+                  "$abc$124$auto$blifparse.cc:397:parse_blif$127": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        3
+                      ],
+                      "B": [
+                        2
+                      ],
+                      "Y": [
+                        5
+                      ]
+                    }
+                  },
+                  "$abc$124$auto$blifparse.cc:397:parse_blif$128": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        5
+                      ],
+                      "Y": [
+                        8
+                      ]
+                    }
+                  },
+                  "$abc$124$auto$blifparse.cc:397:parse_blif$129": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        6
+                      ],
+                      "B": [
+                        7
+                      ],
+                      "Y": [
+                        9
+                      ]
+                    }
+                  },
+                  "$abc$124$auto$blifparse.cc:397:parse_blif$130": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        9
+                      ],
+                      "Y": [
+                        10
+                      ]
+                    }
+                  },
+                  "$abc$124$auto$blifparse.cc:397:parse_blif$131": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        8
+                      ],
+                      "B": [
+                        10
+                      ],
+                      "Y": [
+                        4
+                      ]
+                    }
+                  }
+                },
+                "netnames": {
+                  "$abc$124$new_n10": {
+                    "hide_name": 1,
+                    "bits": [
+                      10
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$124$new_n5": {
+                    "hide_name": 1,
+                    "bits": [
+                      6
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$124$new_n6": {
+                    "hide_name": 1,
+                    "bits": [
+                      7
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$124$new_n8": {
+                    "hide_name": 1,
+                    "bits": [
+                      8
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$124$new_n9": {
+                    "hide_name": 1,
+                    "bits": [
+                      9
+                    ],
+                    "attributes": {}
+                  },
+                  "n1": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:2.6-2.8"
+                    }
+                  },
+                  "n15": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:16.6-16.9"
+                    }
+                  },
+                  "n16": {
+                    "hide_name": 0,
+                    "bits": [
+                      5
+                    ],
+                    "attributes": {
+                      "src": "input.v:17.6-17.9"
+                    }
+                  },
+                  "n18": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:19.6-19.9"
+                    }
+                  },
+                  "n19": {
+                    "hide_name": 0,
+                    "bits": [
+                      5
+                    ],
+                    "attributes": {
+                      "src": "input.v:20.6-20.9"
+                    }
+                  },
+                  "n2": {
+                    "hide_name": 0,
+                    "bits": [
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:3.6-3.8"
+                    }
+                  },
+                  "n3": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:4.6-4.8"
+                    }
+                  },
+                  "n6": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:7.6-7.8"
+                    }
+                  },
+                  "x": {
+                    "hide_name": 0,
+                    "bits": [
+                      2,
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.24-1.25"
+                    }
+                  },
+                  "y": {
+                    "hide_name": 0,
+                    "bits": [
+                      4,
+                      5
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.40-1.41"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "exact_abc": {
+          "seconds": 1.0721148000002358,
+          "script": "read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json",
+          "stdout": "\n-- Running command `read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json' --\n\n1. Executing Verilog-2005 frontend: input.v\nParsing Verilog input from `input.v' to AST representation.\nGenerating RTLIL representation for module `\\top'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\top\n\n2.2. Analyzing design hierarchy..\nTop module:  \\top\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n4. Executing FLATTEN pass (flatten design).\n\n5. Executing TECHMAP pass (map to technology primitives).\n\n5.1. Executing Verilog-2005 frontend: /share/techmap.v\nParsing Verilog input from `/share/techmap.v' to AST representation.\nGenerating RTLIL representation for module `\\_90_simplemap_bool_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_reduce_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_logic_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_compare_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_various'.\nGenerating RTLIL representation for module `\\_90_simplemap_registers'.\nGenerating RTLIL representation for module `\\_90_shift_ops_shr_shl_sshl_sshr'.\nGenerating RTLIL representation for module `\\_90_shift_shiftx'.\nGenerating RTLIL representation for module `\\_90_fa'.\nGenerating RTLIL representation for module `\\_90_lcu_brent_kung'.\nGenerating RTLIL representation for module `\\_90_alu'.\nGenerating RTLIL representation for module `\\_90_macc'.\nGenerating RTLIL representation for module `\\_90_alumacc'.\nGenerating RTLIL representation for module `$__div_mod_u'.\nGenerating RTLIL representation for module `$__div_mod_trunc'.\nGenerating RTLIL representation for module `\\_90_div'.\nGenerating RTLIL representation for module `\\_90_mod'.\nGenerating RTLIL representation for module `$__div_mod_floor'.\nGenerating RTLIL representation for module `\\_90_divfloor'.\nGenerating RTLIL representation for module `\\_90_modfloor'.\nGenerating RTLIL representation for module `\\_90_pow'.\nGenerating RTLIL representation for module `\\_90_demux'.\nGenerating RTLIL representation for module `\\_90_lut'.\nGenerating RTLIL representation for module `$connect'.\nGenerating RTLIL representation for module `$input_port'.\nSuccessfully finished Verilog frontend.\n\n5.2. Continuing TECHMAP pass.\nUsing extmapper simplemap for cells of type $not.\nUsing extmapper simplemap for cells of type $and.\nNo more expansions possible.\n<suppressed ~84 debug messages>\n\n6. Executing OPT pass (performing simple optimizations).\n\n6.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 7 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 7 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\nRemoved 0 unused cells and 3 unused wires.\n<suppressed ~1 debug messages>\n\n6.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 7 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\n\n6.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.16. Finished fast OPT passes. (There is nothing left to do.)\n\n7. Executing ABC pass (technology mapping using ABC).\n\n7.1. Extracting gate netlist of module `\\top' to `<abc-temp-dir>/input.blif'..\n",
+          "stderr": "",
+          "netlist": {
+            "creator": "Yosys 0.68 (git sha1 38e001a6f, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)",
+            "modules": {
+              "top": {
+                "attributes": {
+                  "top": "00000000000000000000000000000001",
+                  "src": "input.v:1.1-9.10"
+                },
+                "ports": {
+                  "x": {
+                    "direction": "input",
+                    "bits": [
+                      2,
+                      3
+                    ]
+                  },
+                  "y": {
+                    "direction": "output",
+                    "bits": [
+                      4,
+                      5
+                    ]
+                  }
+                },
+                "cells": {
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$87": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "Y": [
+                        6
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$88": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        3
+                      ],
+                      "Y": [
+                        7
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$89": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        6
+                      ],
+                      "B": [
+                        7
+                      ],
+                      "Y": [
+                        8
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$90": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        8
+                      ],
+                      "Y": [
+                        9
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$91": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "B": [
+                        3
+                      ],
+                      "Y": [
+                        5
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$92": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        5
+                      ],
+                      "Y": [
+                        10
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$93": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        9
+                      ],
+                      "B": [
+                        10
+                      ],
+                      "Y": [
+                        4
+                      ]
+                    }
+                  }
+                },
+                "netnames": {
+                  "$abc$86$new_n10": {
+                    "hide_name": 1,
+                    "bits": [
+                      10
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$86$new_n5": {
+                    "hide_name": 1,
+                    "bits": [
+                      6
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$86$new_n6": {
+                    "hide_name": 1,
+                    "bits": [
+                      7
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$86$new_n7": {
+                    "hide_name": 1,
+                    "bits": [
+                      8
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$86$new_n8": {
+                    "hide_name": 1,
+                    "bits": [
+                      9
+                    ],
+                    "attributes": {}
+                  },
+                  "n1": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:2.6-2.8"
+                    }
+                  },
+                  "n2": {
+                    "hide_name": 0,
+                    "bits": [
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:3.6-3.8"
+                    }
+                  },
+                  "n4": {
+                    "hide_name": 0,
+                    "bits": [
+                      5
+                    ],
+                    "attributes": {
+                      "src": "input.v:5.6-5.8"
+                    }
+                  },
+                  "n5": {
+                    "hide_name": 0,
+                    "bits": [
+                      4
+                    ],
+                    "attributes": {
+                      "src": "input.v:6.6-6.8"
+                    }
+                  },
+                  "x": {
+                    "hide_name": 0,
+                    "bits": [
+                      2,
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.24-1.25"
+                    }
+                  },
+                  "y": {
+                    "hide_name": 0,
+                    "bits": [
+                      4,
+                      5
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.40-1.41"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "test_status": "not_applicable_verification_fixture",
+      "worker_seconds": 2.5470000000000255,
+      "sampled_process_tree_peak_bytes": 186839040
+    },
+    {
+      "fixture": "full_adder",
+      "inputs": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "targets": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "models": {
+        "literal": {
+          "circuit": {
+            "inputs": 3,
+            "gates": [
+              [
+                1,
+                2
+              ],
+              [
+                8,
+                5
+              ],
+              [
+                10,
+                7
+              ],
+              [
+                1,
+                13
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                16,
+                5
+              ],
+              [
+                18,
+                7
+              ],
+              [
+                14,
+                21
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                24,
+                4
+              ],
+              [
+                26,
+                7
+              ],
+              [
+                22,
+                29
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                32,
+                4
+              ],
+              [
+                34,
+                7
+              ],
+              [
+                30,
+                37
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                40,
+                5
+              ],
+              [
+                42,
+                6
+              ],
+              [
+                38,
+                45
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                48,
+                5
+              ],
+              [
+                50,
+                6
+              ],
+              [
+                46,
+                53
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                56,
+                4
+              ],
+              [
+                58,
+                6
+              ],
+              [
+                54,
+                61
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                64,
+                4
+              ],
+              [
+                66,
+                6
+              ],
+              [
+                62,
+                69
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                72,
+                4
+              ],
+              [
+                74,
+                7
+              ],
+              [
+                1,
+                77
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                80,
+                4
+              ],
+              [
+                82,
+                7
+              ],
+              [
+                78,
+                85
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                88,
+                5
+              ],
+              [
+                90,
+                6
+              ],
+              [
+                86,
+                93
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                96,
+                5
+              ],
+              [
+                98,
+                6
+              ],
+              [
+                94,
+                101
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                104,
+                4
+              ],
+              [
+                106,
+                6
+              ],
+              [
+                102,
+                109
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                112,
+                4
+              ],
+              [
+                114,
+                6
+              ],
+              [
+                110,
+                117
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                120,
+                4
+              ],
+              [
+                122,
+                6
+              ],
+              [
+                118,
+                125
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                128,
+                4
+              ],
+              [
+                130,
+                6
+              ],
+              [
+                126,
+                133
+              ]
+            ],
+            "outputs": [
+              71,
+              135
+            ]
+          },
+          "metrics": {
+            "and_nodes": 64,
+            "depth": 11,
+            "inverted_edges": 54,
+            "serialized_bytes": 503
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "abc": {
+          "circuit": {
+            "inputs": 3,
+            "gates": [
+              [
+                2,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                9,
+                11
+              ],
+              [
+                6,
+                12
+              ],
+              [
+                7,
+                13
+              ],
+              [
+                15,
+                17
+              ],
+              [
+                9,
+                15
+              ]
+            ],
+            "outputs": [
+              18,
+              21
+            ]
+          },
+          "metrics": {
+            "and_nodes": 7,
+            "depth": 4,
+            "inverted_edges": 11,
+            "serialized_bytes": 88
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        }
+      },
+      "solver_attempts": [
+        {
+          "gates": 0,
+          "status": "unsat",
+          "seconds": 0.010390099999767699,
+          "reason": null
+        },
+        {
+          "gates": 1,
+          "status": "unsat",
+          "seconds": 0.013322499999958382,
+          "reason": null
+        },
+        {
+          "gates": 2,
+          "status": "unsat",
+          "seconds": 0.017587100000127975,
+          "reason": null
+        },
+        {
+          "gates": 3,
+          "status": "unsat",
+          "seconds": 0.06032770000001619,
+          "reason": null
+        },
+        {
+          "gates": 4,
+          "status": "unsat",
+          "seconds": 0.2695275999999467,
+          "reason": null
+        },
+        {
+          "gates": 5,
+          "status": "unsat",
+          "seconds": 1.1771658999996362,
+          "reason": null
+        },
+        {
+          "gates": 6,
+          "status": "unknown",
+          "seconds": 5.043789300000299,
+          "reason": "timeout"
+        }
+      ],
+      "solver_completed": false,
+      "backend_logs": {
+        "abc": {
+          "seconds": 1.0978064000000813,
+          "script": "read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json",
+          "stdout": "\n-- Running command `read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json' --\n\n1. Executing Verilog-2005 frontend: input.v\nParsing Verilog input from `input.v' to AST representation.\nGenerating RTLIL representation for module `\\top'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\top\n\n2.2. Analyzing design hierarchy..\nTop module:  \\top\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n<suppressed ~18 debug messages>\n\n4. Executing FLATTEN pass (flatten design).\n\n5. Executing TECHMAP pass (map to technology primitives).\n\n5.1. Executing Verilog-2005 frontend: /share/techmap.v\nParsing Verilog input from `/share/techmap.v' to AST representation.\nGenerating RTLIL representation for module `\\_90_simplemap_bool_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_reduce_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_logic_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_compare_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_various'.\nGenerating RTLIL representation for module `\\_90_simplemap_registers'.\nGenerating RTLIL representation for module `\\_90_shift_ops_shr_shl_sshl_sshr'.\nGenerating RTLIL representation for module `\\_90_shift_shiftx'.\nGenerating RTLIL representation for module `\\_90_fa'.\nGenerating RTLIL representation for module `\\_90_lcu_brent_kung'.\nGenerating RTLIL representation for module `\\_90_alu'.\nGenerating RTLIL representation for module `\\_90_macc'.\nGenerating RTLIL representation for module `\\_90_alumacc'.\nGenerating RTLIL representation for module `$__div_mod_u'.\nGenerating RTLIL representation for module `$__div_mod_trunc'.\nGenerating RTLIL representation for module `\\_90_div'.\nGenerating RTLIL representation for module `\\_90_mod'.\nGenerating RTLIL representation for module `$__div_mod_floor'.\nGenerating RTLIL representation for module `\\_90_divfloor'.\nGenerating RTLIL representation for module `\\_90_modfloor'.\nGenerating RTLIL representation for module `\\_90_pow'.\nGenerating RTLIL representation for module `\\_90_demux'.\nGenerating RTLIL representation for module `\\_90_lut'.\nGenerating RTLIL representation for module `$connect'.\nGenerating RTLIL representation for module `$input_port'.\nSuccessfully finished Verilog frontend.\n\n5.2. Continuing TECHMAP pass.\nUsing extmapper simplemap for cells of type $not.\nUsing extmapper simplemap for cells of type $and.\nNo more expansions possible.\n<suppressed ~159 debug messages>\n\n6. Executing OPT pass (performing simple optimizations).\n\n6.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 82 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 62 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 51 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 42 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 37 cells of `\\top'.\nFinding duplicate cells in `\\top'.\n<suppressed ~135 debug messages>\nRemoved a total of 45 cells.\n\n6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 37 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\nRemoved 0 unused cells and 93 unused wires.\n<suppressed ~1 debug messages>\n\n6.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n<suppressed ~2 debug messages>\n\n6.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 35 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\n\n6.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.16. Finished fast OPT passes. (There is nothing left to do.)\n\n7. Executing ABC pass (technology mapping using ABC).\n\n7.1. Extracting gate netlist of module `\\top' to `<abc-temp-dir>/input.blif'..\n",
+          "stderr": "",
+          "netlist": {
+            "creator": "Yosys 0.68 (git sha1 38e001a6f, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)",
+            "modules": {
+              "top": {
+                "attributes": {
+                  "top": "00000000000000000000000000000001",
+                  "src": "input.v:1.1-71.10"
+                },
+                "ports": {
+                  "x": {
+                    "direction": "input",
+                    "bits": [
+                      2,
+                      3,
+                      4
+                    ]
+                  },
+                  "y": {
+                    "direction": "output",
+                    "bits": [
+                      5,
+                      6
+                    ]
+                  }
+                },
+                "cells": {
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$255": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        4
+                      ],
+                      "Y": [
+                        7
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$256": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "Y": [
+                        8
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$257": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        3
+                      ],
+                      "Y": [
+                        9
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$258": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "B": [
+                        3
+                      ],
+                      "Y": [
+                        10
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$259": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        10
+                      ],
+                      "Y": [
+                        11
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$260": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        8
+                      ],
+                      "B": [
+                        9
+                      ],
+                      "Y": [
+                        12
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$261": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        12
+                      ],
+                      "Y": [
+                        13
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$262": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        11
+                      ],
+                      "B": [
+                        13
+                      ],
+                      "Y": [
+                        14
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$263": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        14
+                      ],
+                      "Y": [
+                        15
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$264": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        4
+                      ],
+                      "B": [
+                        14
+                      ],
+                      "Y": [
+                        16
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$265": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        16
+                      ],
+                      "Y": [
+                        17
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$266": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        7
+                      ],
+                      "B": [
+                        15
+                      ],
+                      "Y": [
+                        18
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$267": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        18
+                      ],
+                      "Y": [
+                        19
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$268": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        17
+                      ],
+                      "B": [
+                        19
+                      ],
+                      "Y": [
+                        5
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$269": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        11
+                      ],
+                      "B": [
+                        17
+                      ],
+                      "Y": [
+                        20
+                      ]
+                    }
+                  },
+                  "$abc$254$auto$blifparse.cc:397:parse_blif$270": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        20
+                      ],
+                      "Y": [
+                        6
+                      ]
+                    }
+                  }
+                },
+                "netnames": {
+                  "$abc$254$new_n10": {
+                    "hide_name": 1,
+                    "bits": [
+                      11
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n11": {
+                    "hide_name": 1,
+                    "bits": [
+                      12
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n12": {
+                    "hide_name": 1,
+                    "bits": [
+                      13
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n13": {
+                    "hide_name": 1,
+                    "bits": [
+                      14
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n14": {
+                    "hide_name": 1,
+                    "bits": [
+                      15
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n15": {
+                    "hide_name": 1,
+                    "bits": [
+                      16
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n16": {
+                    "hide_name": 1,
+                    "bits": [
+                      17
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n17": {
+                    "hide_name": 1,
+                    "bits": [
+                      18
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n18": {
+                    "hide_name": 1,
+                    "bits": [
+                      19
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n20": {
+                    "hide_name": 1,
+                    "bits": [
+                      20
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n6": {
+                    "hide_name": 1,
+                    "bits": [
+                      7
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n7": {
+                    "hide_name": 1,
+                    "bits": [
+                      8
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n8": {
+                    "hide_name": 1,
+                    "bits": [
+                      9
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$254$new_n9": {
+                    "hide_name": 1,
+                    "bits": [
+                      10
+                    ],
+                    "attributes": {}
+                  },
+                  "n1": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:2.6-2.8"
+                    }
+                  },
+                  "n2": {
+                    "hide_name": 0,
+                    "bits": [
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:3.6-3.8"
+                    }
+                  },
+                  "n28": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:29.6-29.9"
+                    }
+                  },
+                  "n3": {
+                    "hide_name": 0,
+                    "bits": [
+                      4
+                    ],
+                    "attributes": {
+                      "src": "input.v:4.6-4.8"
+                    }
+                  },
+                  "n32": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:33.6-33.9"
+                    }
+                  },
+                  "n36": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:37.6-37.9"
+                    }
+                  },
+                  "n4": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:5.6-5.8"
+                    }
+                  },
+                  "n40": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:41.6-41.9"
+                    }
+                  },
+                  "n44": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:45.6-45.9"
+                    }
+                  },
+                  "n48": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:49.6-49.9"
+                    }
+                  },
+                  "n60": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:61.6-61.9"
+                    }
+                  },
+                  "n64": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:65.6-65.9"
+                    }
+                  },
+                  "n8": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:9.6-9.8"
+                    }
+                  },
+                  "x": {
+                    "hide_name": 0,
+                    "bits": [
+                      2,
+                      3,
+                      4
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.24-1.25"
+                    }
+                  },
+                  "y": {
+                    "hide_name": 0,
+                    "bits": [
+                      5,
+                      6
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.40-1.41"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "test_status": "not_applicable_verification_fixture",
+      "worker_seconds": 8.110000000000127,
+      "sampled_process_tree_peak_bytes": 158769152
+    },
+    {
+      "fixture": "majority3",
+      "inputs": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "targets": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "models": {
+        "literal": {
+          "circuit": {
+            "inputs": 3,
+            "gates": [
+              [
+                1,
+                2
+              ],
+              [
+                8,
+                4
+              ],
+              [
+                10,
+                7
+              ],
+              [
+                1,
+                13
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                16,
+                4
+              ],
+              [
+                18,
+                7
+              ],
+              [
+                14,
+                21
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                24,
+                5
+              ],
+              [
+                26,
+                6
+              ],
+              [
+                22,
+                29
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                32,
+                5
+              ],
+              [
+                34,
+                6
+              ],
+              [
+                30,
+                37
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                40,
+                4
+              ],
+              [
+                42,
+                6
+              ],
+              [
+                38,
+                45
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                48,
+                4
+              ],
+              [
+                50,
+                6
+              ],
+              [
+                46,
+                53
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                56,
+                4
+              ],
+              [
+                58,
+                6
+              ],
+              [
+                54,
+                61
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                64,
+                4
+              ],
+              [
+                66,
+                6
+              ],
+              [
+                62,
+                69
+              ]
+            ],
+            "outputs": [
+              71
+            ]
+          },
+          "metrics": {
+            "and_nodes": 32,
+            "depth": 11,
+            "inverted_edges": 24,
+            "serialized_bytes": 259
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "abc": {
+          "circuit": {
+            "inputs": 3,
+            "gates": [
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                7
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                11,
+                13
+              ]
+            ],
+            "outputs": [
+              14
+            ]
+          },
+          "metrics": {
+            "and_nodes": 4,
+            "depth": 3,
+            "inverted_edges": 6,
+            "serialized_bytes": 63
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "exact": {
+          "circuit": {
+            "inputs": 3,
+            "gates": [
+              [
+                3,
+                5
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                7,
+                11
+              ],
+              [
+                9,
+                13
+              ]
+            ],
+            "outputs": [
+              14
+            ]
+          },
+          "metrics": {
+            "and_nodes": 4,
+            "depth": 3,
+            "inverted_edges": 6,
+            "serialized_bytes": 63
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "exact_abc": {
+          "circuit": {
+            "inputs": 3,
+            "gates": [
+              [
+                6,
+                4
+              ],
+              [
+                7,
+                5
+              ],
+              [
+                3,
+                9
+              ],
+              [
+                11,
+                13
+              ]
+            ],
+            "outputs": [
+              14
+            ]
+          },
+          "metrics": {
+            "and_nodes": 4,
+            "depth": 3,
+            "inverted_edges": 6,
+            "serialized_bytes": 63
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        }
+      },
+      "solver_attempts": [
+        {
+          "gates": 0,
+          "status": "unsat",
+          "seconds": 0.008703800000148476,
+          "reason": null
+        },
+        {
+          "gates": 1,
+          "status": "unsat",
+          "seconds": 0.010503200000130164,
+          "reason": null
+        },
+        {
+          "gates": 2,
+          "status": "unsat",
+          "seconds": 0.019352400000116177,
+          "reason": null
+        },
+        {
+          "gates": 3,
+          "status": "unsat",
+          "seconds": 0.0833996000001207,
+          "reason": null
+        },
+        {
+          "gates": 4,
+          "status": "sat",
+          "seconds": 0.25052240000013626,
+          "reason": null
+        }
+      ],
+      "solver_completed": true,
+      "backend_logs": {
+        "abc": {
+          "seconds": 0.8301974999999402,
+          "script": "read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json",
+          "stdout": "\n-- Running command `read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json' --\n\n1. Executing Verilog-2005 frontend: input.v\nParsing Verilog input from `input.v' to AST representation.\nGenerating RTLIL representation for module `\\top'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\top\n\n2.2. Analyzing design hierarchy..\nTop module:  \\top\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n<suppressed ~9 debug messages>\n\n4. Executing FLATTEN pass (flatten design).\n\n5. Executing TECHMAP pass (map to technology primitives).\n\n5.1. Executing Verilog-2005 frontend: /share/techmap.v\nParsing Verilog input from `/share/techmap.v' to AST representation.\nGenerating RTLIL representation for module `\\_90_simplemap_bool_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_reduce_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_logic_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_compare_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_various'.\nGenerating RTLIL representation for module `\\_90_simplemap_registers'.\nGenerating RTLIL representation for module `\\_90_shift_ops_shr_shl_sshl_sshr'.\nGenerating RTLIL representation for module `\\_90_shift_shiftx'.\nGenerating RTLIL representation for module `\\_90_fa'.\nGenerating RTLIL representation for module `\\_90_lcu_brent_kung'.\nGenerating RTLIL representation for module `\\_90_alu'.\nGenerating RTLIL representation for module `\\_90_macc'.\nGenerating RTLIL representation for module `\\_90_alumacc'.\nGenerating RTLIL representation for module `$__div_mod_u'.\nGenerating RTLIL representation for module `$__div_mod_trunc'.\nGenerating RTLIL representation for module `\\_90_div'.\nGenerating RTLIL representation for module `\\_90_mod'.\nGenerating RTLIL representation for module `$__div_mod_floor'.\nGenerating RTLIL representation for module `\\_90_divfloor'.\nGenerating RTLIL representation for module `\\_90_modfloor'.\nGenerating RTLIL representation for module `\\_90_pow'.\nGenerating RTLIL representation for module `\\_90_demux'.\nGenerating RTLIL representation for module `\\_90_lut'.\nGenerating RTLIL representation for module `$connect'.\nGenerating RTLIL representation for module `$input_port'.\nSuccessfully finished Verilog frontend.\n\n5.2. Continuing TECHMAP pass.\nUsing extmapper simplemap for cells of type $and.\nUsing extmapper simplemap for cells of type $not.\nNo more expansions possible.\n<suppressed ~115 debug messages>\n\n6. Executing OPT pass (performing simple optimizations).\n\n6.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 38 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 32 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 28 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 24 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 22 cells of `\\top'.\nFinding duplicate cells in `\\top'.\n<suppressed ~48 debug messages>\nRemoved a total of 16 cells.\n\n6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 22 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\nRemoved 0 unused cells and 42 unused wires.\n<suppressed ~1 debug messages>\n\n6.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n<suppressed ~1 debug messages>\n\n6.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 21 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\n\n6.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.16. Finished fast OPT passes. (There is nothing left to do.)\n\n7. Executing ABC pass (technology mapping using ABC).\n\n7.1. Extracting gate netlist of module `\\top' to `<abc-temp-dir>/input.blif'..\n",
+          "stderr": "",
+          "netlist": {
+            "creator": "Yosys 0.68 (git sha1 38e001a6f, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)",
+            "modules": {
+              "top": {
+                "attributes": {
+                  "top": "00000000000000000000000000000001",
+                  "src": "input.v:1.1-38.10"
+                },
+                "ports": {
+                  "x": {
+                    "direction": "input",
+                    "bits": [
+                      2,
+                      3,
+                      4
+                    ]
+                  },
+                  "y": {
+                    "direction": "output",
+                    "bits": [
+                      5
+                    ]
+                  }
+                },
+                "cells": {
+                  "$abc$157$auto$blifparse.cc:397:parse_blif$158": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "Y": [
+                        6
+                      ]
+                    }
+                  },
+                  "$abc$157$auto$blifparse.cc:397:parse_blif$159": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        3
+                      ],
+                      "Y": [
+                        7
+                      ]
+                    }
+                  },
+                  "$abc$157$auto$blifparse.cc:397:parse_blif$160": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        4
+                      ],
+                      "Y": [
+                        8
+                      ]
+                    }
+                  },
+                  "$abc$157$auto$blifparse.cc:397:parse_blif$161": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "B": [
+                        4
+                      ],
+                      "Y": [
+                        9
+                      ]
+                    }
+                  },
+                  "$abc$157$auto$blifparse.cc:397:parse_blif$162": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        9
+                      ],
+                      "Y": [
+                        10
+                      ]
+                    }
+                  },
+                  "$abc$157$auto$blifparse.cc:397:parse_blif$163": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        6
+                      ],
+                      "B": [
+                        8
+                      ],
+                      "Y": [
+                        11
+                      ]
+                    }
+                  },
+                  "$abc$157$auto$blifparse.cc:397:parse_blif$164": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        11
+                      ],
+                      "Y": [
+                        12
+                      ]
+                    }
+                  },
+                  "$abc$157$auto$blifparse.cc:397:parse_blif$165": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        7
+                      ],
+                      "B": [
+                        10
+                      ],
+                      "Y": [
+                        13
+                      ]
+                    }
+                  },
+                  "$abc$157$auto$blifparse.cc:397:parse_blif$166": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        13
+                      ],
+                      "Y": [
+                        14
+                      ]
+                    }
+                  },
+                  "$abc$157$auto$blifparse.cc:397:parse_blif$167": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        12
+                      ],
+                      "B": [
+                        14
+                      ],
+                      "Y": [
+                        5
+                      ]
+                    }
+                  }
+                },
+                "netnames": {
+                  "$abc$157$new_n10": {
+                    "hide_name": 1,
+                    "bits": [
+                      11
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$157$new_n11": {
+                    "hide_name": 1,
+                    "bits": [
+                      12
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$157$new_n12": {
+                    "hide_name": 1,
+                    "bits": [
+                      13
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$157$new_n13": {
+                    "hide_name": 1,
+                    "bits": [
+                      14
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$157$new_n5": {
+                    "hide_name": 1,
+                    "bits": [
+                      6
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$157$new_n6": {
+                    "hide_name": 1,
+                    "bits": [
+                      7
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$157$new_n7": {
+                    "hide_name": 1,
+                    "bits": [
+                      8
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$157$new_n8": {
+                    "hide_name": 1,
+                    "bits": [
+                      9
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$157$new_n9": {
+                    "hide_name": 1,
+                    "bits": [
+                      10
+                    ],
+                    "attributes": {}
+                  },
+                  "n1": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:2.6-2.8"
+                    }
+                  },
+                  "n12": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:13.6-13.9"
+                    }
+                  },
+                  "n16": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:17.6-17.9"
+                    }
+                  },
+                  "n2": {
+                    "hide_name": 0,
+                    "bits": [
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:3.6-3.8"
+                    }
+                  },
+                  "n28": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:29.6-29.9"
+                    }
+                  },
+                  "n3": {
+                    "hide_name": 0,
+                    "bits": [
+                      4
+                    ],
+                    "attributes": {
+                      "src": "input.v:4.6-4.8"
+                    }
+                  },
+                  "n32": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:33.6-33.9"
+                    }
+                  },
+                  "n4": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:5.6-5.8"
+                    }
+                  },
+                  "n8": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:9.6-9.8"
+                    }
+                  },
+                  "x": {
+                    "hide_name": 0,
+                    "bits": [
+                      2,
+                      3,
+                      4
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.24-1.25"
+                    }
+                  },
+                  "y": {
+                    "hide_name": 0,
+                    "bits": [
+                      5
+                    ],
+                    "attributes": {
+                      "single_bit_vector": "00000000000000000000000000000001",
+                      "src": "input.v:1.40-1.41"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "exact_abc": {
+          "seconds": 0.7809345000000576,
+          "script": "read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json",
+          "stdout": "\n-- Running command `read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json' --\n\n1. Executing Verilog-2005 frontend: input.v\nParsing Verilog input from `input.v' to AST representation.\nGenerating RTLIL representation for module `\\top'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\top\n\n2.2. Analyzing design hierarchy..\nTop module:  \\top\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n4. Executing FLATTEN pass (flatten design).\n\n5. Executing TECHMAP pass (map to technology primitives).\n\n5.1. Executing Verilog-2005 frontend: /share/techmap.v\nParsing Verilog input from `/share/techmap.v' to AST representation.\nGenerating RTLIL representation for module `\\_90_simplemap_bool_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_reduce_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_logic_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_compare_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_various'.\nGenerating RTLIL representation for module `\\_90_simplemap_registers'.\nGenerating RTLIL representation for module `\\_90_shift_ops_shr_shl_sshl_sshr'.\nGenerating RTLIL representation for module `\\_90_shift_shiftx'.\nGenerating RTLIL representation for module `\\_90_fa'.\nGenerating RTLIL representation for module `\\_90_lcu_brent_kung'.\nGenerating RTLIL representation for module `\\_90_alu'.\nGenerating RTLIL representation for module `\\_90_macc'.\nGenerating RTLIL representation for module `\\_90_alumacc'.\nGenerating RTLIL representation for module `$__div_mod_u'.\nGenerating RTLIL representation for module `$__div_mod_trunc'.\nGenerating RTLIL representation for module `\\_90_div'.\nGenerating RTLIL representation for module `\\_90_mod'.\nGenerating RTLIL representation for module `$__div_mod_floor'.\nGenerating RTLIL representation for module `\\_90_divfloor'.\nGenerating RTLIL representation for module `\\_90_modfloor'.\nGenerating RTLIL representation for module `\\_90_pow'.\nGenerating RTLIL representation for module `\\_90_demux'.\nGenerating RTLIL representation for module `\\_90_lut'.\nGenerating RTLIL representation for module `$connect'.\nGenerating RTLIL representation for module `$input_port'.\nSuccessfully finished Verilog frontend.\n\n5.2. Continuing TECHMAP pass.\nUsing extmapper simplemap for cells of type $not.\nUsing extmapper simplemap for cells of type $and.\nNo more expansions possible.\n<suppressed ~87 debug messages>\n\n6. Executing OPT pass (performing simple optimizations).\n\n6.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 10 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 10 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\nRemoved 0 unused cells and 4 unused wires.\n<suppressed ~1 debug messages>\n\n6.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 10 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\n\n6.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.16. Finished fast OPT passes. (There is nothing left to do.)\n\n7. Executing ABC pass (technology mapping using ABC).\n\n7.1. Extracting gate netlist of module `\\top' to `<abc-temp-dir>/input.blif'..\n",
+          "stderr": "",
+          "netlist": {
+            "creator": "Yosys 0.68 (git sha1 38e001a6f, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)",
+            "modules": {
+              "top": {
+                "attributes": {
+                  "top": "00000000000000000000000000000001",
+                  "src": "input.v:1.1-10.10"
+                },
+                "ports": {
+                  "x": {
+                    "direction": "input",
+                    "bits": [
+                      2,
+                      3,
+                      4
+                    ]
+                  },
+                  "y": {
+                    "direction": "output",
+                    "bits": [
+                      5
+                    ]
+                  }
+                },
+                "cells": {
+                  "$abc$92$auto$blifparse.cc:397:parse_blif$100": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        6
+                      ],
+                      "B": [
+                        7
+                      ],
+                      "Y": [
+                        8
+                      ]
+                    }
+                  },
+                  "$abc$92$auto$blifparse.cc:397:parse_blif$101": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        8
+                      ],
+                      "Y": [
+                        9
+                      ]
+                    }
+                  },
+                  "$abc$92$auto$blifparse.cc:397:parse_blif$102": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        10
+                      ],
+                      "B": [
+                        9
+                      ],
+                      "Y": [
+                        5
+                      ]
+                    }
+                  },
+                  "$abc$92$auto$blifparse.cc:397:parse_blif$93": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        4
+                      ],
+                      "Y": [
+                        11
+                      ]
+                    }
+                  },
+                  "$abc$92$auto$blifparse.cc:397:parse_blif$94": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "Y": [
+                        6
+                      ]
+                    }
+                  },
+                  "$abc$92$auto$blifparse.cc:397:parse_blif$95": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        3
+                      ],
+                      "Y": [
+                        12
+                      ]
+                    }
+                  },
+                  "$abc$92$auto$blifparse.cc:397:parse_blif$96": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        4
+                      ],
+                      "B": [
+                        3
+                      ],
+                      "Y": [
+                        13
+                      ]
+                    }
+                  },
+                  "$abc$92$auto$blifparse.cc:397:parse_blif$97": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        13
+                      ],
+                      "Y": [
+                        7
+                      ]
+                    }
+                  },
+                  "$abc$92$auto$blifparse.cc:397:parse_blif$98": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        11
+                      ],
+                      "B": [
+                        12
+                      ],
+                      "Y": [
+                        14
+                      ]
+                    }
+                  },
+                  "$abc$92$auto$blifparse.cc:397:parse_blif$99": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        14
+                      ],
+                      "Y": [
+                        10
+                      ]
+                    }
+                  }
+                },
+                "netnames": {
+                  "$abc$92$new_n10": {
+                    "hide_name": 1,
+                    "bits": [
+                      14
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$92$new_n11": {
+                    "hide_name": 1,
+                    "bits": [
+                      10
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$92$new_n12": {
+                    "hide_name": 1,
+                    "bits": [
+                      8
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$92$new_n13": {
+                    "hide_name": 1,
+                    "bits": [
+                      9
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$92$new_n5": {
+                    "hide_name": 1,
+                    "bits": [
+                      11
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$92$new_n6": {
+                    "hide_name": 1,
+                    "bits": [
+                      6
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$92$new_n7": {
+                    "hide_name": 1,
+                    "bits": [
+                      12
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$92$new_n8": {
+                    "hide_name": 1,
+                    "bits": [
+                      13
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$92$new_n9": {
+                    "hide_name": 1,
+                    "bits": [
+                      7
+                    ],
+                    "attributes": {}
+                  },
+                  "n1": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:2.6-2.8"
+                    }
+                  },
+                  "n2": {
+                    "hide_name": 0,
+                    "bits": [
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:3.6-3.8"
+                    }
+                  },
+                  "n3": {
+                    "hide_name": 0,
+                    "bits": [
+                      4
+                    ],
+                    "attributes": {
+                      "src": "input.v:4.6-4.8"
+                    }
+                  },
+                  "n7": {
+                    "hide_name": 0,
+                    "bits": [
+                      5
+                    ],
+                    "attributes": {
+                      "src": "input.v:8.6-8.8"
+                    }
+                  },
+                  "x": {
+                    "hide_name": 0,
+                    "bits": [
+                      2,
+                      3,
+                      4
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.24-1.25"
+                    }
+                  },
+                  "y": {
+                    "hide_name": 0,
+                    "bits": [
+                      5
+                    ],
+                    "attributes": {
+                      "single_bit_vector": "00000000000000000000000000000001",
+                      "src": "input.v:1.40-1.41"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "test_status": "not_applicable_verification_fixture",
+      "worker_seconds": 2.405999999999949,
+      "sampled_process_tree_peak_bytes": 184655872
+    },
+    {
+      "fixture": "mux2",
+      "inputs": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "targets": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "models": {
+        "literal": {
+          "circuit": {
+            "inputs": 3,
+            "gates": [
+              [
+                1,
+                3
+              ],
+              [
+                8,
+                4
+              ],
+              [
+                10,
+                7
+              ],
+              [
+                1,
+                13
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                16,
+                4
+              ],
+              [
+                18,
+                7
+              ],
+              [
+                14,
+                21
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                24,
+                5
+              ],
+              [
+                26,
+                6
+              ],
+              [
+                22,
+                29
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                32,
+                5
+              ],
+              [
+                34,
+                6
+              ],
+              [
+                30,
+                37
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                40,
+                4
+              ],
+              [
+                42,
+                6
+              ],
+              [
+                38,
+                45
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                48,
+                4
+              ],
+              [
+                50,
+                6
+              ],
+              [
+                46,
+                53
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                56,
+                4
+              ],
+              [
+                58,
+                6
+              ],
+              [
+                54,
+                61
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                64,
+                4
+              ],
+              [
+                66,
+                6
+              ],
+              [
+                62,
+                69
+              ]
+            ],
+            "outputs": [
+              71
+            ]
+          },
+          "metrics": {
+            "and_nodes": 32,
+            "depth": 11,
+            "inverted_edges": 26,
+            "serialized_bytes": 259
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "abc": {
+          "circuit": {
+            "inputs": 3,
+            "gates": [
+              [
+                5,
+                3
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                9,
+                11
+              ]
+            ],
+            "outputs": [
+              12
+            ]
+          },
+          "metrics": {
+            "and_nodes": 3,
+            "depth": 2,
+            "inverted_edges": 5,
+            "serialized_bytes": 56
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "exact": {
+          "circuit": {
+            "inputs": 3,
+            "gates": [
+              [
+                3,
+                4
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                9,
+                11
+              ]
+            ],
+            "outputs": [
+              13
+            ]
+          },
+          "metrics": {
+            "and_nodes": 3,
+            "depth": 2,
+            "inverted_edges": 4,
+            "serialized_bytes": 56
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        },
+        "exact_abc": {
+          "circuit": {
+            "inputs": 3,
+            "gates": [
+              [
+                3,
+                5
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                9,
+                11
+              ]
+            ],
+            "outputs": [
+              12
+            ]
+          },
+          "metrics": {
+            "and_nodes": 3,
+            "depth": 2,
+            "inverted_edges": 5,
+            "serialized_bytes": 56
+          },
+          "equivalence_pass": true,
+          "mutation_detected": true
+        }
+      },
+      "solver_attempts": [
+        {
+          "gates": 0,
+          "status": "unsat",
+          "seconds": 0.010154099999908794,
+          "reason": null
+        },
+        {
+          "gates": 1,
+          "status": "unsat",
+          "seconds": 0.010700199999973847,
+          "reason": null
+        },
+        {
+          "gates": 2,
+          "status": "unsat",
+          "seconds": 0.019207700000151817,
+          "reason": null
+        },
+        {
+          "gates": 3,
+          "status": "sat",
+          "seconds": 0.061870600000020204,
+          "reason": null
+        }
+      ],
+      "solver_completed": true,
+      "backend_logs": {
+        "abc": {
+          "seconds": 0.8538217000000259,
+          "script": "read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json",
+          "stdout": "\n-- Running command `read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json' --\n\n1. Executing Verilog-2005 frontend: input.v\nParsing Verilog input from `input.v' to AST representation.\nGenerating RTLIL representation for module `\\top'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\top\n\n2.2. Analyzing design hierarchy..\nTop module:  \\top\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n<suppressed ~9 debug messages>\n\n4. Executing FLATTEN pass (flatten design).\n\n5. Executing TECHMAP pass (map to technology primitives).\n\n5.1. Executing Verilog-2005 frontend: /share/techmap.v\nParsing Verilog input from `/share/techmap.v' to AST representation.\nGenerating RTLIL representation for module `\\_90_simplemap_bool_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_reduce_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_logic_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_compare_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_various'.\nGenerating RTLIL representation for module `\\_90_simplemap_registers'.\nGenerating RTLIL representation for module `\\_90_shift_ops_shr_shl_sshl_sshr'.\nGenerating RTLIL representation for module `\\_90_shift_shiftx'.\nGenerating RTLIL representation for module `\\_90_fa'.\nGenerating RTLIL representation for module `\\_90_lcu_brent_kung'.\nGenerating RTLIL representation for module `\\_90_alu'.\nGenerating RTLIL representation for module `\\_90_macc'.\nGenerating RTLIL representation for module `\\_90_alumacc'.\nGenerating RTLIL representation for module `$__div_mod_u'.\nGenerating RTLIL representation for module `$__div_mod_trunc'.\nGenerating RTLIL representation for module `\\_90_div'.\nGenerating RTLIL representation for module `\\_90_mod'.\nGenerating RTLIL representation for module `$__div_mod_floor'.\nGenerating RTLIL representation for module `\\_90_divfloor'.\nGenerating RTLIL representation for module `\\_90_modfloor'.\nGenerating RTLIL representation for module `\\_90_pow'.\nGenerating RTLIL representation for module `\\_90_demux'.\nGenerating RTLIL representation for module `\\_90_lut'.\nGenerating RTLIL representation for module `$connect'.\nGenerating RTLIL representation for module `$input_port'.\nSuccessfully finished Verilog frontend.\n\n5.2. Continuing TECHMAP pass.\nUsing extmapper simplemap for cells of type $not.\nUsing extmapper simplemap for cells of type $and.\nNo more expansions possible.\n<suppressed ~117 debug messages>\n\n6. Executing OPT pass (performing simple optimizations).\n\n6.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 40 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 34 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 29 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 25 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nComputing hashes of 22 cells of `\\top'.\nFinding duplicate cells in `\\top'.\n<suppressed ~54 debug messages>\nRemoved a total of 18 cells.\n\n6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 22 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\nRemoved 0 unused cells and 44 unused wires.\n<suppressed ~1 debug messages>\n\n6.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n<suppressed ~1 debug messages>\n\n6.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 21 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\n\n6.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.16. Finished fast OPT passes. (There is nothing left to do.)\n\n7. Executing ABC pass (technology mapping using ABC).\n\n7.1. Extracting gate netlist of module `\\top' to `<abc-temp-dir>/input.blif'..\n",
+          "stderr": "",
+          "netlist": {
+            "creator": "Yosys 0.68 (git sha1 38e001a6f, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)",
+            "modules": {
+              "top": {
+                "attributes": {
+                  "top": "00000000000000000000000000000001",
+                  "src": "input.v:1.1-38.10"
+                },
+                "ports": {
+                  "x": {
+                    "direction": "input",
+                    "bits": [
+                      2,
+                      3,
+                      4
+                    ]
+                  },
+                  "y": {
+                    "direction": "output",
+                    "bits": [
+                      5
+                    ]
+                  }
+                },
+                "cells": {
+                  "$abc$161$auto$blifparse.cc:397:parse_blif$162": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        3
+                      ],
+                      "Y": [
+                        6
+                      ]
+                    }
+                  },
+                  "$abc$161$auto$blifparse.cc:397:parse_blif$163": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "Y": [
+                        7
+                      ]
+                    }
+                  },
+                  "$abc$161$auto$blifparse.cc:397:parse_blif$164": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        4
+                      ],
+                      "Y": [
+                        8
+                      ]
+                    }
+                  },
+                  "$abc$161$auto$blifparse.cc:397:parse_blif$165": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        6
+                      ],
+                      "B": [
+                        7
+                      ],
+                      "Y": [
+                        9
+                      ]
+                    }
+                  },
+                  "$abc$161$auto$blifparse.cc:397:parse_blif$166": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        9
+                      ],
+                      "Y": [
+                        10
+                      ]
+                    }
+                  },
+                  "$abc$161$auto$blifparse.cc:397:parse_blif$167": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "B": [
+                        8
+                      ],
+                      "Y": [
+                        11
+                      ]
+                    }
+                  },
+                  "$abc$161$auto$blifparse.cc:397:parse_blif$168": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        11
+                      ],
+                      "Y": [
+                        12
+                      ]
+                    }
+                  },
+                  "$abc$161$auto$blifparse.cc:397:parse_blif$169": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        10
+                      ],
+                      "B": [
+                        12
+                      ],
+                      "Y": [
+                        5
+                      ]
+                    }
+                  }
+                },
+                "netnames": {
+                  "$abc$161$new_n10": {
+                    "hide_name": 1,
+                    "bits": [
+                      11
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$161$new_n11": {
+                    "hide_name": 1,
+                    "bits": [
+                      12
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$161$new_n5": {
+                    "hide_name": 1,
+                    "bits": [
+                      6
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$161$new_n6": {
+                    "hide_name": 1,
+                    "bits": [
+                      7
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$161$new_n7": {
+                    "hide_name": 1,
+                    "bits": [
+                      8
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$161$new_n8": {
+                    "hide_name": 1,
+                    "bits": [
+                      9
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$161$new_n9": {
+                    "hide_name": 1,
+                    "bits": [
+                      10
+                    ],
+                    "attributes": {}
+                  },
+                  "n1": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:2.6-2.8"
+                    }
+                  },
+                  "n12": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:13.6-13.9"
+                    }
+                  },
+                  "n16": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:17.6-17.9"
+                    }
+                  },
+                  "n2": {
+                    "hide_name": 0,
+                    "bits": [
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:3.6-3.8"
+                    }
+                  },
+                  "n28": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:29.6-29.9"
+                    }
+                  },
+                  "n3": {
+                    "hide_name": 0,
+                    "bits": [
+                      4
+                    ],
+                    "attributes": {
+                      "src": "input.v:4.6-4.8"
+                    }
+                  },
+                  "n32": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:33.6-33.9"
+                    }
+                  },
+                  "x": {
+                    "hide_name": 0,
+                    "bits": [
+                      2,
+                      3,
+                      4
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.24-1.25"
+                    }
+                  },
+                  "y": {
+                    "hide_name": 0,
+                    "bits": [
+                      5
+                    ],
+                    "attributes": {
+                      "single_bit_vector": "00000000000000000000000000000001",
+                      "src": "input.v:1.40-1.41"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "exact_abc": {
+          "seconds": 0.7762496999998802,
+          "script": "read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json",
+          "stdout": "\n-- Running command `read_verilog input.v; hierarchy -top top; proc; flatten; techmap; opt; abc -g AND; clean; write_json mapped.json' --\n\n1. Executing Verilog-2005 frontend: input.v\nParsing Verilog input from `input.v' to AST representation.\nGenerating RTLIL representation for module `\\top'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\top\n\n2.2. Analyzing design hierarchy..\nTop module:  \\top\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n4. Executing FLATTEN pass (flatten design).\n\n5. Executing TECHMAP pass (map to technology primitives).\n\n5.1. Executing Verilog-2005 frontend: /share/techmap.v\nParsing Verilog input from `/share/techmap.v' to AST representation.\nGenerating RTLIL representation for module `\\_90_simplemap_bool_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_reduce_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_logic_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_compare_ops'.\nGenerating RTLIL representation for module `\\_90_simplemap_various'.\nGenerating RTLIL representation for module `\\_90_simplemap_registers'.\nGenerating RTLIL representation for module `\\_90_shift_ops_shr_shl_sshl_sshr'.\nGenerating RTLIL representation for module `\\_90_shift_shiftx'.\nGenerating RTLIL representation for module `\\_90_fa'.\nGenerating RTLIL representation for module `\\_90_lcu_brent_kung'.\nGenerating RTLIL representation for module `\\_90_alu'.\nGenerating RTLIL representation for module `\\_90_macc'.\nGenerating RTLIL representation for module `\\_90_alumacc'.\nGenerating RTLIL representation for module `$__div_mod_u'.\nGenerating RTLIL representation for module `$__div_mod_trunc'.\nGenerating RTLIL representation for module `\\_90_div'.\nGenerating RTLIL representation for module `\\_90_mod'.\nGenerating RTLIL representation for module `$__div_mod_floor'.\nGenerating RTLIL representation for module `\\_90_divfloor'.\nGenerating RTLIL representation for module `\\_90_modfloor'.\nGenerating RTLIL representation for module `\\_90_pow'.\nGenerating RTLIL representation for module `\\_90_demux'.\nGenerating RTLIL representation for module `\\_90_lut'.\nGenerating RTLIL representation for module `$connect'.\nGenerating RTLIL representation for module `$input_port'.\nSuccessfully finished Verilog frontend.\n\n5.2. Continuing TECHMAP pass.\nUsing extmapper simplemap for cells of type $not.\nUsing extmapper simplemap for cells of type $and.\nNo more expansions possible.\n<suppressed ~84 debug messages>\n\n6. Executing OPT pass (performing simple optimizations).\n\n6.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 7 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 7 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\nRemoved 0 unused cells and 4 unused wires.\n<suppressed ~1 debug messages>\n\n6.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\top..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\top.\nPerformed a total of 0 changes.\n\n6.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\top'.\nComputing hashes of 7 cells of `\\top'.\nFinding duplicate cells in `\\top'.\nRemoved a total of 0 cells.\n\n6.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n6.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\top..\n\n6.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module top.\n\n6.16. Finished fast OPT passes. (There is nothing left to do.)\n\n7. Executing ABC pass (technology mapping using ABC).\n\n7.1. Extracting gate netlist of module `\\top' to `<abc-temp-dir>/input.blif'..\n",
+          "stderr": "",
+          "netlist": {
+            "creator": "Yosys 0.68 (git sha1 38e001a6f, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)",
+            "modules": {
+              "top": {
+                "attributes": {
+                  "top": "00000000000000000000000000000001",
+                  "src": "input.v:1.1-9.10"
+                },
+                "ports": {
+                  "x": {
+                    "direction": "input",
+                    "bits": [
+                      2,
+                      3,
+                      4
+                    ]
+                  },
+                  "y": {
+                    "direction": "output",
+                    "bits": [
+                      5
+                    ]
+                  }
+                },
+                "cells": {
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$87": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "Y": [
+                        6
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$88": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        4
+                      ],
+                      "Y": [
+                        7
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$89": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        3
+                      ],
+                      "Y": [
+                        8
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$90": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        6
+                      ],
+                      "B": [
+                        8
+                      ],
+                      "Y": [
+                        9
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$91": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        9
+                      ],
+                      "Y": [
+                        10
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$92": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        2
+                      ],
+                      "B": [
+                        7
+                      ],
+                      "Y": [
+                        11
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$93": {
+                    "hide_name": 1,
+                    "type": "$_NOT_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        11
+                      ],
+                      "Y": [
+                        12
+                      ]
+                    }
+                  },
+                  "$abc$86$auto$blifparse.cc:397:parse_blif$94": {
+                    "hide_name": 1,
+                    "type": "$_AND_",
+                    "parameters": {},
+                    "attributes": {},
+                    "port_directions": {
+                      "A": "input",
+                      "B": "input",
+                      "Y": "output"
+                    },
+                    "connections": {
+                      "A": [
+                        10
+                      ],
+                      "B": [
+                        12
+                      ],
+                      "Y": [
+                        5
+                      ]
+                    }
+                  }
+                },
+                "netnames": {
+                  "$abc$86$new_n10": {
+                    "hide_name": 1,
+                    "bits": [
+                      11
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$86$new_n11": {
+                    "hide_name": 1,
+                    "bits": [
+                      12
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$86$new_n5": {
+                    "hide_name": 1,
+                    "bits": [
+                      6
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$86$new_n6": {
+                    "hide_name": 1,
+                    "bits": [
+                      7
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$86$new_n7": {
+                    "hide_name": 1,
+                    "bits": [
+                      8
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$86$new_n8": {
+                    "hide_name": 1,
+                    "bits": [
+                      9
+                    ],
+                    "attributes": {}
+                  },
+                  "$abc$86$new_n9": {
+                    "hide_name": 1,
+                    "bits": [
+                      10
+                    ],
+                    "attributes": {}
+                  },
+                  "n1": {
+                    "hide_name": 0,
+                    "bits": [
+                      2
+                    ],
+                    "attributes": {
+                      "src": "input.v:2.6-2.8"
+                    }
+                  },
+                  "n2": {
+                    "hide_name": 0,
+                    "bits": [
+                      3
+                    ],
+                    "attributes": {
+                      "src": "input.v:3.6-3.8"
+                    }
+                  },
+                  "n3": {
+                    "hide_name": 0,
+                    "bits": [
+                      4
+                    ],
+                    "attributes": {
+                      "src": "input.v:4.6-4.8"
+                    }
+                  },
+                  "x": {
+                    "hide_name": 0,
+                    "bits": [
+                      2,
+                      3,
+                      4
+                    ],
+                    "attributes": {
+                      "src": "input.v:1.24-1.25"
+                    }
+                  },
+                  "y": {
+                    "hide_name": 0,
+                    "bits": [
+                      5
+                    ],
+                    "attributes": {
+                      "single_bit_vector": "00000000000000000000000000000001",
+                      "src": "input.v:1.40-1.41"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "test_status": "not_applicable_verification_fixture",
+      "worker_seconds": 2.1720000000000255,
+      "sampled_process_tree_peak_bytes": 187547648
+    }
+  ],
+  "status": "incomplete_or_failed",
+  "evidence_type": "full_specification_verification"
+}

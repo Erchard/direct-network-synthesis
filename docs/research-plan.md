@@ -339,7 +339,10 @@ reopen a paused branch only when new evidence changes its expected value.
 Execution update 2026-09-07: [BM end-to-end report](dns05-bm-end-to-end-result.md)
 closed the memory gate negative; larger BM runs are paused. CS-A0 established
 V0 backend readiness with explicitly incomplete novelty coverage. The sole active
-new mechanism is [DCS-V0 verification](dcs-v0-protocol.md); C1/L1 remain queued.
+new mechanism was [DCS-V0 verification](dcs-v0-protocol.md), now evaluated with
+[one unresolved exact search and no added benefit over ABC](dcs-v0-result.md).
+No mechanism is currently running. Exact full-table search is paused; C1/L1
+remain queued pending a bounded regional design and fuller relevant prior art.
 
 The [DCS/EDCS plan](dcs-edcs-experiment-plan-uk.md) defines CS-A0 (source/backend
 audit), DCS-V0 (exact transformation fixtures), DCS-C1 (value beyond standard

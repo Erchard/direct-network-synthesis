@@ -1,5 +1,23 @@
 # Research Log
 
+## 2026-09-07: DCS-V0 Completed With One Unresolved Exact Search
+
+Executed the locked five-fixture suite at `2e642ac`. [Report](dcs-v0-result.md)
+and complete [artifact](results/dcs_v0.json) preserve all 18 generated circuits,
+ABC logs/netlists, solver attempts, versions and resource observations.
+Every produced circuit is equivalent and every deliberately corrupted output is
+detected. ABC gives 3/3/7/4/3 AND nodes; exact synthesis matches ABC on four
+fixtures but times out at six gates for the full-adder. No timeout extension or
+seed retry. The full-adder minimum remains unresolved between six and seven.
+
+Outcome: positive for bounded conversion/verification, no added compression
+benefit beyond ABC on completed pairs, and a negative resource signal for naive
+exact minimality search. This is not learned-model evidence. Pause the evaluated
+exact route; next design should consider bounded regional improvement from a
+known circuit, with verified prior art and a separate protocol. C1/L1 stay queued.
+BM closure and this run provide two specific stopping decisions, not proof that
+the broader direct-synthesis ambition fails. No test dataset was evaluated.
+
 ## 2026-09-07: DCS-V0 Verification Suite Locked
 
 CS-A0 [backend audit](audits/cs-a0-backend.md) established a working YoWASP
