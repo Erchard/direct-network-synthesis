@@ -1,7 +1,37 @@
 # Research Plan: Direct Synthesis and Independent Model Creation
 
+## Active Direction Update, 2026-09-07
+
+The active primary research line is now **DAS-V0: Direct Automaton Synthesis**.
+This is a deliberate mathematical pivot after DNS05-BM closed negative and
+DCS-V0 produced only bounded verification evidence. The most promising next
+strategy is to work in a model class where direct reconstruction has a precise
+theorem-shaped boundary: finite-rank weighted automata reconstructed from Hankel
+subblocks.
+
+This branch does not claim a neural-network result and does not replace DNS05 as
+the long-term neural objective. It gives the project a clean exact case for the
+larger idea `data -> compact internal state -> parameters` without iterative
+parameter optimization.
+
+DAS order of work:
+
+1. Lock and run [DAS-V0](das-v0-protocol.md) on fixed finite-rank synthetic
+   weighted automata and one non-finite-rank control.
+2. If V0 passes, write a theorem note separating established weighted-automata
+   facts, implemented reconstruction, and numerical verification.
+3. Design DAS-L1 for incomplete or noisy Hankel observations with real
+   train/validation/test separation and matched baselines.
+4. Only after L1, ask whether recovered linear state machines can be compiled
+   into neural or circuit artifacts under an explicit resource budget.
+
+Paused for now: further `prototype_class_hybrid` formula tuning, the larger
+DNS05 bounded-memory grid, and raising DCS-V0 exact-search timeouts. These can be
+reopened only with a new bounded protocol and a reason stronger than preserving
+the old expectation.
+
 Status: planned work, recorded 2026-09-05 and updated 2026-09-07 with the
-bounded DCS/EDCS experimental queue. This document
+bounded DCS/EDCS experimental queue and DAS mathematical reconstruction branch. This document
 summarizes direction; experimental results remain in [Research Log](research-log.md).
 
 This plan implements the motivation in [Hypothesis](hypothesis.md): enable small
@@ -40,11 +70,51 @@ fresh boundary chosen before candidate outcomes are inspected. Further digits
 work is allowed only as bounded development diagnostics and must not be treated
 as new independent evidence.
 
-Immediate priority: stop ad hoc center-formula expansion and define one new
-mechanism, not a tuned variant of `prototype_class_hybrid`. The two live options
-are a bounded-memory kernel-map compiler that avoids dense center inverse roots,
-or a true-depth experiment whose later features depend on earlier synthesized
-representations and cannot collapse to one wide map.
+Immediate priority: stop ad hoc center-formula expansion and move the primary
+research line to a theorem-shaped setting. DNS05 and DCS-V0 have produced useful
+negative or bounded engineering evidence, but neither gives a mathematical core
+for direct internal-state synthesis. The active branch is now DAS-V0: exact
+spectral reconstruction of finite-rank weighted automata from Hankel subblocks,
+with an explicit non-finite-rank negative control. This does not replace DNS05 as
+a neural objective; it provides the cleanest current route to precise statements
+about when data can directly determine a compact computational state.
+
+## 0. Active Mathematical Branch: DAS
+
+Direct Automaton Synthesis (DAS) studies sequence functions whose behavior can
+be represented by a finite weighted automaton. The core mathematical object is
+the Hankel matrix `H_f(u,v)=f(uv)`. For finite-rank series, established weighted
+automata theory relates the rank of `H_f` to the minimum state dimension of an
+exact weighted-automaton realization. This is prior work, not a DNS novelty
+claim.
+
+The near-term value for DNS is conceptual and technical:
+
+1. It gives a precise recovery theorem shape: assumption, observed finite
+   subblocks, rank condition, direct reconstruction and exact behavior.
+2. It turns "hidden state" into an auditable linear state rather than a guessed
+   neural representation.
+3. It supplies explicit failure modes: incomplete basis, poor conditioning,
+   noisy Hankel entries and functions whose Hankel rank grows with window size.
+4. It is naturally closer to sequence modeling than the current digits
+   classifier, while still small enough for exact tests.
+
+Immediate DAS order:
+
+1. Lock and run DAS-V0 on synthetic finite-rank weighted automata and one
+   non-finite-rank control. No test-set tuning is involved because this is a
+   mathematical reconstruction fixture, not a supervised ML benchmark.
+2. If V0 passes, write a short theorem note stating exactly what is proven by the
+   implemented reconstruction and what is only checked numerically.
+3. Then design DAS-L1 with train/validation/test sampled strings, noisy or
+   incomplete Hankel estimates, matched baselines and failure reporting. Only L1
+   should be treated as a learning/generalization experiment.
+4. Only after L1 should we ask whether the recovered linear automaton can be
+   compiled into a neural or circuit representation within a resource budget.
+
+Deliverable: one locked DAS-V0 protocol, implementation, exact reconstruction
+record and negative-control rank record. Decision: continue only if the exact
+finite-rank cases pass without changing seeds/windows after inspection.
 
 ## 1. Establish the Starting Point
 
@@ -341,8 +411,9 @@ closed the memory gate negative; larger BM runs are paused. CS-A0 established
 V0 backend readiness with explicitly incomplete novelty coverage. The sole active
 new mechanism was [DCS-V0 verification](dcs-v0-protocol.md), now evaluated with
 [one unresolved exact search and no added benefit over ABC](dcs-v0-result.md).
-No mechanism is currently running. Exact full-table search is paused; C1/L1
-remain queued pending a bounded regional design and fuller relevant prior art.
+Exact full-table search is paused; C1/L1 remain queued pending a bounded regional
+design and fuller relevant prior art. The active mechanism is now DAS-V0, a
+mathematical reconstruction branch rather than another Boolean-circuit search.
 
 The [DCS/EDCS plan](dcs-edcs-experiment-plan-uk.md) defines CS-A0 (source/backend
 audit), DCS-V0 (exact transformation fixtures), DCS-C1 (value beyond standard
@@ -459,13 +530,12 @@ alone does not establish affordability, portability or freedom to redistribute.
 6. Keep economic implications conditional: the deliverable is a practical ability
    to create alternatives, not proof that data centers or monopolies disappear.
 
-Immediate execution order after DNS05-FMSA: do not continue
-`prototype_class_hybrid` formula tweaks on the inspected boundaries. The draft
-train/validation-only [bounded-memory kernel-map protocol](dns05-bounded-memory-kernel-map-protocol.md)
-now selects one primary mechanism: streaming Nystrom-style accumulation with
-fixed row blocks. Implement and test that protocol before considering a
-genuinely compositional depth mechanism. Its resource and quality stopping
-criteria must be applied exactly as written, including negative outcomes.
+Immediate execution order after DNS05-FMSA and DCS-V0: do not continue
+`prototype_class_hybrid` formula tweaks on the inspected boundaries, do not
+restart the larger bounded-memory grid, and do not extend exact full-table search
+by raising solver timeouts. Run the locked DAS-V0 reconstruction protocol first.
+If it passes, write the theorem note and then design DAS-L1 for incomplete/noisy
+observations with real train/validation/test separation.
 
 Coordination with [Open Agent Collaboration](open-agent-collaboration-plan-uk.md):
 the first three pilot tasks audit residual collapse, result provenance and deployed

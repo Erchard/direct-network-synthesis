@@ -1,5 +1,27 @@
 # Research Log
 
+## 2026-09-07: DAS-V0 Protocol and Source Locked
+
+Redirected the active research line toward a theorem-shaped reconstruction
+problem after DNS05-BM and DCS-V0 failed to produce a positive primary mechanism.
+Added [DAS-V0](das-v0-protocol.md), a Direct Automaton Synthesis protocol for
+exact spectral reconstruction of finite-rank weighted automata from complete
+Hankel subblocks. This branch treats weighted-automata spectral learning as
+related work and makes no novelty claim.
+
+The locked V0 config uses alphabet `{a,b}`, finite-rank teacher automata with
+states 2/3/4 and seeds 97001/97002/97003, basis words up to length 5, held-out
+check words up to length 9, rank tolerance `1e-9` and error tolerance `1e-8`.
+The negative control records finite-window Hankel ranks for the `a^n b^n`
+indicator over windows 1 through 5. This is not a supervised ML result and does
+not use protected test data. Evaluation is pending until this source/protocol
+milestone is committed.
+
+Implemented `src/dns/synthesis/weighted_automata.py` and
+`experiments/run_das_v0.py`; added focused unit tests for word enumeration,
+exact reconstruction, rank growth and incomplete-basis failure. Next: run tests,
+commit this protocol/source milestone, then execute the locked DAS-V0 runner once.
+
 ## 2026-09-07: DCS-V0 Completed With One Unresolved Exact Search
 
 Executed the locked five-fixture suite at `2e642ac`. [Report](dcs-v0-result.md)

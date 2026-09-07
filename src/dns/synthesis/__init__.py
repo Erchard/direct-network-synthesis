@@ -7,7 +7,10 @@ __all__ = [
     "DNS05CompiledFeatureClassifier",
     "DNS05FeatureCompilerConfig",
     "DNS05KernelCompiler",
+    "HankelBasis",
+    "HankelReconstruction",
     "KernelSpec",
+    "WeightedAutomaton",
 ]
 
 
@@ -37,5 +40,17 @@ def __getattr__(name: str):
             "DNS05FeatureCompilerConfig": DNS05FeatureCompilerConfig,
             "DNS05KernelCompiler": DNS05KernelCompiler,
             "KernelSpec": KernelSpec,
+        }[name]
+    if name in {"HankelBasis", "HankelReconstruction", "WeightedAutomaton"}:
+        from dns.synthesis.weighted_automata import (
+            HankelBasis,
+            HankelReconstruction,
+            WeightedAutomaton,
+        )
+
+        return {
+            "HankelBasis": HankelBasis,
+            "HankelReconstruction": HankelReconstruction,
+            "WeightedAutomaton": WeightedAutomaton,
         }[name]
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

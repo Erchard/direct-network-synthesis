@@ -35,6 +35,11 @@ They do not replace the active DNS05 resource diagnostic or its evidence gates.
 The [DCS/EDCS experimental plan (Ukrainian)](docs/dcs-edcs-experiment-plan-uk.md)
 defines the bounded queue, controls, budgets and activation requirements.
 
+The current mathematical branch is [DAS-V0: Direct Automaton Synthesis](docs/das-v0-protocol.md).
+It tests exact spectral reconstruction of finite-rank weighted automata from
+Hankel subblocks, with a non-finite-rank control. This is a theorem-shaped
+supporting experiment, not a neural or language-model result.
+
 ## Research Question
 
 Can a neural model obtain competitive predictive performance when its hidden features,

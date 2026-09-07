@@ -39,3 +39,9 @@ split's development portion; this is not a globally untouched holdout. The reado
 runner excludes test membership within each split and does not produce test scores.
 No independent confirmation dataset is reserved yet. Selecting one before future
 confirmation is a separate milestone; new digits seeds do not create fresh evidence.
+
+## Direct Automaton Synthesis
+
+| ID | Question | Boundary | Protocol / evidence | Status |
+|---|---|---|---|---|
+| DAS-V0 | Can finite-rank sequence behavior be reconstructed directly from complete Hankel subblocks into a compact weighted automaton? | Synthetic weighted automata with fixed seeds; complete short-word tables; `a^n b^n` finite-window rank control | das-v0-protocol.md, configs/das_v0.json | Locked source/protocol; evaluation pending |
