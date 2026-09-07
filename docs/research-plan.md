@@ -48,6 +48,15 @@ representations and cannot collapse to one wide map.
 
 ## 1. Establish the Starting Point
 
+Supporting branch status, 2026-09-07: [DCS](direct-computational-synthesis-uk.md)
+and [EDCS](error-driven-computational-synthesis-uk.md) are conceptual and paused
+for execution. They do not replace the active DNS05 bounded-memory diagnostic.
+DCS concerns executable simplification; EDCS concerns iterative structural
+learning, not a single-pass DNS result. Before activation, require a related-work
+audit and a separate locked protocol distinguishing full-specification synthesis
+from held-out generalization, with equal-information baselines and total search
+cost accounting. Existing branch-budget and methodology rules still apply.
+
 1. Preserve the completed depth/width and full-basis experiments as negative
    results for the current residual construction. Link every conclusion to the
    committed records in [Research Log](research-log.md).

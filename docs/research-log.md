@@ -1,5 +1,27 @@
 # Research Log
 
+## 2026-09-07: DCS and EDCS Conceptual Scope Review
+
+Preserved the owner's DCS and EDCS documents and linked them from README and
+the research plan. Both remain conceptual supporting branches, not evaluated
+DNS capabilities. Full-truth-table recovery establishes synthesis and equivalence,
+not held-out generalization; oversized-teacher compression alone does not establish
+an advantage over an efficient implementation.
+
+For EDCS, clarified equal-information comparisons against rebuilding from scratch,
+the training status of verifier-supplied counterexamples and protected examples,
+and accounting for failed search, verification and consolidation. Structural
+repair is iterative even without gradient updates. No novelty claim or new
+benchmark result is introduced; the active DNS05 resource direction is unchanged.
+
+Also preserved the existing BM end-to-end summarizer and environment manifest.
+Their inclusion is not a claim that the summary has been executed or its outcomes
+reviewed. This documentation milestone does not rerun benchmark or test data.
+
+Verification: Ruff passed; all 74 tests passed. Pytest could not write its cache
+because of filesystem permissions; this did not fail any test. Benchmark runners
+and the BM summarizer were not executed in this milestone.
+
 ## 2026-09-06: Fixed-Geometry Resource Probe Completed
 
 Executed the preregistered synthetic probe at source 9d152aa using

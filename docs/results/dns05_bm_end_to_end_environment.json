@@ -1,0 +1,29 @@
+{
+  "packages": [
+    "cloudpickle==3.1.2",
+    "colorama==0.4.6",
+    "-e git+ssh://git@github.com/Erchard/direct-network-synthesis.git@1b0b5608571a9b8666d0270eb79b1172384240dc#egg=direct_network_synthesis",
+    "iniconfig==2.3.0",
+    "joblib==1.6.0",
+    "narwhals==2.25.0",
+    "numpy==2.5.2",
+    "packaging==26.3",
+    "pluggy==1.6.0",
+    "psutil==7.2.2",
+    "Pygments==2.21.0",
+    "pytest==9.1.1",
+    "PyYAML==6.0.3",
+    "ruff==0.16.6",
+    "scikit-learn==1.9.0",
+    "scipy==1.18.1",
+    "threadpoolctl==3.6.0"
+  ],
+  "sha256": {
+    "configs/dns05_bm_end_to_end.json": "20428bbd4a77ad8fb4f1962dc55d6a69a46325999c247a8afb348204b59f5b77",
+    "configs/dns05_failure_scaling_audit.json": "1023ba2ec75e5932106ef2e2802249fbb475969ad0a3e42dfde9dfa31bc5dc51",
+    "experiments/run_dns05_bm_end_to_end.py": "f602e327ab464afaca861afadf4b56adc406cdb28560dfc31aec2554fe9e445d",
+    "src/dns/synthesis/linear_algebra.py": "7bc1e8edafce304c13756b3f208fa39d1b652eeca30302d4d174c83611ad86f3"
+  },
+  "source_commit": "1b0b5608571a9b8666d0270eb79b1172384240dc",
+  "note": "Summarizer added while workers ran; frozen worker sources and configs were not edited."
+}

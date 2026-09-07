@@ -24,6 +24,15 @@ experiment.
 These documents are the project's long-form conceptual memory; `docs/hypothesis.md` and
 `docs/methodology.md` remain the concise normative documents.
 
+Two supporting hypotheses explore executable structures beyond neural weights:
+
+- [Direct Computational Synthesis (Ukrainian)](docs/direct-computational-synthesis-uk.md): simplify learned computation into another executable representation.
+- [Error-Driven Computational Synthesis (Ukrainian)](docs/error-driven-computational-synthesis-uk.md): iteratively repair computation, starting from a trivial machine.
+
+These are conceptual branches, not implemented capabilities or DNS results.
+EDCS is iterative structural search, not single-pass closed-form learning.
+They do not replace the active DNS05 resource diagnostic or its evidence gates.
+
 ## Research Question
 
 Can a neural model obtain competitive predictive performance when its hidden features,
